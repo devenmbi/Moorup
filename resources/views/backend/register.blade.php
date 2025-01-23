@@ -13,7 +13,7 @@
         <div class="col-12 p-0">    
           <div class="login-card login-dark">
             <div>
-              <div><a class="logo" href="index.html"> <img class="img-fluid for-dark" src="{{ asset('admin/assets/images/logo/logo-1.png') }}" alt="looginpage" style="max-width: 17% !important;"><img class="img-fluid for-light" src="{{ asset('admin/assets/images/logo/logo-icon.webp') }}" alt="looginpage" style="max-width: 17% !important;"></a></div>
+              <div><a class="logo" href="{{ route('admin.login') }}"> <img class="img-fluid for-dark" src="{{ asset('admin/assets/images/logo/logo-icon-1.webp') }}" alt="" style="max-width: 17% !important;"><img class="img-fluid for-light" src="{{ asset('admin/assets/images/logo/logo-icon-1.webp') }}" alt="looginpage" style="max-width: 17% !important;"></a></div>
               <div class="login-main"> 
               <form class="theme-form" action="{{ route('admin.register.authenticate') }}" method="POST">
                     @csrf
@@ -55,7 +55,7 @@
                         <button class="btn btn-primary btn-block w-100" type="submit">Create Account</button>
                     </div>
 
-                    <p class="mt-4 mb-0">Already have an account?<a class="ms-2" href="login.html">Sign in</a></p>
+                    <p class="mt-4 mb-0">Already have an account?<a class="ms-2" href="{{ route('admin.login') }}">Sign in</a></p>
                 </form>
 
               </div>

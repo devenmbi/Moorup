@@ -31,7 +31,6 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 });
 
 
-
 // ==== Manage User List in User Management
 Route::resource('user-list', UserDetailsController::class);
 Route::post('/update-status', [UserDetailsController::class, 'updateStatus'])->name('update.status');

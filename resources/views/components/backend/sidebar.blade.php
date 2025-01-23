@@ -4,7 +4,7 @@
         <div class="sidebar-wrapper" data-layout="stroke-svg">
           <div class="logo-wrapper"><a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo.png') }}" alt="" style="max-width: 20% !important;"></a>
 		  	<a href="{{ route('admin.dashboard') }}">
-				<img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo-icon.webp') }}" alt="" style="max-width: 65% !important;">
+				<img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo-icon.png') }}" alt="" style="max-width: 65% !important;">
 			</a>  
 		  <div class="back-btn"><i class="fa fa-angle-left"> </i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
@@ -56,7 +56,7 @@
                     </svg>
                     <svg class="fill-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
-                    </svg><span>Products Details</span></a>
+                    </svg><span>Masters</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('collections.index') }}">Collections</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Product Category</a></li>
