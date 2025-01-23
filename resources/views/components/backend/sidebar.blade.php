@@ -62,7 +62,7 @@
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('collections.index') }}">Collections</a></li>
                     <li><a href="{{ route('product-category.index') }}">Product Category</a></li>
-                    <li><a href="{{ route('user-permissions.index') }}">Product Fabrics</a></li>
+                    <li><a href="{{ route('product-fabrics.index') }}">Product Fabrics</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Fabric Composition</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Product Sizes</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Print Options</a></li>
