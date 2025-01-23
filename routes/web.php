@@ -7,6 +7,9 @@ use App\Http\Controllers\Backend\UserPermissionsController;
 use App\Http\Controllers\Backend\CollectionsController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductFabricsController;
+use App\Http\Controllers\Backend\FabricCompositionController;
+use App\Http\Controllers\Backend\ProductSizesController;
+use App\Http\Controllers\Backend\ProductPrintsController;
 
 
 // =========================================================================== Backend Routes
@@ -42,8 +45,17 @@ Route::resource('user-permissions', UserPermissionsController::class);
 // ==== Manage Collections in Product Details
 Route::resource('collections', CollectionsController::class);
 
-// ==== Manage Collections in Product Details
+// ==== Manage category in Product Details
 Route::resource('product-category', ProductCategoryController::class);
 
-// ==== Manage Collections in Product Details
+// ==== Manage fabrics in Product Details
 Route::resource('product-fabrics', ProductFabricsController::class);
+
+// ==== Manage composition in Product Details
+Route::resource('fabric-composition', FabricCompositionController::class);
+
+// ==== Manage Sizes in Product Details
+Route::resource('product-sizes', ProductSizesController::class);
+
+// ==== Manage prints in Product Details
+Route::resource('product-prints', ProductPrintsController::class);
