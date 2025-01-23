@@ -27,13 +27,15 @@
                     <h6 class="lan-1">General</h6>
                   </div>
                 </li>
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i><a class="sidebar-link" href="{{ route('admin.dashboard') }}">
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                <a class="sidebar-link sidebar-title link-nav active" href="{{ route('admin.dashboard') }}">
                     <svg class="stroke-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                     </svg>
                     <svg class="fill-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-home') }}"></use>
-                    </svg><span class="lan-3">Dashboard </span></a>
+                    </svg><span class="lan-3">Dashboard </span>
+                  </a>
                 </li>
 
                 <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
@@ -59,7 +61,7 @@
                     </svg><span>Masters</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('collections.index') }}">Collections</a></li>
-                    <li><a href="{{ route('user-permissions.index') }}">Product Category</a></li>
+                    <li><a href="{{ route('product-category.index') }}">Product Category</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Product Fabrics</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Fabric Composition</a></li>
                     <li><a href="{{ route('user-permissions.index') }}">Product Sizes</a></li>

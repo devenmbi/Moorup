@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Backend\UserDetailsController;
 use App\Http\Controllers\Backend\UserPermissionsController;
 use App\Http\Controllers\Backend\CollectionsController;
+use App\Http\Controllers\Backend\ProductCategoryController;
 
 Route::get('/', function () {
     return view('backend.login');
@@ -30,7 +31,6 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         })->name('admin.dashboard');
 });
 
-
 // ==== Manage User List in User Management
 Route::resource('user-list', UserDetailsController::class);
 Route::post('/update-status', [UserDetailsController::class, 'updateStatus'])->name('update.status');
@@ -40,3 +40,6 @@ Route::resource('user-permissions', UserPermissionsController::class);
 
 // ==== Manage Collections in Product Details
 Route::resource('collections', CollectionsController::class);
+
+// ==== Manage Collections in Product Details
+Route::resource('product-category', ProductCategoryController::class);
