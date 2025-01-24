@@ -23,6 +23,7 @@ class ProductDetails extends Model
         'product_fabric_id',
         'product_price',
         'description',
+        'collection_name',
         'thumbnail_image',
         'gallery_images',
         'created_at',

@@ -52,7 +52,7 @@
                 {
                     type: "theme",
                     allow_dismiss: true,
-                    delay: 2000,
+                    delay: 5000,
                     showProgressbar: true,
                     timer: 300,
                     animate: {
@@ -74,7 +74,7 @@
                 {
                     type: "theme",
                     allow_dismiss: true,
-                    delay: 2000,
+                    delay: 5000,
                     showProgressbar: true,
                     timer: 300,
                     animate: {

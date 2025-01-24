@@ -50,19 +50,35 @@
                         <a href="{{ route('product-details.create') }}" class="btn btn-primary px-5 radius-30">+ Add Products </a>
                     </div>
                     <div class="table-responsive custom-scrollbar">
-                      <table class="display" id="basic-1">
+                    <table class="display" id="basic-1">
                         <thead>
                           <tr>
                             <th>#</th>
                             <th>Collection Name</th>
+                            <th>Style Code</th>
                             <th>Product Name</th>
-                            <th>Created By</th>
-                            <th>Created Date</th>
+                            <th>Look Name</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          
+                            @foreach ($productDetails as $key => $product)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td> 
+                                    <td>{{ $product->collection_name }}</td>
+                                    <td>{{ $product->style_code }}</td> 
+                                    <td>{{ $product->product_name }}</td>
+                                    <td>{{ $product->look_name }}</td> 
+                                    <td>
+                                        <a href="{{ route('product-details.edit', $product->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('product-details.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     </div>
@@ -78,6 +94,7 @@
     </div>
 
         @include('components.backend.main-js')
+
 
 </body>
 

@@ -47,14 +47,19 @@
                             <div class="col-12">
                             <div class="tab-content" id="wizard-tabContent">
                                 <div class="tab-pane fade show active" id="wizard-contact" role="tabpanel" aria-labelledby="wizard-contact-tab">
-                                <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-details.store') }}" method="POST">
+                                <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-details.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
-                                    <!-- Style Code -->
+                                    <!-- Collection Name -->
                                     <div class="col-xxl-4 col-sm-6">
-                                        <label class="form-label" for="style_code">Style Code <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="style_code" type="text" name="style_code" placeholder="Enter Product Style Code" required>
-                                        <div class="invalid-feedback">Please enter a product style code.</div>
+                                        <label class="form-label" for="collection_name">Collection Name <span class="txt-danger">*</span></label>
+                                        <select class="form-control" id="collection_name" name="collection_name" placeholder="Select Collection Name" required>
+                                            <option value="" disabled selected>Select Collection Name</option>
+                                            @foreach($collections as $collection)
+                                                <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Please select a Collection Name.</div>
                                     </div>
 
                                     <!-- Full Look Name -->
@@ -98,6 +103,13 @@
                                     </div>
 
 
+                                     <!-- Style Code -->
+                                     <div class="col-xxl-4 col-sm-6">
+                                        <label class="form-label" for="style_code">Style Code <span class="txt-danger">*</span></label>
+                                        <input class="form-control" id="style_code" type="text" name="style_code" placeholder="Enter Product Style Code" required>
+                                        <div class="invalid-feedback">Please enter a product style code.</div>
+                                    </div>
+
                                      <!-- Fabric -->
                                      <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_fabric">
@@ -122,8 +134,8 @@
 
                                      <!-- Product Description -->
                                     <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
-                                        <label class="form-label" for="product_price">Product Description <span class="txt-danger">*</span></label>
-                                        <textarea id="description" class="form-control" name="description" rows="5" placeholder="Enter Product Description here" required></textarea>
+                                        <label class="form-label" for="description">Product Description <span class="txt-danger">*</span></label>
+                                        <textarea id="description" class="form-control" name="description" rows="5" placeholder="Enter Product Description here" required value="{{ old('description') }}"></textarea>
                                         <div class="invalid-feedback">Please enter Product Description here.</div>
                                     </div>
 
@@ -142,7 +154,7 @@
                                                 <tr>
                                                     <td>
                                                         <input type="file" onchange="previewThumbnail(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="thumbnail_image[]" id="thumbnail_image_0" class="form-control" placeholder="Upload Thumbnail Image" multiple required>
-                                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
                                                         <br>
                                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                                                     </td>
@@ -173,7 +185,7 @@
                                                 <tr>
                                                     <td>
                                                         <input type="file" onchange="previewGalleryImage(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="gallery_image[]" id="gallery_image_0" class="form-control" placeholder="Upload Gallery Image" multiple required>
-                                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
                                                         <br>
                                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                                                     </td>
@@ -230,7 +242,7 @@
                 alert("Please upload a valid image file (.jpg, .jpeg, .png, .webp).");
                 return;
             }
-            if (file.size > 2 * 1024 * 1024) {
+            if (file.size > 3 * 3072 * 3072) {
                 alert("The file size should be less than 2MB.");
                 return;
             }
@@ -262,8 +274,8 @@
             const newRow = `
                 <tr>
                     <td>
-                        <input type="file" onchange="previewThumbnail(this, ${rowId})" accept=".png, .jpg, .jpeg, .webp" name="industries_image[]" id="industries_image_${rowId}" class="form-control" placeholder="Upload Industry Image">
-                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                        <input type="file" onchange="previewThumbnail(this, ${rowId})" accept=".png, .jpg, .jpeg, .webp" name="thumbnail_image[]" id="thumbnail_image${rowId}" class="form-control" placeholder="Upload thumbnail Image">
+                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
                         <br>
                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                     </td>
@@ -329,7 +341,7 @@
                 <tr>
                     <td>
                         <input type="file" onchange="previewGalleryImage(this, ${rowId})" accept=".png, .jpg, .jpeg, .webp" name="gallery_image[]" id="gallery_image_${rowId}" class="form-control" placeholder="Upload Gallery Image">
-                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
                         <br>
                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                     </td>
