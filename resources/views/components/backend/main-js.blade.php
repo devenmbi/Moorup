@@ -16,6 +16,7 @@
     <script src="{{ asset('admin/assets/js/slick/slick.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/slick/slick.js') }}"></script>
     <script src="{{ asset('admin/assets/js/header-slick.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/editors/quill.js') }}"></script>
     <!-- <script src="{{ asset('admin/assets/js/chart/apex-chart/apex-chart.js') }}"></script>
     <script src="{{ asset('admin/assets/js/chart/apex-chart/stock-prices.js') }}"></script>
     <script src="{{ asset('admin/assets/js/chart/apex-chart/moment.min.js') }}"></script> -->
