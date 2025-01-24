@@ -119,8 +119,8 @@ class UserDetailsController extends Controller
         }
 
         $user->status = $validatedData['status'];
-        $user->updated_at = Carbon::now();
-        $user->updated_by =  Auth::user()->id;
+        $user->modified_at = Carbon::now();
+        $user->modified_by =  Auth::user()->id;
         $user->save();
 
         return redirect()->route('user-list.index')->with('message', 'User has been updated successfully.');

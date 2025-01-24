@@ -44,10 +44,10 @@
                     </svg>
                     <svg class="fill-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-user') }}"></use>
-                    </svg><span>Users Management</span></a>
+                    </svg><span>User Management</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('user-list.index') }}">New User</a></li>
-                    <li><a href="{{ route('user-permissions.index') }}">Users Permissions</a></li>
+                    <li><a href="{{ route('user-permissions.index') }}">User Permissions</a></li>
                   </ul>
                 </li>
 
@@ -58,7 +58,7 @@
                     </svg>
                     <svg class="fill-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
-                    </svg><span>Masters</span></a>
+                    </svg><span>Store Management</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('collections.index') }}">Collections</a></li>
                     <li><a href="{{ route('product-category.index') }}">Product Category</a></li>
@@ -66,6 +66,7 @@
                     <li><a href="{{ route('fabric-composition.index') }}">Fabric Composition</a></li>
                     <li><a href="{{ route('product-sizes.index') }}">Product Sizes</a></li>
                     <li><a href="{{ route('product-prints.index') }}">Print Options</a></li>
+                    <li><a href="{{ route('product-details.index') }}">Product Details</a></li>
                   </ul>
                 </li>
 

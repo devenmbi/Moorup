@@ -83,8 +83,8 @@ class FabricCompositionController extends Controller
 
             $category->update([
                 'composition_name' => $request->composition_name,
-                'updated_by' => Auth::user()->id, 
-                'updated_at' => Carbon::now(),
+                'modified_by' => Auth::user()->id, 
+                'modified_at' => Carbon::now(),
             ]);
 
             return redirect()->route('fabric-composition.index')->with('message', 'Fabrics Composition updated successfully!');

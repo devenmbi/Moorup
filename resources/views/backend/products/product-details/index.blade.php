@@ -38,47 +38,31 @@
                   <div class="card-body">
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
-								<nav aria-label="breadcrumb" role="navigation">
-									<ol class="breadcrumb mb-0">
-										<li class="breadcrumb-item">
-											<a href="{{ route('product-sizes.index') }}">Home</a>
-										</li>
-										<li class="breadcrumb-item active" aria-current="page">Product Size List</li>
-									</ol>
-								</nav>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('product-details.index') }}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Product List</li>
+                            </ol>
+                        </nav>
 
-								<a href="{{ route('product-sizes.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Size</a>
-							</div>
-
-
+                        <a href="{{ route('product-details.create') }}" class="btn btn-primary px-5 radius-30">+ Add Products </a>
+                    </div>
                     <div class="table-responsive custom-scrollbar">
                       <table class="display" id="basic-1">
                         <thead>
                           <tr>
                             <th>#</th>
-                            <th>Product Size</th>
+                            <th>Collection Name</th>
+                            <th>Product Name</th>
                             <th>Created By</th>
                             <th>Created Date</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($product_sizes as $key => $category)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $category->size }}</td>
-                                    <td>{{ $category->creator_name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($category->created_at)->format('d-m-Y') }}</td>
-                                    <td>
-                                        <a href="{{ route('product-sizes.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        <form action="{{ route('product-sizes.destroy', $category->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this size?')">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                          
                         </tbody>
                     </table>
                     </div>

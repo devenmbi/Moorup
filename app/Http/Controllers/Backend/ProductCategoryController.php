@@ -83,8 +83,8 @@ class ProductCategoryController extends Controller
 
             $category->update([
                 'category_name' => $request->category_name,
-                'updated_by' => Auth::user()->id, 
-                'updated_at' => Carbon::now(),
+                'modified_by' => Auth::user()->id, 
+                'modified_at' => Carbon::now(),
             ]);
 
             return redirect()->route('product-category.index')->with('message', 'Product Category updated successfully!');

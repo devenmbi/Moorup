@@ -99,6 +99,8 @@ class UserPermissionsController extends Controller
         $user_permission->update([
             'user_id' => $request->user_id,
             'permission_id' => $request->permissions, 
+            'modified_at' => Carbon::now(),
+            'modified_by' => Auth::user()->id,
         ]);
 
         return redirect()->route('user-permissions.index')->with('message', 'Permissions updated successfully');

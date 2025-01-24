@@ -17,14 +17,14 @@
             <div class="page-title">
               <div class="row">
                 <div class="col-6">
-                  <h4>Edit Product Prints Form</h4>
+                  <h4>Add Product Prints Form</h4>
                 </div>
                 <div class="col-6">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                     <a href="{{ route('product-prints.index') }}">Home</a>
                     </li>
-                    <li class="breadcrumb-item active">Edit Product Prints</li>
+                    <li class="breadcrumb-item active">Add Product Prints</li>
                 </ol>
 
                 </div>
@@ -47,14 +47,12 @@
                             <div class="col-12">
                             <div class="tab-content" id="wizard-tabContent">
                                 <div class="tab-pane fade show active" id="wizard-contact" role="tabpanel" aria-labelledby="wizard-contact-tab">
-                                <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-prints.update', $prints->id) }}" method="POST">
+                                <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-prints.store') }}" method="POST">
                                     @csrf
-                                    @method('PUT')
-
                                     <!-- Collection Name -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="print_name">Product Prints Name <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="print_name" type="text" name="print_name" value="{{ old('print_name', $prints->print_name) }}" placeholder="Enter Product Prints Name" required>
+                                        <input class="form-control" id="print_name" type="text" name="print_name" placeholder="Enter Product Prints Name" required>
                                         <div class="invalid-feedback">Please enter a product sizes name.</div>
                                     </div>
 

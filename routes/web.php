@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ProductFabricsController;
 use App\Http\Controllers\Backend\FabricCompositionController;
 use App\Http\Controllers\Backend\ProductSizesController;
 use App\Http\Controllers\Backend\ProductPrintsController;
+use App\Http\Controllers\Backend\ProductDetailsController;
 
 
 // =========================================================================== Backend Routes
@@ -42,20 +43,23 @@ Route::post('/update-status', [UserDetailsController::class, 'updateStatus'])->n
 // ==== Manage User Permissions in User Management
 Route::resource('user-permissions', UserPermissionsController::class);
 
-// ==== Manage Collections in Product Details
+// ==== Manage Collections in Store Management
 Route::resource('collections', CollectionsController::class);
 
-// ==== Manage category in Product Details
+// ==== Manage category in Store Management
 Route::resource('product-category', ProductCategoryController::class);
 
-// ==== Manage fabrics in Product Details
+// ==== Manage fabrics in Store Management
 Route::resource('product-fabrics', ProductFabricsController::class);
 
-// ==== Manage composition in Product Details
+// ==== Manage composition in Store Management
 Route::resource('fabric-composition', FabricCompositionController::class);
 
-// ==== Manage Sizes in Product Details
+// ==== Manage Sizes in Store Management
 Route::resource('product-sizes', ProductSizesController::class);
 
-// ==== Manage prints in Product Details
+// ==== Manage prints in Store Management
 Route::resource('product-prints', ProductPrintsController::class);
+
+// ==== Manage product details in Store Management
+Route::resource('product-details', ProductDetailsController::class);

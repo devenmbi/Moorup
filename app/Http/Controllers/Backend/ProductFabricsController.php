@@ -82,8 +82,8 @@ class ProductFabricsController extends Controller
 
             $category->update([
                 'fabrics_name' => $request->fabrics_name,
-                'updated_by' => Auth::user()->id, 
-                'updated_at' => Carbon::now(),
+                'modified_by' => Auth::user()->id, 
+                'modified_at' => Carbon::now(),
             ]);
 
             return redirect()->route('product-fabrics.index')->with('message', 'Product fabrics updated successfully!');
