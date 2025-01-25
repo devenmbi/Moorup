@@ -40,6 +40,17 @@
     <script src="{{ asset('admin/assets/js/script.js') }}"></script>
     <script>new WOW().init();</script>
 
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#summernote').summernote({
+      height: 200, // Adjust height as needed
+      focus: true   // Focus the editor when initialized
+    });
+  });
+</script>
+
 
 
    <!-- Toastr Messages-->
