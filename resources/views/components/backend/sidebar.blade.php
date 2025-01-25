@@ -70,6 +70,25 @@
                   </ul>
                 </li>
 
+                <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
+                    </svg><span>Home</span></a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('banner-details.index') }}">Banner Details</a></li>
+                    <li><a href="{{ route('new-arrivals.index') }}">New Arrivals</a></li>
+                    <li><a href="{{ route('collection-details.index') }}">Collection Details </a></li>
+                    <li><a href="{{ route('shop-category.index') }}">Shop By Category</a></li>
+                    <li><a href="{{ route('product-policies.index') }}">Product Policies</a></li>
+                    <li><a href="{{ route('testimonials.index') }}">Testimonials</a></li>
+                    <li><a href="{{ route('social-media.index') }}">Social Media Details</a></li>
+                    <li><a href="{{ route('footer.index') }}">Footer</a></li>
+                  </ul>
+                </li>
+
                 
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

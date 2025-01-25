@@ -11,6 +11,16 @@ use App\Http\Controllers\Backend\FabricCompositionController;
 use App\Http\Controllers\Backend\ProductSizesController;
 use App\Http\Controllers\Backend\ProductPrintsController;
 use App\Http\Controllers\Backend\ProductDetailsController;
+use App\Http\Controllers\Backend\Home\BannerDetailsController;
+use App\Http\Controllers\Backend\Home\NewArrivalsController;
+use App\Http\Controllers\Backend\Home\CollectionDetailsController;
+use App\Http\Controllers\Backend\Home\ShopByCategoryController;
+use App\Http\Controllers\Backend\Home\ProductPoliciesController;
+use App\Http\Controllers\Backend\Home\TestimonialsController;
+use App\Http\Controllers\Backend\Home\SocialMediaController;
+use App\Http\Controllers\Backend\Home\FooterController;
+
+
 
 
 // =========================================================================== Backend Routes
@@ -63,3 +73,28 @@ Route::resource('product-prints', ProductPrintsController::class);
 
 // ==== Manage product details in Store Management
 Route::resource('product-details', ProductDetailsController::class);
+
+
+// ==== Manage Banner Details in Home
+Route::resource('banner-details', BannerDetailsController::class);
+
+// ==== Manage New Arrival in Home
+Route::resource('new-arrivals', NewArrivalsController::class);
+
+// ==== Manage Collection Details in Home
+Route::resource('collection-details', CollectionDetailsController::class);
+
+// ==== Manage Shop By Category in Home
+Route::resource('shop-category', ShopByCategoryController::class);
+
+// ==== Manage Product Policies in Home
+Route::resource('product-policies', ProductPoliciesController::class);
+
+// ==== Manage Testimonials in Home
+Route::resource('testimonials', TestimonialsController::class);
+
+// ==== Manage Social Media Details in Home
+Route::resource('social-media', SocialMediaController::class);
+
+// ==== Manage Footer in Home
+Route::resource('footer', FooterController::class);
