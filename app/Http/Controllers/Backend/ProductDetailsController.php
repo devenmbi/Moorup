@@ -138,15 +138,11 @@ class ProductDetailsController extends Controller
         $fabric_composition = FabricsComposition::whereNull('deleted_by')->get();
         $product_fabric = ProductFabrics::whereNull('deleted_by')->get();
         $collections = MasterCollections::whereNull('deleted_by')->get();
-        // $thumbnails = json_decode($product_details->thumbnail_image, true);
-        $galleryImages = json_decode($product_details->gallery_images, true);
-        return view('backend.products.product-details.edit', compact('product_details','categories','fabric_composition','product_fabric','collections','galleryImages'));
+        return view('backend.products.product-details.edit', compact('product_details','categories','fabric_composition','product_fabric','collections'));
     }
 
     public function update(Request $request, $id)
     {
-        // dd($request);
-        // Validate the input
         $request->validate([
             'style_code' => 'required|string|max:255',
             'look_name' => 'required|string|max:255',
@@ -176,10 +172,8 @@ class ProductDetailsController extends Controller
             'gallery_image.*.max' => 'Each gallery image must be less than 3MB.',
         ]);
         
-        // Find the existing product
         $product = ProductDetails::findOrFail($id);
     
-        // Update product details
         $product->style_code = $request->style_code;
         $product->look_name = $request->look_name;
         $product->product_name = $request->product_name;
@@ -192,47 +186,56 @@ class ProductDetailsController extends Controller
         $product->modified_at = Carbon::now();
         $product->modified_by = Auth::user()->id;
     
-        // Handle existing thumbnail images
-        $existingThumbnails = $request->input('existing_thumbnail_images', []);  // Retrieve the existing thumbnails from the request
+
+        $existingThumbnails = $request->input('existing_thumbnail_images', []);  
         if ($request->hasFile('thumbnail_image')) {
-            // Upload new thumbnails
             foreach ($request->file('thumbnail_image') as $image) {
                 if ($image->isValid()) {
                     $extension = $image->getClientOriginalExtension();
                     $new_name = time() . rand(10, 999) . '.' . $extension;
                     $image->move(public_path('/murupp/product/thumbnails'), $new_name);
-                    $existingThumbnails[] = $new_name;  // Append the new image to the existing ones
+                    $existingThumbnails[] = $new_name;  
                 }
             }
         }
     
-        // Save updated thumbnail images
         $product->thumbnail_image = json_encode($existingThumbnails);
     
-        // Handle existing gallery images
-        $existingGalleryImages = $request->input('existing_gallery_images', []);  // Retrieve the existing gallery images from the request
+        $existingGalleryImages = $request->input('existing_gallery_images', []);  
         if ($request->hasFile('gallery_image')) {
-            // Upload new gallery images
+
             foreach ($request->file('gallery_image') as $image) {
                 if ($image->isValid()) {
                     $extension = $image->getClientOriginalExtension();
                     $new_name = time() . rand(10, 999) . '.' . $extension;
                     $image->move(public_path('/murupp/product/gallery'), $new_name);
-                    $existingGalleryImages[] = $new_name;  // Append the new image to the existing ones
+                    $existingGalleryImages[] = $new_name;  
                 }
             }
         }
-    
-        // Save updated gallery images
+
         $product->gallery_images = json_encode($existingGalleryImages);
     
-        // Save the product details
         $product->save();
-    
-        // Redirect with success message
+
         return redirect()->route('product-details.index')->with('message', 'Product has been successfully updated!');
     }
     
+
+    public function destroy(string $id)
+    {
+        $data['deleted_by'] =  Auth::user()->id;
+        $data['deleted_at'] =  Carbon::now();
+        try {
+            $industries = ProductDetails::findOrFail($id);
+            $industries->update($data);
+
+            return redirect()->route('product-details.index')->with('message', 'Product details deleted successfully!');
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
+        }
+    }
+
     
     
 
