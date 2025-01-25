@@ -47,19 +47,18 @@
                             <div class="col-12">
                             <div class="tab-content" id="wizard-tabContent">
                                 <div class="tab-pane fade show active" id="wizard-contact" role="tabpanel" aria-labelledby="wizard-contact-tab">
+
                                 <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-details.update', $product_details->id) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT') <!-- Required for update -->
+                                        @csrf
+                                        @method('PUT')
 
                                     <!-- Collection Name -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="collection_name">Collection Name <span class="txt-danger">*</span></label>
-                                        <select class="form-control" id="collection_name" name="collection_name" placeholder="Select Collection Name" required>
+                                        <select class="form-control" id="collection_name" name="collection_name" required>
                                             <option value="" disabled>Select Collection Name</option>
                                             @foreach($collections as $collection)
-                                                <option value="{{ $collection->id }}" {{ $collection->id == $product_details->collection_id ? 'selected' : '' }}>
-                                                    {{ $collection->collection_name }}
-                                                </option>
+                                                <option value="{{ $collection->id }}" {{ $product_details->collection_name == $collection->id ? 'selected' : '' }}>{{ $collection->collection_name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">Please select a Collection Name.</div>
@@ -68,26 +67,24 @@
                                     <!-- Full Look Name -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="look_name">Full Look Name <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="look_name" type="text" name="look_name" placeholder="Enter Product Full Look Name" value="{{ $product_details->look_name }}" required>
+                                        <input class="form-control" id="look_name" type="text" name="look_name" value="{{ $product_details->look_name }}" required>
                                         <div class="invalid-feedback">Please enter a product full look name.</div>
                                     </div>
 
                                     <!-- Product Name -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_name">Product Name <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="product_name" type="text" name="product_name" placeholder="Enter Product Name" value="{{ $product_details->product_name }}" required>
+                                        <input class="form-control" id="product_name" type="text" name="product_name" value="{{ $product_details->product_name }}" required>
                                         <div class="invalid-feedback">Please enter a product name.</div>
                                     </div>
 
                                     <!-- Category -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_category">Product Category <span class="txt-danger">*</span></label>
-                                        <select class="form-control" id="product_category" name="product_category" placeholder="Select Product Category" required>
+                                        <select class="form-control" id="product_category" name="product_category" required>
                                             <option value="" disabled>Select Product Category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $category->id == $product_details->category_id ? 'selected' : '' }}>
-                                                    {{ $category->category_name }}
-                                                </option>
+                                                <option value="{{ $category->id }}" {{ $product_details->product_category == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">Please select a product category.</div>
@@ -96,12 +93,10 @@
                                     <!-- Fabric Composition -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="fabric_composition">Fabric Composition <span class="txt-danger">*</span></label>
-                                        <select class="form-control" id="fabric_composition" name="fabric_composition" placeholder="Select Fabric Composition" required>
+                                        <select class="form-control" id="fabric_composition" name="fabric_composition" required>
                                             <option value="" disabled>Select Fabric Composition</option>
                                             @foreach($fabric_composition as $composition)
-                                                <option value="{{ $composition->id }}" {{ $composition->id == $product_details->fabric_composition_id ? 'selected' : '' }}>
-                                                    {{ $composition->composition_name }}
-                                                </option>
+                                                <option value="{{ $composition->id }}" {{ $product_details->fabric_composition == $composition->id ? 'selected' : '' }}>{{ $composition->composition_name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">Please select a Fabric Composition.</div>
@@ -110,19 +105,17 @@
                                     <!-- Style Code -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="style_code">Style Code <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="style_code" type="text" name="style_code" placeholder="Enter Product Style Code" value="{{ $product_details->style_code }}" required>
+                                        <input class="form-control" id="style_code" type="text" name="style_code" value="{{ $product_details->style_code }}" required>
                                         <div class="invalid-feedback">Please enter a product style code.</div>
                                     </div>
 
-                                    <!-- Fabric -->
+                                    <!-- Product Fabric -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_fabric">Product Fabric <span class="txt-danger">*</span></label>
-                                        <select class="form-control" id="product_fabric" name="product_fabric" placeholder="Select Product Fabric" required>
+                                        <select class="form-control" id="product_fabric" name="product_fabric" required>
                                             <option value="" disabled>Select Product Fabric</option>
-                                            @foreach($product_fabric as $fabrics)
-                                                <option value="{{ $fabrics->id }}" {{ $fabrics->id == $product_details->fabric_id ? 'selected' : '' }}>
-                                                    {{ $fabrics->fabrics_name }}
-                                                </option>
+                                            @foreach($product_fabric as $fabric)
+                                                <option value="{{ $fabric->id }}" {{ $product_details->product_fabric == $fabric->id ? 'selected' : '' }}>{{ $fabric->fabrics_name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">Please select a Product Fabric.</div>
@@ -131,21 +124,25 @@
                                     <!-- Product Price -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_price">Product Price <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="product_price" type="text" name="product_price" placeholder="Enter Product Price" value="{{ $product_details->product_price }}" required>
-                                        <div class="invalid-feedback">Please enter a product Price.</div>
+                                        <input class="form-control" id="product_price" type="text" name="product_price" value="{{ $product_details->product_price }}" required>
+                                        <div class="invalid-feedback">Please enter a product price.</div>
                                     </div>
 
                                     <!-- Product Description -->
                                     <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
                                         <label class="form-label" for="description">Product Description <span class="txt-danger">*</span></label>
-                                        <textarea id="description" class="form-control" name="description" rows="5" placeholder="Enter Product Description here" required>{{ $product_details->description }}</textarea>
+                                        <textarea id="description" class="form-control" name="description" rows="5" required>{{ $product_details->description }}</textarea>
                                         <div class="invalid-feedback">Please enter Product Description here.</div>
                                     </div>
 
-
                                     <!-- Thumbnail Image Upload -->
-                                    <div class="table-container" style="margin-bottom: 20px;">
-                                        <h5 class="mb-4"><strong>Thumbnail Image Upload</strong></h5>
+                                    <div class="table-container" style="margin-bottom: 30px;">
+                                        <div class="d-flex align-items-center">
+                                            <h5 class="mb-4 me-3"><strong>Thumbnail Image Upload</strong></h5>
+                                            <button type="button" class="btn btn-primary ms-auto" id="addRow">Add More</button>
+                                        </div>
+
+
                                         <table class="table table-bordered p-3" id="dynamicTable" style="border: 2px solid #dee2e6;">
                                             <thead>
                                                 <tr>
@@ -155,38 +152,41 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($thumbnails as $index => $thumbnail)
-                                                    <tr>
-                                                        <td>
-                                                            <input type="file" onchange="previewThumbnail(this, {{ $index }})" accept=".png, .jpg, .jpeg, .webp" name="thumbnail_image[]" id="thumbnail_image_{{ $index }}" class="form-control">
-                                                            <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
-                                                            <br>
-                                                            <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
-                                                        </td>
-                                                        <td>
-                                                            <div id="preview-container-{{ $index }}">
-                                                                <img src="{{ asset('murupp/product/thumbnails/' . $thumbnail) }}" alt="Thumbnail" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            @if ($index === 0)
-                                                                <button type="button" class="btn btn-primary" id="addRow">Add More</button>
-                                                            @else
+                                                <!-- Loop through existing thumbnails if any -->
+                                                @if(isset($product_details->thumbnail_image) && $thumbnails = json_decode($product_details->thumbnail_image, true))
+                                                    @foreach($thumbnails as $index => $thumbnail)
+                                                        <tr>
+                                                            <td>
+                                                                <!-- File Input for New Images -->
+                                                                <input type="file" onchange="previewThumbnail(this, {{ $index }})" accept=".png, .jpg, .jpeg, .webp" name="thumbnail_image[]" id="thumbnail_image_{{ $index }}" class="form-control" placeholder="Upload Thumbnail Image">
+                                                                <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                                                <br>
+                                                                <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                                                                <!-- Hidden Input for Existing Image -->
+                                                                <input type="hidden" name="existing_thumbnail_images[]" value="{{ $thumbnail }}">
+                                                            </td>
+                                                            <td>
+                                                                <div id="preview-container-{{ $index }}">
+                                                                    <img src="{{ asset('/murupp/product/thumbnails/' . $thumbnail) }}" style="max-width: 120px; max-height: 100px; object-fit: cover;">
+                                                                </div>
+                                                            </td>
+                                                            <td>
                                                                 <button type="button" class="btn btn-danger removeRow">Remove</button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
-
-
                                         </table>
                                     </div>
 
-
                                     <!-- Gallery Image Upload -->
                                     <div class="table-container" style="margin-bottom: 20px;">
-                                        <h5 class="mb-4"><strong>Gallery Image Upload</strong></h5>
+                                        <div class="d-flex align-items-center">
+                                            <h5 class="mb-4 me-3"><strong>Gallery Image Upload</strong></h5>
+                                            <button type="button" class="btn btn-primary ms-auto" id="addGalleryRow">Add More</button>
+                                        </div>
+
                                         <table class="table table-bordered p-3" id="galleryTable" style="border: 2px solid #dee2e6;">
                                             <thead>
                                                 <tr>
@@ -196,33 +196,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($galleryImages as $index => $galleryImage)
-                                                    <tr>
-                                                        <td>
-                                                            <input type="file" onchange="previewGalleryImage(this, {{ $index }})" accept=".png, .jpg, .jpeg, .webp" name="gallery_image[]" id="gallery_image_{{ $index }}" class="form-control">
-                                                            <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
-                                                            <br>
-                                                            <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
-                                                        </td>
-                                                        <td>
-                                                            <div id="gallery-preview-container-{{ $index }}">
-                                                                <img src="{{ asset('murupp/product/gallery/' . $galleryImage) }}" alt="Gallery Image" style="max-width: 100px; max-height: 100px; object-fit: cover;">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            @if ($index === 0)
-                                                                <button type="button" class="btn btn-primary" id="addGalleryRow">Add More</button>
-                                                            @else
+                                                @if(isset($product_details->gallery_images) && $galleryImages = json_decode($product_details->gallery_images, true))
+                                                    @foreach($galleryImages as $key => $galleryImage)
+                                                        <tr>
+                                                            <td>
+                                                                <input type="file" onchange="previewGalleryImage(this, {{ $key }})" accept=".png, .jpg, .jpeg, .webp" name="gallery_image[]" id="gallery_image_{{ $key }}" class="form-control" placeholder="Upload Gallery Image">
+                                                                @error('gallery_image')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                                <small class="form-text text-muted">Note: The file size should be less than 3MB.</small><br>
+                                                                <small class="form-text text-muted">Note: Only files in .jpg, .jpeg, .png, .webp format are allowed.</small>
+                                                                <input type="hidden" name="existing_gallery_images[]" value="{{ $galleryImage }}">
+                                                            </td>
+                                                            <td>
+                                                                <img id="gallery-preview-container-{{ $key }}" src="{{ asset('/murupp/product/gallery/' . $galleryImage) }}" alt="Preview" style="max-height: 100px; border: 1px solid #ddd; padding: 5px;">
+                                                            </td>
+                                                            <td>
                                                                 <button type="button" class="btn btn-danger removeGalleryRow">Remove</button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
-
                                         </table>
                                     </div>
-
 
 
                                     <!-- Form Actions -->
@@ -231,8 +228,6 @@
                                         <button class="btn btn-primary" type="submit">Update</button>
                                     </div>
                                 </form>
-
-
                                 </div>
                             </div>
                             </div>
@@ -252,43 +247,6 @@
 
        @include('components.backend.main-js')
 
-
-<!--Thumbnail Preview-->
-<script>
-    function previewThumbnail(input, index) {
-        const file = input.files[0];
-        const previewContainer = document.getElementById(`preview-container-${index}`);
-        
-        previewContainer.innerHTML = "";
-
-        if (file) {
-            const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
-            if (!validTypes.includes(file.type)) {
-                alert("Please upload a valid image file (.jpg, .jpeg, .png, .webp).");
-                return;
-            }
-            if (file.size > 3 * 3072 * 3072) {
-                alert("The file size should be less than 2MB.");
-                return;
-            }
-
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.style.maxWidth = "100px";  
-                img.style.maxHeight = "100px"; 
-                img.alt = "Preview Image";
-                
-                previewContainer.appendChild(img);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    }
-
-</script>
 
 <!--Thumbnail Add More Option-->
 <script>
@@ -352,6 +310,8 @@
         }
     }
 </script>
+
+
 
 
 <!--Gallery Image Preview & Add More Option-->
