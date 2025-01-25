@@ -52,6 +52,13 @@
                                     @csrf
                                     @method('PUT')
 
+                                     <!-- Section Headng-->
+                                     <div class="col-xxl-4 col-sm-6">
+                                        <label class="form-label" for="section_heading">Section Heading </label>
+                                        <input class="form-control" id="section_heading" type="text" name="section_heading" value="{{ $new_arrival->section_heading }}" placeholder="Enter Section Heading" required>
+                                        <div class="invalid-feedback">Please enter a Section Heading.</div>
+                                    </div>
+
                                     <!-- Product Name -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_name">Product Name <span class="txt-danger">*</span></label>

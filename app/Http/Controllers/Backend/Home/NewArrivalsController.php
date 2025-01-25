@@ -38,6 +38,7 @@ class NewArrivalsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'section_heading' => 'nullable|string|max:255',
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string',
             'product_size' => 'required|string|max:255',
@@ -59,6 +60,7 @@ class NewArrivalsController extends Controller
         }
 
         $product = new NewArrival();
+        $product->section_heading = $request->input('section_heading');
         $product->product_name = $request->input('product_name');
         $product->product_price = $request->input('product_price');
         $product->product_size = $request->input('product_size');
@@ -80,6 +82,7 @@ class NewArrivalsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'section_heading' => 'nullable|string|max:255',
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string',
             'product_size' => 'required|string|max:255',
@@ -102,6 +105,7 @@ class NewArrivalsController extends Controller
             $product->product_image = $imageName;
         }
 
+        $product->section_heading = $request->input('section_heading');
         $product->product_name = $request->input('product_name');
         $product->product_price = $request->input('product_price');
         $product->product_size = $request->input('product_size');

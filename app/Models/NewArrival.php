@@ -14,6 +14,7 @@ class NewArrival extends Model
 
     protected $fillable = [
         'product_name',
+        'section_heading',
         'product_price',
         'product_size',
         'product_image',
