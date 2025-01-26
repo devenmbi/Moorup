@@ -26,7 +26,16 @@ class TestimonialsController extends Controller
                                     ->whereNull('testimonials.deleted_by')
                                     ->select('testimonials.*', 'users.name as creator_name')
                                     ->get();
-        return view('backend.home-page.testimonials.index', compact('testimonials'));
+
+
+        $section_details = Testimonial::whereNull('testimonials.deleted_by')  
+                                    ->whereNotNull('testimonials.section_heading') 
+                                    ->select('testimonials.section_heading', 'testimonials.section_title')
+                                    ->get();
+                                
+                                    
+
+        return view('backend.home-page.testimonials.index', compact('testimonials','section_details'));
     }
 
     public function create(Request $request)

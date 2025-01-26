@@ -51,6 +51,7 @@
 							</div>
 
 
+                  
                     <div class="table-responsive custom-scrollbar">
                     <table class="display" id="basic-1">
                         <thead>
@@ -83,6 +84,7 @@
                         </tbody>
                     </table>
 
+
                     </div>
                   </div>
                 </div>
@@ -96,7 +98,11 @@
     </div>
 
         @include('components.backend.main-js')
-
+<script>
+    $(document).ready(function() {
+        $('#basic').DataTable(); // Initialize the DataTable on the table with id "basic"
+    });
+</script>
 </body>
 
 </html>
