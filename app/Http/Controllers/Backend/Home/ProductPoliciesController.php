@@ -58,6 +58,8 @@ class ProductPoliciesController extends Controller
             'heading' => $request->heading,
             'description' => $request->image_title,
             'policy_image' => $imageName, 
+            'created_at' => Carbon::now(),
+            'created_by' => Auth::user()->id, 
         ]);
 
         return redirect()->route('product-policies.index')->with('message', 'Policy added successfully.');
@@ -96,6 +98,9 @@ class ProductPoliciesController extends Controller
 
         $productPolicy->heading = $request->heading;
         $productPolicy->description = $request->image_title;
+        $productPolicy->modified_at = Carbon::now();
+        $productPolicy->modified_by = Auth::user()->id; 
+        
         $productPolicy->save();
 
         return redirect()->route('product-policies.index')->with('message', 'Policy updated successfully.');
