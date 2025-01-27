@@ -25,7 +25,6 @@ class CategoryDetailsController extends Controller
 
         $products = ProductDetails::where('category_id', $categoryId)->get();
 
-
         return view('frontend.category.dresses', compact('banner','products'));
     }
     
