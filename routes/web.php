@@ -20,6 +20,12 @@ use App\Http\Controllers\Backend\Home\TestimonialsController;
 use App\Http\Controllers\Backend\Home\SocialMediaController;
 use App\Http\Controllers\Backend\Home\FooterController;
 
+use App\Http\Controllers\Backend\Category\DressesController;
+use App\Http\Controllers\Backend\Category\TopsController;
+use App\Http\Controllers\Backend\Category\BottomsController;
+use App\Http\Controllers\Backend\Category\CoordsController;
+use App\Http\Controllers\Backend\Category\JacketsController;
+
 
 
 
@@ -115,4 +121,4 @@ Route::resource('bottoms', BottomsController::class);
 Route::resource('co-ords', CoordsController::class);
 
 // ==== Manage Blazers/Jackets in Category Page
-Route::resource('jackest', JackestController::class);
+Route::resource('jackets', JacketsController::class);

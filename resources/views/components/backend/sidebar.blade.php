@@ -97,11 +97,11 @@
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
                     </svg><span>Category page</span></a>
                   <ul class="sidebar-submenu">
-                    <li><a href="{{ route('banner-details.index') }}">Dresses</a></li>
-                    <li><a href="{{ route('new-arrivals.index') }}">Tops</a></li>
-                    <li><a href="{{ route('collection-details.index') }}">Bottoms </a></li>
-                    <li><a href="{{ route('shop-category.index') }}">Co-ords</a></li>
-                    <li><a href="{{ route('product-policies.index') }}">Blazers/Jackets</a></li>
+                    <li><a href="{{ route('dresses.index') }}">Dresses</a></li>
+                    <li><a href="{{ route('tops.index') }}">Tops</a></li>
+                    <li><a href="{{ route('bottoms.index') }}">Bottoms </a></li>
+                    <li><a href="{{ route('co-ords.index') }}">Co-ords</a></li>
+                    <li><a href="{{ route('jackets.index') }}">Blazers/Jackets</a></li>
                   </ul>
                 </li>
 
