@@ -75,6 +75,7 @@ Route::resource('product-prints', ProductPrintsController::class);
 Route::resource('product-details', ProductDetailsController::class);
 
 
+
 // ==== Manage Banner Details in Home
 Route::resource('banner-details', BannerDetailsController::class);
 
@@ -98,3 +99,20 @@ Route::resource('social-media', SocialMediaController::class);
 
 // ==== Manage Footer in Home
 Route::resource('footer', FooterController::class);
+
+
+
+// ==== Manage Dresses in Category Page
+Route::resource('dresses', DressesController::class);
+
+// ==== Manage  Tops in Category Page
+Route::resource('tops', TopsController::class);
+
+// ==== Manage  Bottoms in Category Page
+Route::resource('bottoms', BottomsController::class);
+
+// ==== Manage  Co-ords in Category Page
+Route::resource('co-ords', CoordsController::class);
+
+// ==== Manage Blazers/Jackets in Category Page
+Route::resource('jackest', JackestController::class);

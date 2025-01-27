@@ -28,7 +28,7 @@
                   </div>
                 </li>
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
-                <a class="sidebar-link sidebar-title link-nav active" href="{{ route('admin.dashboard') }}">
+                <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.dashboard') }}">
                     <svg class="stroke-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                     </svg>
@@ -54,10 +54,10 @@
 
                 <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#orders') }}"></use>
                     </svg>
                     <svg class="fill-icon">
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#orders') }}"></use>
                     </svg><span>Store Management</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('collections.index') }}">Collections</a></li>
@@ -76,7 +76,7 @@
                     </svg>
                     <svg class="fill-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
-                    </svg><span>Home</span></a>
+                    </svg><span>Home page</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('banner-details.index') }}">Banner Details</a></li>
                     <li><a href="{{ route('new-arrivals.index') }}">New Arrivals</a></li>
@@ -84,8 +84,24 @@
                     <li><a href="{{ route('shop-category.index') }}">Shop By Category</a></li>
                     <li><a href="{{ route('product-policies.index') }}">Product Policies</a></li>
                     <li><a href="{{ route('testimonials.index') }}">Testimonials</a></li>
-                    <li><a href="{{ route('social-media.index') }}">Social Media Details</a></li>
+                    <li><a href="{{ route('social-media.index') }}">Social Media</a></li>
                     <li><a href="{{ route('footer.index') }}">Footer</a></li>
+                  </ul>
+                </li>
+
+                <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#product-category') }}"></use>
+                    </svg><span>Category page</span></a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('banner-details.index') }}">Dresses</a></li>
+                    <li><a href="{{ route('new-arrivals.index') }}">Tops</a></li>
+                    <li><a href="{{ route('collection-details.index') }}">Bottoms </a></li>
+                    <li><a href="{{ route('shop-category.index') }}">Co-ords</a></li>
+                    <li><a href="{{ route('product-policies.index') }}">Blazers/Jackets</a></li>
                   </ul>
                 </li>
 
