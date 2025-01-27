@@ -27,6 +27,7 @@ use App\Http\Controllers\Backend\Category\JacketsController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\CategoryDetailsController;
 
 
 // =========================================================================== Backend Routes
@@ -130,5 +131,8 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
 
     // ==== Home
     Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
+
+    // ==== Category Pages
+    Route::get('/category-dresses', [CategoryDetailsController::class, 'index'])->name('frontend.category');
     
 });
