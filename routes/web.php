@@ -19,7 +19,6 @@ use App\Http\Controllers\Backend\Home\ProductPoliciesController;
 use App\Http\Controllers\Backend\Home\TestimonialsController;
 use App\Http\Controllers\Backend\Home\SocialMediaController;
 use App\Http\Controllers\Backend\Home\FooterController;
-
 use App\Http\Controllers\Backend\Category\DressesController;
 use App\Http\Controllers\Backend\Category\TopsController;
 use App\Http\Controllers\Backend\Category\BottomsController;
@@ -27,13 +26,14 @@ use App\Http\Controllers\Backend\Category\CoordsController;
 use App\Http\Controllers\Backend\Category\JacketsController;
 
 
+use App\Http\Controllers\Frontend\HomeController;
 
 
 // =========================================================================== Backend Routes
 
-Route::get('/', function () {
-    return view('backend.login');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
   
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'login'])->name('admin.login');
@@ -122,3 +122,13 @@ Route::resource('co-ords', CoordsController::class);
 
 // ==== Manage Blazers/Jackets in Category Page
 Route::resource('jackets', JacketsController::class);
+
+
+
+// ======================= Frontend
+Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
+
+    // ==== Home
+    Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
+    
+});
