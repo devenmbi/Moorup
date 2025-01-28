@@ -133,6 +133,23 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
 
     // ==== Category Pages
-    Route::get('/category-dresses', [CategoryDetailsController::class, 'index'])->name('frontend.category');
+    Route::get('/category-dresses', [CategoryDetailsController::class, 'dresses'])->name('frontend.dresses');
+
+    // ==== Category Pages
+    Route::get('/category-tops', [CategoryDetailsController::class, 'tops'])->name('frontend.tops');
+
+    // ==== Category Pages
+    Route::get('/category-bottoms', [CategoryDetailsController::class, 'bottoms'])->name('frontend.bottoms');
+
+    // ==== Category Pages
+    Route::get('/category-coords', [CategoryDetailsController::class, 'coords'])->name('frontend.coords');
+
+    // ==== Category Pages
+    Route::get('/category-blazers', [CategoryDetailsController::class, 'blazers'])->name('frontend.blazers');
+
+    //===== Detailed Product Page
+    Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
+
+
     
 });

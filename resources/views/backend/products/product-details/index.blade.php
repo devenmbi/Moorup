@@ -55,9 +55,9 @@
                           <tr>
                             <th>#</th>
                             <th>Collection Name</th>
-                            <th>Style Code</th>
+                            <!-- <th>Style Code</th> -->
                             <th>Product Name</th>
-                            <th>Look Name</th>
+                            <!-- <th>Look Name</th> -->
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -66,9 +66,9 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td> 
                                     <td>{{ $product->collection_name }}</td>
-                                    <td>{{ $product->style_code }}</td> 
+                                    <!-- <td>{{ $product->style_code }}</td>  -->
                                     <td>{{ $product->product_name }}</td>
-                                    <td>{{ $product->look_name }}</td> 
+                                    <!-- <td>{{ $product->look_name }}</td>  -->
                                     <td>
                                         <a href="{{ route('product-details.edit', $product->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                         <form action="{{ route('product-details.destroy', $product->id) }}" method="POST" style="display:inline;">

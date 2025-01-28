@@ -12,7 +12,7 @@
 
 
         <!-- page-title -->
-        <div class="page-title" style="background-image: url({{ asset('murupp/category/dresses/' . $banner->banner_image) }});">
+        <div class="page-title" style="background-image: url({{ asset('murupp/category/bottoms/' . $banner->banner_image) }});">
             <div class="container-full">
                 <div class="row">
                     <div class="col-12">

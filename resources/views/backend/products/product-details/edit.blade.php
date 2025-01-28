@@ -84,9 +84,12 @@
                                         <select class="form-control" id="product_category" name="product_category" required>
                                             <option value="" disabled>Select Product Category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $product_details->product_category == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                                                <option value="{{ $category->id }}" {{ $product_details->category_id == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->category_name }}
+                                                </option>
                                             @endforeach
                                         </select>
+
                                         <div class="invalid-feedback">Please select a product category.</div>
                                     </div>
 
