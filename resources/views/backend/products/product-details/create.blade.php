@@ -201,6 +201,38 @@
                                     </div>
 
 
+                                    <!-- Product Prints Image Upload -->
+                                    <div class="table-container" style="margin-bottom: 20px;">
+                                        <h5 class="mb-4"><strong>Product Prints Upload</strong></h5>
+                                        <table class="table table-bordered p-3" id="printsTable" style="border: 2px solid #dee2e6;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Uploaded Print Image:</th>
+                                                    <th>Preview</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input type="file" onchange="previewPrintImage(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_0" class="form-control" placeholder="Upload Print Image">
+                                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                                        <br>
+                                                        <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                                                    </td>
+                                                    <td>
+                                                        <div id="print-preview-container-0"></div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary" id="addPrintRow">Add More</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
                                         <a href="{{ route('product-details.index') }}" class="btn btn-danger px-4">Cancel</a>
@@ -392,6 +424,67 @@
             }
         }
     }
+</script>
+
+
+<!--Product Prints Image Preview & Add More Option-->
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let rowIndex = 1; // Start row index for new rows
+
+        // Add row functionality
+        document.getElementById("addPrintRow").addEventListener("click", function () {
+            const tableBody = document.querySelector("#printsTable tbody");
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>
+                    <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control" placeholder="Upload Print Image" required>
+                    <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                    <br>
+                    <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                </td>
+                <td>
+                    <div id="print-preview-container-${rowIndex}"></div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger removePrintRow">Remove</button>
+                </td>
+            `;
+
+            tableBody.appendChild(newRow);
+            rowIndex++; // Increment row index for unique IDs
+        });
+
+        // Remove row functionality
+        document.querySelector("#printsTable").addEventListener("click", function (e) {
+            if (e.target.classList.contains("removePrintRow")) {
+                const row = e.target.closest("tr");
+                row.remove();
+            }
+        });
+    });
+
+    // Image preview function
+    function previewPrintImage(input, index) {
+        const previewContainer = document.getElementById(`print-preview-container-${index}`);
+        previewContainer.innerHTML = ""; // Clear previous preview
+        if (input.files) {
+            Array.from(input.files).forEach((file) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.width = "100px";
+                    img.style.marginRight = "10px";
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+
 </script>
 
        

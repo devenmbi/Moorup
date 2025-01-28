@@ -62,7 +62,8 @@ class ProductDetailsController extends Controller
             'thumbnail_image' => 'required|array',
             'thumbnail_image.*' => 'max:3072', 
             'gallery_image' => 'nullable|array',
-            'gallery_image.*' => 'max:3072', 
+            'gallery_image.*' => 'max:3072',
+            'print_image.*' => 'nullable|image|max:3072', 
         ], [
             'style_code.required' => 'The product style code is required.',
             'look_name.required' => 'The full look name is required.',
@@ -77,6 +78,7 @@ class ProductDetailsController extends Controller
             'thumbnail_image.array' => 'The thumbnail image must be an array.',
             'thumbnail_image.*.max' => 'Each thumbnail image must be less than 3MB.',
             'gallery_image.*.max' => 'Each gallery image must be less than 3MB.',
+            'print_image.*.max' => 'Each print image must be less than 3MB.',
         ]);
 
         $slug = Str::slug($request->product_name, '-');
@@ -125,6 +127,22 @@ class ProductDetailsController extends Controller
             $product->gallery_images = json_encode($galleryImages); 
         }
     
+        // Handle product print image upload
+        if ($request->hasFile('print_image')) {
+            $prints = [];
+            foreach ($request->file('print_image') as $image) {
+                if ($image->isValid()) {
+                    $extension = $image->getClientOriginalExtension();
+                    $new_name = time() . rand(10, 999) . '.' . $extension;
+                    $image->move(public_path('/murupp/product/prints'), $new_name);
+                    $image_path = "/murupp/product/prints/" . $new_name;
+                    $prints[] = $new_name; 
+                }
+            }
+            $product->product_prints = json_encode($prints); 
+        }
+    
+
         $product->save();
 
         return redirect()->route('product-details.index')->with('message', 'Product has been successfully added!');
@@ -157,6 +175,7 @@ class ProductDetailsController extends Controller
             'thumbnail_image.*' => 'max:3072',
             'gallery_image' => 'nullable|array',
             'gallery_image.*' => 'max:3072',
+            'print_image.*' => 'nullable|image|max:3072', 
         ], [
             'style_code.required' => 'The product style code is required.',
             'look_name.required' => 'The full look name is required.',
@@ -170,6 +189,7 @@ class ProductDetailsController extends Controller
             'thumbnail_image.array' => 'The thumbnail image must be an array.',
             'thumbnail_image.*.max' => 'Each thumbnail image must be less than 3MB.',
             'gallery_image.*.max' => 'Each gallery image must be less than 3MB.',
+            'print_image.*.max' => 'Each print image must be less than 3MB.',
         ]);
         
         $product = ProductDetails::findOrFail($id);
@@ -213,8 +233,23 @@ class ProductDetailsController extends Controller
                 }
             }
         }
-
         $product->gallery_images = json_encode($existingGalleryImages);
+
+        
+        $existingPrintImages = $request->input('existing_prints', []);  
+        if ($request->hasFile('print_image')) {
+
+            foreach ($request->file('print_image') as $image) {
+                if ($image->isValid()) {
+                    $extension = $image->getClientOriginalExtension();
+                    $new_name = time() . rand(10, 999) . '.' . $extension;
+                    $image->move(public_path('/murupp/product/prints'), $new_name);
+                    $existingPrintImages[] = $new_name;  
+                }
+            }
+        }
+
+        $product->product_prints = json_encode($existingPrintImages);
     
         $product->save();
 

@@ -224,6 +224,47 @@
                                         </table>
                                     </div>
 
+                                    <!-- Product Prints Image Upload -->
+                                    <div class="table-container" style="margin-bottom: 20px;">
+                                        <div class="d-flex align-items-center">
+                                            <h5 class="mb-4 me-3"><strong>Product Prints Upload</strong></h5>
+                                            <button type="button" class="btn btn-primary ms-auto" id="addPrintRow">Add More</button>
+                                        </div>
+
+                                        <table class="table table-bordered p-3" id="printsTable" style="border: 2px solid #dee2e6;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Uploaded Print Image:</th>
+                                                    <th>Preview</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop through existing prints if available -->
+                                                @if(isset($product_details->product_prints) && $productPrints = json_decode($product_details->product_prints, true))
+                                                    @foreach($productPrints as $key => $print)
+                                                    <tr>
+                                                        <td>
+                                                            <input type="file" onchange="previewPrintImage(this, {{ $key }})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_{{ $key }}" class="form-control">
+                                                            <input type="hidden" name="existing_prints[]" value="{{ $print }}">
+                                                            <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                                            <br>
+                                                            <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                                                        </td>
+                                                        <td>
+                                                            <img id="print-preview-container-{{ $key }}" src="{{ asset('/murupp/product/prints/' . $print) }}" alt="Preview" style="max-height: 100px; border: 1px solid #ddd; padding: 5px;">
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger removePrintRow">Remove</button>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
 
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
@@ -382,7 +423,65 @@
     }
 </script>
 
-       
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let rowIndex = {{ isset($product_details->product_prints) ? count(json_decode($product_details->product_prints)) : 1 }};
+
+        // Add new row
+        document.getElementById("addPrintRow").addEventListener("click", function () {
+            const tableBody = document.querySelector("#printsTable tbody");
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>
+                    <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control">
+                    <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                    <br>
+                    <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                </td>
+                <td>
+                    <div id="print-preview-container-${rowIndex}"></div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger removePrintRow">Remove</button>
+                </td>
+            `;
+            tableBody.appendChild(newRow);
+            rowIndex++;
+        });
+
+        // Remove row
+        document.querySelector("#printsTable").addEventListener("click", function (e) {
+            if (e.target.classList.contains("removePrintRow")) {
+                const row = e.target.closest("tr");
+                row.remove();
+            }
+        });
+    });
+
+    // Preview uploaded image
+    function previewPrintImage(input, index) {
+        const previewContainer = document.getElementById(`print-preview-container-${index}`);
+        previewContainer.innerHTML = ""; // Clear previous preview
+        if (input.files) {
+            Array.from(input.files).forEach((file) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.maxWidth = "100px";
+                    img.style.marginTop = "10px";
+                    img.style.border = "1px solid #ddd";
+                    img.style.padding = "5px";
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+</script>
+
 </body>
 
 </html>
