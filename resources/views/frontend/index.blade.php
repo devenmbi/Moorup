@@ -247,13 +247,13 @@
                             <div class="content">
                                 <div class="title-top">
                                     <h4 class="title">
-                                        <a href="shop-collection.html" class="link text-white wow fadeInUp">
+                                        <a href="{{ !empty($category->slug) ? url('/category-' . $category->slug) : '#' }}" class="link text-white wow fadeInUp">
                                             {{ $category->image_title }}
                                         </a>
                                     </h4>
                                 </div>
                                 <div>
-                                    <a href="#" class="btn-line style-white">Shop Now</a>
+                                    <a href="{{ !empty($category->slug) ? url('/category-' . $category->slug) : '#' }}" class="btn-line style-white">Shop Now</a>
                                 </div>
                             </div>
                         </div>

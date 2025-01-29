@@ -142,10 +142,10 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/category-bottoms', [CategoryDetailsController::class, 'bottoms'])->name('frontend.bottoms');
 
     // ==== Category Pages
-    Route::get('/category-coords', [CategoryDetailsController::class, 'coords'])->name('frontend.coords');
+    Route::get('/category-co-ord-set', [CategoryDetailsController::class, 'coords'])->name('frontend.coords');
 
     // ==== Category Pages
-    Route::get('/category-blazers', [CategoryDetailsController::class, 'blazers'])->name('frontend.blazers');
+    Route::get('/category-blazersjackets', [CategoryDetailsController::class, 'blazers'])->name('frontend.blazers');
 
     //===== Detailed Product Page
     Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
