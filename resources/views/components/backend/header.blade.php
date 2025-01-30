@@ -52,9 +52,9 @@
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
-                  <li><a href="user-profile.html"><i data-feather="user"></i><span>My Profile</span></a></li>
-                  <li><a href="letter-box.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                  <li> <a href="edit-profile.html"> <i data-feather="settings"></i><span>Settings</span></a></li>
+                  <!-- <li><a href="user-profile.html"><i data-feather="user"></i><span>My Profile</span></a></li> -->
+                  <!-- <li><a href="letter-box.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
+                  <li> <a href="edit-profile.html"> <i data-feather="settings"></i><span>Settings</span></a></li> -->
                   <li><a class="btn btn-pill btn-outline-primary btn-sm" href="{{ route('admin.logout') }}">Log Out</a></li>
                 </ul>
               </li>
