@@ -18,6 +18,7 @@ class ProductDetails extends Model
         'slug',
         'look_name',
         'product_name',
+        'available_quantity',
         'category_id',
         'fabric_composition_id',
         'product_fabric_id',

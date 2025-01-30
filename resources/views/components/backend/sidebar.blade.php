@@ -54,10 +54,10 @@
 
                 <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#orders') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#cart') }}"></use>
                     </svg>
                     <svg class="fill-icon">
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#orders') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#cart') }}"></use>
                     </svg><span>Store Management</span></a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('collections.index') }}">Collections</a></li>
@@ -115,6 +115,20 @@
                             <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-board') }}"></use>
                         </svg>
                         <span>SEO</span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-list">
+                    <i class="fa fa-thumb-tack"></i>
+                    <a class="sidebar-link" href="{{ route('stock-details.index') }}">
+                        <svg class="stroke-icon"> 
+                            <use href="{{ asset('admin/assets/svg/icon-sprite.svg#sale') }}"></use>
+                        </svg>
+                        <svg class="fill-icon">
+                            <use href="{{ asset('admin/assets/svg/icon-sprite.svg#sale') }}"></use>
+                        </svg>
+                        <span>Stock Management</span>
                     </a>
                 </li>
 

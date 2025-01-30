@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductSizesController;
 use App\Http\Controllers\Backend\ProductPrintsController;
 use App\Http\Controllers\Backend\ProductDetailsController;
 use App\Http\Controllers\Backend\SEOController;
+use App\Http\Controllers\Backend\StockDetailsController;
 use App\Http\Controllers\Backend\Home\BannerDetailsController;
 use App\Http\Controllers\Backend\Home\NewArrivalsController;
 use App\Http\Controllers\Backend\Home\CollectionDetailsController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Backend\Category\JacketsController;
 
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CategoryDetailsController;
+use App\Http\Controllers\Frontend\ProductController;
 
 
 // =========================================================================== Backend Routes
@@ -128,6 +130,9 @@ Route::resource('jackets', JacketsController::class);
 
 // ==== Manage Add SEO Tags in SEO
 Route::resource('seo-tags', SEOController::class);
+
+// ==== Manage Stock Management
+Route::resource('stock-details', StockDetailsController::class);
 
 
 // ======================= Frontend
