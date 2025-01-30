@@ -31,6 +31,8 @@ use App\Http\Controllers\Backend\Category\JacketsController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CategoryDetailsController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\CartController;
 
 
 // =========================================================================== Backend Routes
@@ -159,6 +161,12 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     //===== Detailed Product Page
     Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
+  
+
 
     
 });
+
+Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+    
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');

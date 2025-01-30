@@ -31,7 +31,7 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-md-4 col-6">
-                        <a href="#" class="logo-header">
+                        <a href="{{ route('frontend.index') }}" class="logo-header">
                             <img src="{{ asset('frontend/assets/images/logo/logo.webp') }}" width="144px" height="26px" alt="Murupp Logo" class="logo">
                         </a>
                     </div>

@@ -135,7 +135,7 @@
                                         @endif
                                     </a>
                                     <div class="list-product-btn">
-                                        <a href="" class="box-icon wishlist btn-icon-action">
+                                        <a href="{{ route('wishlist.add', ['id' => $product->id]) }}" class="box-icon wishlist btn-icon-action">
                                             <span class="icon icon-heart"></span>
                                             <span class="tooltip">Wishlist</span>
                                         </a>
