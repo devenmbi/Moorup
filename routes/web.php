@@ -138,6 +138,12 @@ Route::resource('stock-details', StockDetailsController::class);
 
 
 // ======================= Frontend
+
+    Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+        
+    Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+
 Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
 
     // ==== Home
@@ -163,10 +169,5 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
 
   
 
-
-    
 });
 
-Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
-    
-Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');

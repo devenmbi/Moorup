@@ -141,7 +141,7 @@
                                         </a>
                                     </div>
                                     <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal" class="btn-main-product">Add To cart</a>
+                                        <a href="{{ route('cart.add', ['id' => $product->id]) }}" class="btn-main-product">Add To cart</a>
                                     </div>
                                 </div>
                                 <div class="card-product-info">
