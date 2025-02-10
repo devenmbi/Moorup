@@ -16,7 +16,7 @@
             <div class="container-full">
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="heading text-center">{{ $banner->banner_heading }}</h3>
+                        <h3 class="heading text-center">{{ $imageTitle->banner_heading }}</h3>
                         <ul class="breadcrumbs d-flex align-items-center justify-content-center">
                             <li>
                                 <a class="link" href="#">Home</a>
@@ -31,7 +31,7 @@
                                 <i class="icon-arrRight"></i>
                             </li>
                             <li>
-                                {{ $banner->banner_heading }}
+                                {{ $imageTitle->banner_heading }}
                             </li>
                         </ul>
                     </div>

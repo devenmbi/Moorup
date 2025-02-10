@@ -11,27 +11,27 @@
         @include('components.frontend.header')
 
 
-  <!-- page-title -->
-  <div class="page-title" style="background-image: url(images/bg/page-title.webp);">
+      <!-- page-title -->
+        <div class="page-title" style="background-image: url('{{ asset('frontend/assets/images/bg/page-title.webp') }}');">
             <div class="container-full">
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="heading text-center">Dresses</h3>
+                        <h3 class="heading text-center">{{ $category->image_title ?? 'Dresses' }}</h3>
                         <ul class="breadcrumbs d-flex align-items-center justify-content-center">
                             <li>
-                                <a class="link" href="#">Home</a>
+                                <a class="link" href="{{ url('/') }}">Home</a>
                             </li>
                             <li>
                                 <i class="icon-arrRight"></i>
                             </li>
                             <li>
-                                <a class="link" href="#">Shop by Category</a>
+                                <a class="link" href="{{ url('/shop-by-category') }}">Shop by Category</a>
                             </li>
                             <li>
                                 <i class="icon-arrRight"></i>
                             </li>
                             <li>
-                                Dresses
+                                {{ $category->image_title ?? 'Dresses' }}
                             </li>
                         </ul>
                     </div>
@@ -39,6 +39,10 @@
             </div>
         </div>
         <!-- /page-title -->
+
+
+
+
         <!-- Product_Main -->
         <section class="flat-spacing">
             <div class="tf-main-product section-image-zoom">
@@ -47,7 +51,7 @@
                         <!-- Product default -->
                         <div class="col-md-6">
                             
-<div class="tf-product-media-wrap sticky-top">
+                            <div class="tf-product-media-wrap sticky-top">
                                 <div class="thumbs-slider">
                                     <div dir="ltr" class="swiper tf-product-media-thumbs other-image-zoom" data-direction="vertical">
                                         <div class="swiper-wrapper stagger-wrap">
@@ -280,11 +284,11 @@
                                 <div class="widget-content-inner active">
                                     <div class="tab-description">
                                     <p>
-Dresses Viscose Satin A chic midi A-line dress that stands out with its embroidered magpie 
-appliqués and 3D embellishments created using piping. The plunging V-neckline, paired with bold geometric cut-outs on the bodice, adds a 
-modern edge to the elegant silhouette. It also features hidden side 
-pockets.</p>
-                                            
+                Dresses Viscose Satin A chic midi A-line dress that stands out with its embroidered magpie 
+                appliqués and 3D embellishments created using piping. The plunging V-neckline, paired with bold geometric cut-outs on the bodice, adds a 
+                modern edge to the elegant silhouette. It also features hidden side 
+                pockets.</p>
+                                                            
                                             <p class="text-btn-uppercase"><b>Fabric & Care</b></p>
                                             <ul class="list-text type-disc mb_12 gap-6">
                                                 <li class="font-2">Cotton Georgette </li>
@@ -378,71 +382,73 @@ pockets.</p>
         </section>
         <!-- /Product_Description_Tabs -->
 
-     <!-- size-guide -->
-    <div class="modal fade modal-size-guide" id="size-guide">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content widget-tabs style-2">
-                <div class="header">
-                    <ul class="widget-menu-tab">
-                
-                        <li class="item-title active">
-                            <span class="inner text-button">Size Guide</span>
-                        </li>
-                    </ul>
-                    <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
-                </div>
-                <div class="wrap">
-                    <div class="widget-content-tab">
+        <!-- size-guide -->
+        <div class="modal fade modal-size-guide" id="size-guide">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content widget-tabs style-2">
+                    <div class="header">
+                        <ul class="widget-menu-tab">
                     
-                        <div class="widget-content-inner active">
-                            <table class="tab-sizeguide-table">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>XS</th>
-                                        <th>S</th>
-                                        <th>M</th>
-                                        <th>L</th>
-                                        <th>XL</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Bust</td>
-                                        <td>32</td>
-                                        <td>34</td>
-                                        <td>36</td>
-                                        <td>38</td>
-                                        <td>40</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Waist</td>
-                                        <td>24</td>
-                                        <td>26</td>
-                                        <td>28</td>
-                                        <td>30</td>
-                                        <td>32</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hips</td>
-                                        <td>34</td>
-                                        <td>36</td>
-                                        <td>38</td>
-                                        <td>40</td>
-                                        <td>42</td>
-                                    </tr>    
-                                </tbody>
-                            </table>
+                            <li class="item-title active">
+                                <span class="inner text-button">Size Guide</span>
+                            </li>
+                        </ul>
+                        <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
+                    </div>
+                    <div class="wrap">
+                        <div class="widget-content-tab">
+                        
+                            <div class="widget-content-inner active">
+                                <table class="tab-sizeguide-table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>XS</th>
+                                            <th>S</th>
+                                            <th>M</th>
+                                            <th>L</th>
+                                            <th>XL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Bust</td>
+                                            <td>32</td>
+                                            <td>34</td>
+                                            <td>36</td>
+                                            <td>38</td>
+                                            <td>40</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Waist</td>
+                                            <td>24</td>
+                                            <td>26</td>
+                                            <td>28</td>
+                                            <td>30</td>
+                                            <td>32</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hips</td>
+                                            <td>34</td>
+                                            <td>36</td>
+                                            <td>38</td>
+                                            <td>40</td>
+                                            <td>42</td>
+                                        </tr>    
+                                    </tbody>
+                                </table>
+                            </div>
+
+
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /size-guide -->
- <section class="flat-spacing">
+        <!-- /size-guide -->
+
+
+        <section class="flat-spacing">
             <div class="container">
                 <div class="heading-section text-center  wow fadeInUp">
                     <h3 class="heading ">Related Products</h3>

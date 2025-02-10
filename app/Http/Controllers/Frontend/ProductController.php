@@ -8,17 +8,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductDetails;
+use App\Models\ShopCategory;
+use App\Models\DressesDetails;
 
 
 class ProductController extends Controller
 {
 
-     // === Product Details
-     public function show(Request $request)
-     {
-         $details = ProductDetails::whereNull('deleted_at')->orderBy('created_at', 'asc')->get();
+    public function show($slug)
+    {
+        $product = ProductDetails::where('slug', $slug)->whereNull('deleted_at')->firstOrFail();
+        $category = ShopCategory::find($product->category_id);
+        $imageTitle = optional($category)->image_title ?? '';
+
         
-         return view('frontend.product-detail', compact('details'));
-     }
+        return view('frontend.product-detail', compact('product', 'category'));
+    }
+    
      
 }
