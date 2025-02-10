@@ -27,6 +27,7 @@ class ProductDetails extends Model
         'shipping',
         'return',
         'sizes',
+        'colors',
         'collection_name',
         'thumbnail_image',
         'gallery_images',

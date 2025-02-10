@@ -143,6 +143,24 @@
                                     </div>
 
 
+                                    <div class="col-xxl-4 col-sm-6">
+                                    <label class="form-label" for="product_colors">Product Colors </label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" select2 id="color_dropdown" name="colors[]" multiple>
+                                                <option value="#ff0000">Red</option>
+                                                <option value="#00ff00">Green</option>
+                                                <option value="#0000ff">Blue</option>
+                                                <option value="#006666">Teal</option>
+                                                <option value="custom">Custom</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 mt-3" id="custom_color_container" style="display: none;">
+                                            <label class="form-label">Custom Color</label>
+                                            <input class="form-control form-control-color" type="color" name="custom_color" id="custom_color" value="#006666">
+                                        </div>
+                                    </div>
+
+
 
                                      <!-- Product Description -->
                                     <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
@@ -518,7 +536,7 @@
 
 </script>
 
-       
+ <!--Product Size elect 2 opt-->      
 <script>
     $(document).ready(function() {
         $('#product_size').select2({
@@ -527,6 +545,60 @@
         });
     });
 </script>
+
+
+
+<script>
+    $(document).ready(function () {
+        const colorDropdown = $('#color_dropdown');
+        const customColorContainer = $('#custom_color_container');
+        const customColorInput = $('#custom_color');
+
+        // Initialize Select2 with color swatches
+        colorDropdown.select2({
+            placeholder: "Select Colors",
+            allowClear: true,
+            templateResult: formatColorOption, // Swatches + text in dropdown
+            templateSelection: formatColorNameOnly // Show names only in selection
+        });
+
+        // Show/hide the custom color picker based on dropdown selection
+        colorDropdown.on('change', function () {
+            const selectedOptions = colorDropdown.val() || [];
+            if (selectedOptions.includes('custom')) {
+                customColorContainer.show();
+            } else {
+                customColorContainer.hide();
+            }
+        });
+
+        // Handle custom color selection
+        customColorInput.on('input', function () {
+            console.log('Custom color selected:', this.value);
+        });
+
+        // Format options to include swatches and text
+        function formatColorOption(option) {
+            if (!option.id) return option.text; // Handle placeholder
+
+            const color = option.id === 'custom' ? '#cccccc' : option.id; // Default swatch for custom
+            return $(
+                `<span style="display: flex; align-items: center;">
+                    <span style="display: inline-block; width: 20px; height: 20px; background-color: ${color}; margin-right: 8px; border-radius: 3px;"></span>
+                    <span>${option.text}</span>
+                </span>`
+            );
+        }
+
+        // Format selection to display only the name without swatches
+        function formatColorNameOnly(option) {
+            return option.text;
+        }
+    });
+</script>
+
+
+
 
 </body>
 

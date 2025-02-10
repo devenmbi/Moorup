@@ -64,6 +64,7 @@ class ProductDetailsController extends Controller
             'shipping' => 'required',
             'return' => 'required',
             'product_size' => 'required',
+            'colors' => 'nullable',
             'thumbnail_image' => 'required|array',
             'thumbnail_image.*' => 'max:3072', 
             'gallery_image' => 'nullable|array',
@@ -92,6 +93,17 @@ class ProductDetailsController extends Controller
         $slug = Str::slug($request->product_name, '-');
         $product = new ProductDetails();
 
+        // Handle colors
+        $colors = $request->colors;
+
+        // Check if 'custom' is selected, and add the custom color value if provided
+        if (in_array('custom', $colors) && $request->has('custom_color')) {
+            $customColor = $request->custom_color;
+            $colors = array_filter($colors, fn($color) => $color !== 'custom'); // Remove 'custom'
+            $colors[] = $customColor; // Add the custom color hex value
+        }
+
+
         $product->style_code = $request->style_code;
         $product->look_name = $request->look_name;
         $product->product_name = $request->product_name;
@@ -104,6 +116,7 @@ class ProductDetailsController extends Controller
         $product->shipping = $request->shipping;
         $product->return = $request->return;
         $product->sizes = json_encode($request->product_size);
+        $product->colors = json_encode($colors);
         $product->slug = $slug;
         $product->created_at = Carbon::now();
         $product->created_by = Auth::user()->id;
@@ -169,8 +182,10 @@ class ProductDetailsController extends Controller
         $collections = MasterCollections::whereNull('deleted_by')->get();
         $product_sizes = ProductSizes::whereNull('deleted_at')->pluck('size', 'id');
         $selected_sizes = json_decode($product_details->sizes, true) ?? [];
+        $selectedColors = json_decode($product_details->colors, true); 
+        // dd($selectedColors);
 
-        return view('backend.products.product-details.edit', compact('product_details','categories','fabric_composition','product_fabric','collections','product_sizes','selected_sizes'));
+        return view('backend.products.product-details.edit', compact('product_details','categories','fabric_composition','product_fabric','collections','product_sizes','selected_sizes','selectedColors'));
     }
 
     public function update(Request $request, $id)
@@ -188,6 +203,7 @@ class ProductDetailsController extends Controller
             'product_size' => 'required',
             'shipping' => 'required',
             'return' => 'required',
+            'colors' => 'nullable',
             'thumbnail_image' => 'nullable|array',
             'thumbnail_image.*' => 'max:3072',
             'gallery_image' => 'nullable|array',
@@ -213,7 +229,15 @@ class ProductDetailsController extends Controller
         ]);
         
         $product = ProductDetails::findOrFail($id);
-    
+
+        $colors = $request->colors;
+
+        if (in_array('custom', $colors) && $request->filled('custom_color')) {
+            $colors = array_filter($colors, fn($color) => $color !== 'custom'); 
+            $colors[] = $request->custom_color; 
+        }
+
+        $product->colors = json_encode($colors);
         $product->style_code = $request->style_code;
         $product->look_name = $request->look_name;
         $product->product_name = $request->product_name;
