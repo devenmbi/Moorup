@@ -19,13 +19,13 @@
                         <h3 class="heading text-center">{{ $category->image_title ?? 'Dresses' }}</h3>
                         <ul class="breadcrumbs d-flex align-items-center justify-content-center">
                             <li>
-                                <a class="link" href="{{ url('/') }}">Home</a>
+                                <a class="link" href="{{ route('frontend.index') }}">Home</a>
                             </li>
                             <li>
                                 <i class="icon-arrRight"></i>
                             </li>
                             <li>
-                                <a class="link" href="{{ url('/shop-by-category') }}">Shop by Category</a>
+                                <a class="link" href="#">Shop by Category</a>
                             </li>
                             <li>
                                 <i class="icon-arrRight"></i>
