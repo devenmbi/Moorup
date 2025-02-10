@@ -278,7 +278,7 @@
                                     <div class="tab-description">
                                     <p>{!! $product->description ?? 'No description available.' !!}</p>
 
-                                            <div class="d-flex gap-20 mb_12 list-icon-guideline">
+                                            <!-- <div class="d-flex gap-20 mb_12 list-icon-guideline">
                                                 <div class="d-flex">
                                                     <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                         <rect width="24" height="21.6" fill="url(#pattern0_15741_41601)"></rect>
@@ -335,7 +335,7 @@
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <div class="text-caption-2">MACHINE WASHING MAX 30°C / 85ºF SHORT SPIN DRY</div>
+                                            <div class="text-caption-2">MACHINE WASHING MAX 30°C / 85ºF SHORT SPIN DRY</div> -->
                                     </div>
                                 </div>
                                 
@@ -436,174 +436,60 @@
 
 
 
-        <section class="flat-spacing">
-            <div class="container">
-                <div class="heading-section text-center  wow fadeInUp">
-                    <h3 class="heading ">Related Products</h3>
-                </div>
-                <div dir="ltr" class="swiper tf-sw-recent" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-md="1" data-pagination-lg="1">
-                    <div class="swiper-wrapper">
-                        <!-- 1 -->
-                        <div class="swiper-slide">
-                            <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
-                                <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
-                                        <img class="lazyload img-product" data-src="images/New-Arrivals/1_2_11zon.webp" src="images/New-Arrivals/1_2_11zon.webp" alt="image-product">
-                                        <img class="lazyload img-hover" data-src="images/New-Arrivals/1_2_11zon.webp" src="images/New-Arrivals/1_2_11zon.webp" alt="image-product">
-                                    </a>
-                                    <div class="variant-wrap size-list">
-                                        <ul class="variant-box">
-                                            <li class="size-item">S</li>
-                                            <li class="size-item">M</li>
-                                            <li class="size-item">L</li>
-                                            <li class="size-item">XL</li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Wishlist</span>
-                                        </a>
-                                    </div>
-                                    <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal"  class="btn-main-product">Quick Add</a>
-                                    </div> 
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="#" class="title link">SAA Tiered Midi Dress</a>
-                                    <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> 14,000 INR</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
-                                <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
-                                        <img class="lazyload img-product" data-src="images/New-Arrivals/2_3_11zon.webp" src="images/New-Arrivals/2_3_11zon.webp" alt="image-product">
-                                        <img class="lazyload img-hover" data-src="images/New-Arrivals/2_3_11zon.webp" src="images/New-Arrivals/2_3_11zon.webp" alt="image-product">
-                                    </a>
-                                    <div class="variant-wrap size-list">
-                                        <ul class="variant-box">
-                                            <li class="size-item">S</li>
-                                            <li class="size-item">M</li>
-                                            <li class="size-item">L</li>
-                                            <li class="size-item">XL</li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#" class="box-icon wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Wishlist</span>
-                                        </a>
-                                    </div>
-                                    <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                    </div> 
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="#" class="title link">PUTIT Short Bubble-Hem Dress</a>
-                                    <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> 17,000 INR </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
-                                <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
-                                        <img class="lazyload img-product" data-src="images/New-Arrivals/3_4_11zon.webp" src="images/New-Arrivals/3_4_11zon.webp" alt="image-product">
-                                        <img class="lazyload img-hover" data-src="images/New-Arrivals/3_4_11zon.webp" src="images/New-Arrivals/3_4_11zon.webp" alt="image-product">
-                                    </a>
-                                    <div class="variant-wrap size-list">
-                                        <ul class="variant-box">
-                                            <li class="size-item">S</li>
-                                            <li class="size-item">M</li>
-                                            <li class="size-item">L</li>
-                                            <li class="size-item">XL</li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#" class="box-icon wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Wishlist</span>
-                                        </a>
-                                    </div>
-                                    <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                    </div> 
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="#" class="title link">RI Bowknot Dress</a>
-                                    <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> 9,500 INR</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
-                                <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
-                                        <img class="lazyload img-product" data-src="images/New-Arrivals/4_1_11zon.webp" src="images/New-Arrivals/4_1_11zon.webp" alt="image-product">
-                                        <img class="lazyload img-hover" data-src="images/New-Arrivals/4_1_11zon.webp" src="images/New-Arrivals/4_1_11zon.webp" alt="image-product">
-                                    </a>
-                                    <div class="variant-wrap size-list">
-                                        <ul class="variant-box">
-                                            <li class="size-item">S</li>
-                                            <li class="size-item">M</li>
-                                            <li class="size-item">L</li>
-                                            <li class="size-item">XL</li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#" class="box-icon wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Wishlist</span>
-                                        </a>
-                                    </div>
-                                    <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                    </div> 
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="#" class="title link">PUTIT Drop-Waist Dress</a>
-                                    <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> 24,500 INR</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
-                                <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
-                                        <img class="lazyload img-product" data-src="images/New-Arrivals/5_5_11zon.webp" src="images/New-Arrivals/5_5_11zon.webp" alt="image-product">
-                                        <img class="lazyload img-hover" data-src="images/New-Arrivals/5_5_11zon.webp" src="images/New-Arrivals/5_5_11zon.webp" alt="image-product">
-                                    </a>
-                                    <div class="variant-wrap size-list">
-                                        <ul class="variant-box">
-                                            <li class="size-item">S</li>
-                                            <li class="size-item">M</li>
-                                            <li class="size-item">L</li>
-                                            <li class="size-item">XL</li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#" class="box-icon wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Wishlist</span>
-                                        </a>
-                                    </div>
-                                    <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                    </div> 
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="#" class="title link">PUTIT Drop-Waist Dress</a>
-                                    <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> 24,500 INR</span>
-                                </div>
-                            </div>
-                        </div>
+        @if($relatedProducts->isNotEmpty())
+            <section class="flat-spacing">
+                <div class="container">
+                    <div class="heading-section text-center wow fadeInUp">
+                        <h3 class="heading">Related Products</h3>
                     </div>
-                    <div class="sw-pagination-recent sw-dots type-circle justify-content-center"></div>
+                    <div dir="ltr" class="swiper tf-sw-recent" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-md="1" data-pagination-lg="1">
+                        <div class="swiper-wrapper">
+                            @foreach($relatedProducts as $related)
+                            <div class="swiper-slide">
+                                <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
+                                    <div class="card-product-wrapper">
+                                        <a href="{{ route('product.show', $related->slug) }}" class="product-img">
+                                            @php
+                                                $images = json_decode($related->thumbnail_image, true) ?? [];
+                                                $thumbnail = count($images) > 0 ? asset('/murupp/product/thumbnails/' . $images[0]) : asset('images/default-product.jpg');
+                                            @endphp
+                                            <img class="lazyload img-product" data-src="{{ $thumbnail }}" src="{{ $thumbnail }}" alt="{{ $related->name }}">
+                                            <img class="lazyload img-hover" data-src="{{ $thumbnail }}" src="{{ $thumbnail }}" alt="{{ $related->name }}">
+                                        </a>
+                                        <div class="variant-wrap size-list">
+                                            <ul class="variant-box">
+                                                @php
+                                                    $sizes = json_decode($related->available_sizes, true) ?? [];
+                                                @endphp
+                                                @foreach($sizes as $size)
+                                                    <li class="size-item">{{ $size }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="list-product-btn">
+                                            <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
+                                                <span class="icon icon-heart"></span>
+                                                <span class="tooltip">Wishlist</span>
+                                            </a>
+                                        </div>
+                                        <div class="list-btn-main">
+                                            <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-product-info">
+                                        <a href="{{ route('product.show', $related->slug) }}" class="title link">{{ $related->product_name }}</a>
+                                        <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{ $related->product_price }} INR</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="sw-pagination-recent sw-dots type-circle justify-content-center"></div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
+
 
 
         @include('components.frontend.footer')
