@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ProductDetails;
 use App\Models\ProductCategory;
 use App\Models\DressesDetails;
+use App\Models\ProductSizes;
 
 
 class ProductController extends Controller
@@ -23,9 +24,14 @@ class ProductController extends Controller
     
         // Fetch gallery images
         $galleryImages = json_decode($product->gallery_images, true) ?? [];
-        // dd($galleryImages);
-        return view('frontend.product-detail', compact('product', 'category', 'galleryImages'));
+    
+        // Fetch all size data and structure it for the table
+        $sizeCharts = ProductSizes::all()->whereNull('deleted_at')->groupBy('size'); 
+    
+        return view('frontend.product-detail', compact('product', 'category', 'galleryImages', 'sizeCharts'));
     }
+    
+    
     
 
     

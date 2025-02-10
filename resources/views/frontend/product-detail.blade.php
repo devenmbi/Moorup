@@ -355,7 +355,6 @@
                 <div class="modal-content widget-tabs style-2">
                     <div class="header">
                         <ul class="widget-menu-tab">
-                    
                             <li class="item-title active">
                                 <span class="inner text-button">Size Guide</span>
                             </li>
@@ -364,54 +363,48 @@
                     </div>
                     <div class="wrap">
                         <div class="widget-content-tab">
-                        
                             <div class="widget-content-inner active">
-                                <table class="tab-sizeguide-table">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>XS</th>
-                                            <th>S</th>
-                                            <th>M</th>
-                                            <th>L</th>
-                                            <th>XL</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Bust</td>
-                                            <td>32</td>
-                                            <td>34</td>
-                                            <td>36</td>
-                                            <td>38</td>
-                                            <td>40</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Waist</td>
-                                            <td>24</td>
-                                            <td>26</td>
-                                            <td>28</td>
-                                            <td>30</td>
-                                            <td>32</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hips</td>
-                                            <td>34</td>
-                                            <td>36</td>
-                                            <td>38</td>
-                                            <td>40</td>
-                                            <td>42</td>
-                                        </tr>    
-                                    </tbody>
-                                </table>
+                                @if($sizeCharts->isNotEmpty())
+                                    <table class="tab-sizeguide-table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                @foreach($sizeCharts as $size => $sizeGroup)
+                                                    <th>{{ strtoupper($size) }}</th>
+                                                @endforeach
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Bust</td>
+                                                @foreach($sizeCharts as $sizeGroup)
+                                                    <td>{{ $sizeGroup->first()->bust }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td>Waist</td>
+                                                @foreach($sizeCharts as $sizeGroup)
+                                                    <td>{{ $sizeGroup->first()->waist }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td>Hips</td>
+                                                @foreach($sizeCharts as $sizeGroup)
+                                                    <td>{{ $sizeGroup->first()->hips }}</td>
+                                                @endforeach
+                                            </tr>    
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <p>No size guide available.</p>
+                                @endif
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- /size-guide -->
 
 
