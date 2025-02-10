@@ -37,7 +37,7 @@ class StockDetailsController extends Controller
     {
         $request->validate([
             'product' => 'required|exists:product_details,id',
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:0'
         ]);
 
         $product = ProductDetails::findOrFail($request->product);
@@ -58,7 +58,7 @@ class StockDetailsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:0'
         ]);
 
         $product = ProductDetails::findOrFail($id);

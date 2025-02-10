@@ -176,20 +176,46 @@
                                         
                                             <li>
                                                 <p class="text-caption-1">Available:</p>
-                                                <p class="text-caption-1 text-1">Stock</p>
+                                                @if($product->available_quantity > 0)
+                                                    <p class="text-caption-1 text-1">Stock</p>
+                                                @else
+                                                    <p class="text-caption-1 text-1 text-danger">Out of Stock</p>
+                                                @endif
                                             </li>
+
                                             <li>
                                                 <p class="text-caption-1">Categories:</p>
-                                                <p class="text-caption-1"><a href="#" class="text-1 link">Dresses</a></p>
+                                                <p class="text-caption-1">
+                                                    @if(!empty($category))
+                                                        <a href="#" class="text-1 link">{{ $category->category_name }}</a>
+                                                    @else
+                                                        <span class="text-muted">No Category</span>
+                                                    @endif
+                                                </p>
                                             </li>
+
                                             <li>
                                                 <p class="text-caption-1">Fabric:</p>
-                                                <p class="text-caption-1"><a href="#" class="text-1 link">Dupion Satin</a></p>
+                                                <p class="text-caption-1">
+                                                    @if(!empty($fabric))
+                                                        <a href="#" class="text-1 link">{{ $fabric }}</a>
+                                                    @else
+                                                        <span class="text-muted">Not Available</span>
+                                                    @endif
+                                                </p>
                                             </li>
+
                                             <li>
                                                 <p class="text-caption-1">Fabric Composition:</p>
-                                                <p class="text-caption-1"><a href="#" class="text-1 link">Viscose Satin</a></p>
+                                                <p class="text-caption-1">
+                                                    @if(!empty($fabricComposition))
+                                                        <a href="#" class="text-1 link">{{ $fabricComposition }}</a>
+                                                    @else
+                                                        <span class="text-muted">Not Available</span>
+                                                    @endif
+                                                </p>
                                             </li>
+
                                         </ul>
                                         <div class="tf-product-info-guranteed">
                                             <div class="text-title">
@@ -197,22 +223,22 @@
                                             </div>
                                             <div class="tf-payment">
                                                 <a href="#">
-                                                    <img src="images/payment/img-1.png" alt="">
+                                                    <img src="{{ asset('frontend/assets/images/payment/img-1.png') }}" alt="">
                                                 </a>
                                                 <a href="#">
-                                                    <img src="images/payment/img-2.png" alt="">
+                                                    <img src="{{ asset('frontend/assets/images/payment/img-2.png') }}" alt="">
                                                 </a>
                                                 <a href="#">
-                                                    <img src="images/payment/img-3.png" alt="">
+                                                    <img src="{{ asset('frontend/assets/images/payment/img-3.png') }}" alt="">
                                                 </a>
                                                 <a href="#">
-                                                    <img src="images/payment/img-4.png" alt="">
+                                                    <img src="{{ asset('frontend/assets/images/payment/img-4.png') }}" alt="">
                                                 </a>
                                                 <a href="#">
-                                                    <img src="images/payment/img-5.png" alt="">
+                                                    <img src="{{ asset('frontend/assets/images/payment/img-5.png') }}" alt="">
                                                 </a>
                                                 <a href="#">
-                                                    <img src="images/payment/img-6.png" alt="">
+                                                    <img src="{{ asset('frontend/assets/images/payment/img-6.png') }}" alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -250,17 +276,8 @@
                             <div class="widget-content-tab">
                                 <div class="widget-content-inner active">
                                     <div class="tab-description">
-                                    <p>
-                Dresses Viscose Satin A chic midi A-line dress that stands out with its embroidered magpie 
-                appliqués and 3D embellishments created using piping. The plunging V-neckline, paired with bold geometric cut-outs on the bodice, adds a 
-                modern edge to the elegant silhouette. It also features hidden side 
-                pockets.</p>
-                                                            
-                                            <p class="text-btn-uppercase"><b>Fabric & Care</b></p>
-                                            <ul class="list-text type-disc mb_12 gap-6">
-                                                <li class="font-2">Cotton Georgette </li>
-                                                <li class="font-2">Hand wash/ Dry Clean</li>
-                                            </ul>
+                                    <p>{!! $product->description ?? 'No description available.' !!}</p>
+
                                             <div class="d-flex gap-20 mb_12 list-icon-guideline">
                                                 <div class="d-flex">
                                                     <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -325,21 +342,29 @@
                                 <div class="widget-content-inner">
                                     <div class="tab-shipping">
                                         <div>
-                                            <p class="text-btn-uppercase mb_12"><b>Free Shipping Within India</b></p>
-                                            <p class="mb_12">All orders are shipped within 14 business days.</p>
-                                            <p class="">For more information, please refer to our <a href="#">Shipping & Delivery Policy.</a></p>
+                                            @php
+                                                $shippingLines = array_filter(explode('.', $product->shipping)); // Split into sentences and remove empty values
+                                                $firstLine = strtoupper(trim(array_shift($shippingLines))); // Get and remove the first sentence
+                                            @endphp
+
+                                            <p class="text-btn-uppercase mb_12"><b>{{ $firstLine }}.</b></p>
+
+                                            @foreach($shippingLines as $line)
+                                                <p class="mb_12">{{ trim($line) }}.</p>
+                                            @endforeach
                                         </div>
-                                    
-                                        
-                                        
+
                                     </div>
                                 </div>
                                 <div class="widget-content-inner">
-                                    <div class="tab-policies">
-                                        <p class="text-btn-uppercase mb_12"><b>Return Policies</b></p>
-                                        <p class="mb_12 text-secondary">You can exchange or return an item within 7 days of receiving your order. For more details, please refer to our Return & Exchange Policy. If you need further assistance, feel free to contact us.</p>
-                                        
-                                    </div>
+                                <div class="tab-policies">
+                                    <p class="text-btn-uppercase mb_12"><b>{{ strtoupper(strtok($product->return, '.')) }}.</b></p>
+                                    <p class="mb_12 text-secondary">
+                                        {{ substr($product->return, strlen(strtok($product->return, '.')) + 1) ?? 'No policies available.' }}
+                                        <a href="#">Return & Exchange Policy.</a>
+                                    </p>
+                                </div>
+
                                 </div>
                             </div>
                         </div>
@@ -348,6 +373,9 @@
             </div>
         </section>
         <!-- /Product_Description_Tabs -->
+
+
+
 
         <!-- size-guide -->
         <div class="modal fade modal-size-guide" id="size-guide">
@@ -404,7 +432,6 @@
                 </div>
             </div>
         </div>
-
         <!-- /size-guide -->
 
 

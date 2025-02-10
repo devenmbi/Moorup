@@ -26,10 +26,21 @@ class ProductController extends Controller
         $galleryImages = json_decode($product->gallery_images, true) ?? [];
     
         // Fetch all size data and structure it for the table
-        $sizeCharts = ProductSizes::all()->whereNull('deleted_at')->groupBy('size'); 
+        $sizeCharts = ProductSizes::whereNull('deleted_at')->get()->groupBy('size');
     
-        return view('frontend.product-detail', compact('product', 'category', 'galleryImages', 'sizeCharts'));
+        // Fetch fabric name from master_product_fabrics
+        $fabric = DB::table('master_product_fabrics')
+                    ->where('id', $product->product_fabric_id)
+                    ->value('fabrics_name');
+    
+        // Fetch fabric composition from master_fabrics_composition
+        $fabricComposition = DB::table('master_fabrics_composition')
+                               ->where('id', $product->fabric_composition_id)
+                               ->value('composition_name');
+    
+        return view('frontend.product-detail', compact('product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition'));
     }
+    
     
     
     

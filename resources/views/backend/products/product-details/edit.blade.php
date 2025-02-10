@@ -134,7 +134,7 @@
                                     <!-- Product Description -->
                                     <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
                                         <label class="form-label" for="description">Product Description <span class="txt-danger">*</span></label>
-                                        <textarea id="description" class="form-control" name="description" rows="5" required>{{ $product_details->description }}</textarea>
+                                        <textarea id="summernote" class="form-control" name="description" rows="5" required>{{ $product_details->description }}</textarea>
                                         <div class="invalid-feedback">Please enter Product Description here.</div>
                                     </div>
 
