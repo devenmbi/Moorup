@@ -37,9 +37,9 @@ class ProductController extends Controller
     
         // Fetch related products (same category but exclude current product)
         $relatedProducts = ProductDetails::where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id) // Exclude the current product
+            ->where('id', '!=', $product->id) 
             ->whereNull('deleted_at')
-            ->take(5) // Limit the number of related products
+            ->take(5) 
             ->get();
     
         return view('frontend.product-detail', compact(

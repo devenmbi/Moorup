@@ -132,6 +132,18 @@
                                         <div class="invalid-feedback">Please enter a product Price.</div>
                                     </div>
 
+                                    <div class="col-xxl-4 col-sm-6">
+                                        <label class="form-label" for="product_size">Product Size <span class="txt-danger">*</span></label>
+                                        <select class="form-control select2" id="product_size" name="product_size[]" multiple required>
+                                            @foreach ($product_sizes as $id => $size)
+                                                <option value="{{ $id }}">{{ $size }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Please select at least one product size.</div>
+                                    </div>
+
+
+
                                      <!-- Product Description -->
                                     <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
                                         <label class="form-label" for="description">Product Description <span class="txt-danger">*</span></label>
@@ -272,6 +284,11 @@
         </div>
 
        @include('components.backend.main-js')
+        <!-- Include Select2 CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+        <!-- Include Select2 JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
 
 <!--Thumbnail Preview-->
@@ -502,6 +519,15 @@
 </script>
 
        
+<script>
+    $(document).ready(function() {
+        $('#product_size').select2({
+            placeholder: "Select Product Sizes",
+            allowClear: true
+        });
+    });
+</script>
+
 </body>
 
 </html>
