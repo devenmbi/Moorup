@@ -37,17 +37,30 @@ class ProductSizesController extends Controller
         
         $request->validate([
             'sizes' => 'required|string|max:255',
+            'bust_sizes' => 'required|numeric',
+            'waist_sizes' => 'required|numeric',
+            'hips_sizes' => 'required|numeric',
         ], [
             'sizes.required' => 'The Product sizes Name field is required.',
             'sizes.string' => 'The Product sizes Name must be a valid string.',
             'sizes.max' => 'The Product sizes Name cannot exceed 255 characters.',
+            'bust_sizes.required' => 'The Bust size field is required.',
+            'bust_sizes.numeric' => 'The Bust size must be a valid number.',
+            'waist_sizes.required' => 'The Waist Size field is required.',
+            'waist_sizes.numeric' => 'The Waist Size must be a valid number.',
+            'hips_sizes.required' => 'The Hips size field is required.',
+            'hips_sizes.numeric' => 'The Hips size must be a valid number.',
         ]);
+        
         
         try {
             $slug = Str::slug($request->sizes, '-');
 
             ProductSizes::create([
                 'size' => $request->sizes,
+                'bust' => $request->bust_sizes,
+                'waist' => $request->waist_sizes,
+                'hips' => $request->hips_sizes,
                 'slug' => $slug,
                 'created_by' => Auth::user()->id,
                 'created_at' => Carbon::now(),
@@ -70,17 +83,30 @@ class ProductSizesController extends Controller
     {
         $request->validate([
             'sizes' => 'required|string|max:255',
+            'bust_sizes' => 'required|numeric',
+            'waist_sizes' => 'required|numeric',
+            'hips_sizes' => 'required|numeric',
         ], [
             'sizes.required' => 'The Product sizes Name field is required.',
             'sizes.string' => 'The Product sizes Name must be a valid string.',
             'sizes.max' => 'The Product sizes Name cannot exceed 255 characters.',
+            'bust_sizes.required' => 'The Bust size field is required.',
+            'bust_sizes.numeric' => 'The Bust size must be a valid number.',
+            'waist_sizes.required' => 'The Waist Size field is required.',
+            'waist_sizes.numeric' => 'The Waist Size must be a valid number.',
+            'hips_sizes.required' => 'The Hips size field is required.',
+            'hips_sizes.numeric' => 'The Hips size must be a valid number.',
         ]);
+        
         
         try {
             $category = ProductSizes::findOrFail($id);
 
             $category->update([
                 'size' => $request->sizes,
+                'bust' => $request->bust_sizes,
+                'waist' => $request->waist_sizes,
+                'hips' => $request->hips_sizes,
                 'modified_by' => Auth::user()->id, 
                 'modified_at' => Carbon::now(),
             ]);

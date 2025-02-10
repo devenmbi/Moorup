@@ -14,6 +14,9 @@ class ProductSizes extends Model
 
     protected $fillable = [
         'size',
+        'bust',
+        'waist',
+        'hips',
         'slug',
         'created_at',
         'created_by',

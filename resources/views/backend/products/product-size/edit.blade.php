@@ -57,6 +57,25 @@
                                         <div class="invalid-feedback">Please enter a product sizes name.</div>
                                     </div>
 
+                                    <div class="col-xxl-4 col-sm-6">
+                                        <label class="form-label" for="bust_sizes">Bust Size <span class="txt-danger">*</span></label>
+                                        <input class="form-control" id="bust_sizes" type="number" name="bust_sizes" value="{{ old('bust', $size->bust) }}" placeholder="Enter Bust Size" required>
+                                        <div class="invalid-feedback">Please enter a Bust Size.</div>
+                                    </div>
+
+
+                                    <div class="col-xxl-4 col-sm-6">
+                                        <label class="form-label" for="waist_sizes">Waist Size <span class="txt-danger">*</span></label>
+                                        <input class="form-control" id="waist_sizes" type="number" name="waist_sizes" value="{{ old('waist', $size->waist) }}" placeholder="Enter Waist Size" required>
+                                        <div class="invalid-feedback">Please enter a Waist Size.</div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-sm-6">
+                                        <label class="form-label" for="hips_sizes">Hips Size<span class="txt-danger">*</span></label>
+                                        <input class="form-control" id="hips_sizes" type="number" name="hips_sizes" value="{{ old('hips', $size->hips) }}" placeholder="Enter Hips Size" required>
+                                        <div class="invalid-feedback">Please enter a Hips Size.</div>
+                                    </div>
+
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
                                         <a href="{{ route('product-sizes.index') }}" class="btn btn-danger px-4">Cancel</a>

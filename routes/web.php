@@ -165,7 +165,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/category-blazersjackets', [CategoryDetailsController::class, 'blazers'])->name('frontend.blazers');
 
     //===== Detailed Product Page
-    Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
+    Route::get('/product-detail/{slug}', [ProductController::class, 'show'])->name('product.show');
 
   
 
