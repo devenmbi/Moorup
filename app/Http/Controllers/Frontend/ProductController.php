@@ -42,10 +42,19 @@ class ProductController extends Controller
             ->take(5) 
             ->get();
     
+        // Decode JSON to get the selected size IDs
+        $productSizeIds = json_decode($product->sizes, true) ?? [];
+
+        // Fetch matching sizes from ProductSizes table
+        $productSizes = ProductSizes::whereIn('id', $productSizeIds)
+            ->whereNull('deleted_at')
+            ->pluck('size', 'id'); // Get an array of size names with their IDs
+
         return view('frontend.product-detail', compact(
-            'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts'
+            'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts', 'productSizes'
         ));
     }
+            
     
     
     

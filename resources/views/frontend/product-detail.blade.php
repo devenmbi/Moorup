@@ -126,32 +126,30 @@
                                             </div>
                                         </div>
                                         <div class="variant-picker-item">
-                                            <div class="d-flex justify-content-between mb_12">
+                                        <div class="d-flex justify-content-between mb_12">
                                                 <div class="variant-picker-label">
-                                                    Size:<span class="text-title variant-picker-label-value">M</span>
+                                                    Size:
+                                                    <span class="text-title variant-picker-label-value" id="selected-size">
+                                                        {{ $productSizes[0] ?? 'Select Size' }}
+                                                    </span>
                                                 </div>
                                                 <a href="#size-guide" data-bs-toggle="modal" class="size-guide text-title link">Size Guide</a>
                                             </div>
+
                                             <div class="variant-picker-values gap12">
-                                                <input type="radio">
-                                                <label class="style-text size-btn">
-                                                    <span class="text-title">XS</span>
-                                                </label>
-                                                <input type="radio">
-                                                <label class="style-text size-btn">
-                                                    <span class="text-title">S</span>
-                                                </label>
-                                                <input type="radio" checked>
-                                                <label class="style-text size-btn">
-                                                    <span class="text-title">M</span>
-                                                </label>
-                                                <input type="radio">
-                                                <label class="style-text size-btn">
-                                                    <span class="text-title">L</span>
-                                                </label>
+                                                @foreach($productSizes as $id => $size)
+                                                    <input type="radio" id="size_{{ $id }}" name="size" value="{{ $size }}" 
+                                                        {{ $loop->first ? 'checked' : '' }} onchange="updateSelectedSize(this)">
+                                                    <label for="size_{{ $id }}" class="style-text size-btn">
+                                                        <span class="text-title">{{ $size }}</span>
+                                                    </label>
+                                                @endforeach
                                             </div>
-                                            <p class="mt-3">For customized sizes, please <a class="contact-link" href="">contact us.</a></p>
+                                            <p class="mt-3">
+                                                For customized sizes, please <a class="contact-link" href="">contact us.</a>
+                                            </p>
                                         </div>
+
 
                                         <div class="tf-product-info-quantity">
                                             <div class="title mb_12">Quantity:</div>
@@ -440,6 +438,13 @@
         <script src="{{ asset('frontend/assets/js/drift.min.js') }}" defer></script>
         <script type="module" src="{{ asset('frontend/assets/js/model-viewer.min.js') }}"></script>
         <script type="module" src="{{ asset('frontend/assets/js/zoom.js') }}"></script>
+
+ <!-- For dynamic size fetching -->       
+<script>
+    function updateSelectedSize(element) {
+        document.getElementById('selected-size').innerText = element.value;
+    }
+</script>
 </body>
 
 </html>
