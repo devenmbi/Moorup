@@ -24,6 +24,8 @@ class ProductDetails extends Model
         'product_fabric_id',
         'product_price',
         'description',
+        'shipping',
+        'return',
         'collection_name',
         'thumbnail_image',
         'gallery_images',

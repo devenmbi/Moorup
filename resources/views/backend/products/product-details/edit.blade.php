@@ -138,6 +138,20 @@
                                         <div class="invalid-feedback">Please enter Product Description here.</div>
                                     </div>
 
+                                    <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
+                                        <label class="form-label" for="shipping">Shipping & Timeline <span class="txt-danger">*</span></label>
+                                        <textarea id="shipping" class="form-control" name="shipping" rows="5" placeholder="Enter Shipping & Timeline here" required value="{{ old('description') }}">{{ $product_details->shipping }}</textarea>
+                                        <div class="invalid-feedback">Please enter Shipping & Timeline here.</div>
+                                    </div>
+
+
+                                    <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
+                                        <label class="form-label" for="return">Return & Exchanges <span class="txt-danger">*</span></label>
+                                        <textarea id="return" class="form-control" name="return" rows="5" placeholder="Enter Return & Exchanges here" required value="{{ old('description') }}">{{ $product_details->return }}</textarea>
+                                        <div class="invalid-feedback">Please enter Return & Exchanges here.</div>
+                                    </div>
+
+
                                     <!-- Thumbnail Image Upload -->
                                     <div class="table-container" style="margin-bottom: 30px;">
                                         <div class="d-flex align-items-center">

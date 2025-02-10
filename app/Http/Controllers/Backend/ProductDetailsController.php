@@ -59,6 +59,8 @@ class ProductDetailsController extends Controller
             'product_fabric' => 'required|exists:master_product_fabrics,id',
             'product_price' => 'required|string|min:0',
             'description' => 'required',
+            'shipping' => 'required',
+            'return' => 'required',
             'thumbnail_image' => 'required|array',
             'thumbnail_image.*' => 'max:3072', 
             'gallery_image' => 'nullable|array',
@@ -74,6 +76,8 @@ class ProductDetailsController extends Controller
             'product_fabric.required' => 'The product fabric is required.',
             'product_price.required' => 'The product price is required.',
             'description.required' => 'The product description is required.',
+            'shipping.required' => 'The product Shipping details is required.',
+            'return.required' => 'The product return details is required.',
             'thumbnail_image.required' => 'Please upload at least one thumbnail image.',
             'thumbnail_image.array' => 'The thumbnail image must be an array.',
             'thumbnail_image.*.max' => 'Each thumbnail image must be less than 3MB.',
@@ -93,6 +97,8 @@ class ProductDetailsController extends Controller
         $product->product_fabric_id = $request->product_fabric;
         $product->product_price = $request->product_price;
         $product->description = $request->description;
+        $product->shipping = $request->shipping;
+        $product->return = $request->return;
         $product->slug = $slug;
         $product->created_at = Carbon::now();
         $product->created_by = Auth::user()->id;
@@ -171,6 +177,8 @@ class ProductDetailsController extends Controller
             'product_fabric' => 'required|exists:master_product_fabrics,id',
             'product_price' => 'required|string|min:0',
             'description' => 'required',
+            'shipping' => 'required',
+            'return' => 'required',
             'thumbnail_image' => 'nullable|array',
             'thumbnail_image.*' => 'max:3072',
             'gallery_image' => 'nullable|array',
@@ -186,6 +194,8 @@ class ProductDetailsController extends Controller
             'product_fabric.required' => 'The product fabric is required.',
             'product_price.required' => 'The product price is required.',
             'description.required' => 'The product description is required.',
+            'shipping.required' => 'The product Shipping details is required.',
+            'return.required' => 'The product return details is required.',
             'thumbnail_image.array' => 'The thumbnail image must be an array.',
             'thumbnail_image.*.max' => 'Each thumbnail image must be less than 3MB.',
             'gallery_image.*.max' => 'Each gallery image must be less than 3MB.',
@@ -203,6 +213,8 @@ class ProductDetailsController extends Controller
         $product->product_fabric_id = $request->product_fabric;
         $product->product_price = $request->product_price;
         $product->description = $request->description;
+        $product->shipping = $request->shipping;
+        $product->return = $request->return;
         $product->modified_at = Carbon::now();
         $product->modified_by = Auth::user()->id;
     
