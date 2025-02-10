@@ -11,7 +11,7 @@
         @include('components.frontend.header')
 
 
-      <!-- page-title -->
+        <!-- page-title -->
         <div class="page-title" style="background-image: url('{{ asset('frontend/assets/images/bg/page-title.webp') }}');">
             <div class="container-full">
                 <div class="row">
@@ -42,7 +42,6 @@
 
 
 
-
         <!-- Product_Main -->
         <section class="flat-spacing">
             <div class="tf-main-product section-image-zoom">
@@ -50,74 +49,41 @@
                     <div class="row">
                         <!-- Product default -->
                         <div class="col-md-6">
-                            
                             <div class="tf-product-media-wrap sticky-top">
                                 <div class="thumbs-slider">
                                     <div dir="ltr" class="swiper tf-product-media-thumbs other-image-zoom" data-direction="vertical">
                                         <div class="swiper-wrapper stagger-wrap">
+                                            @foreach($galleryImages as $image)
                                             <div class="swiper-slide stagger-item" data-color="gray">
                                                 <div class="item">
-                                                    <img class="lazyload" data-src="images/product-thumb/look1/1.jpg" src="images/product-thumb/look1/1.jpg" alt="">
+                                                    <img class="lazyload" data-src="{{ asset('murupp/product/gallery/' . $image) }}" 
+                                                        src="{{ asset('murupp/product/gallery/' . $image) }}" alt="">
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide stagger-item" data-color="gray">
-                                                <div class="item">
-                                                    <img class="lazyload" data-src="images/product-thumb/look1/2.jpg" src="images/product-thumb/look1/2.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="gray">
-                                                <div class="item">
-                                                    <img class="lazyload" data-src="images/product-thumb/look1/3.jpg" src="images/product-thumb/look1/3.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="gray">
-                                                <div class="item">
-                                                    <img class="lazyload" data-src="images/product-thumb/look1/4.jpg" src="images/product-thumb/look1/4.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="beige">
-                                                <div class="item">
-                                                    <img class="lazyload" data-src="images/product-thumb/look1/5.jpg" src="images/product-thumb/look1/5.jpg" alt="">
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div dir="ltr" class="swiper tf-product-media-main" id="gallery-swiper-started">
                                         <div class="swiper-wrapper">
+                                            @foreach($galleryImages as $image)
                                             <div class="swiper-slide" data-color="gray">
-                                                <a href="images/product-thumb/look1/1.jpg" target="_blank" class="item" data-pswp-width="600px" data-pswp-height="800px">
-                                                    <img class="tf-image-zoom lazyload" data-zoom="images/product-thumb/look1/1.jpg" data-src="images/product-thumb/look1/1.jpg" src="images/product-thumb/look1/1.jpg" alt="">
+                                                <a href="{{ asset('murupp/product/gallery/' . $image) }}" target="_blank" class="item" 
+                                                    data-pswp-width="600px" data-pswp-height="800px">
+                                                    <img class="tf-image-zoom lazyload" 
+                                                        data-zoom="{{ asset('murupp/product/gallery/' . $image) }}" 
+                                                        data-src="{{ asset('murupp/product/gallery/' . $image) }}" 
+                                                        src="{{ asset('murupp/product/gallery/' . $image) }}" alt="">
                                                 </a>
                                             </div>
-                                            <div class="swiper-slide" data-color="gray">
-                                                <a href="images/product-thumb/look1/2.jpg" target="_blank" class="item" data-pswp-width="600px" data-pswp-height="800px">
-                                                    <img class="tf-image-zoom lazyload" data-zoom="images/product-thumb/look1/2.jpg" data-src="images/product-thumb/look1/2.jpg" src="images/product-thumb/look1/2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="swiper-slide" data-color="gray">
-                                                <a href="images/product-thumb/look1/3.jpg" target="_blank" class="item" data-pswp-width="600px" data-pswp-height="800px">
-                                                    <img class="tf-image-zoom lazyload" data-zoom="images/product-thumb/look1/3.jpg" data-src="images/product-thumb/look1/3.jpg" src="images/product-thumb/look1/3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="swiper-slide" data-color="gray">
-                                                <a href="images/products/womens/women-5.jpg" target="_blank" class="item" data-pswp-width="600px" data-pswp-height="800px">
-                                                    <img class="tf-image-zoom lazyload" data-zoom="images/product-thumb/look1/4.jpg" data-src="images/product-thumb/look1/4.jpg" src="images/product-thumb/look1/4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="swiper-slide" data-color="beige">
-                                                <a href="images/products/womens/women-6.jpg" target="_blank" class="item" data-pswp-width="600px" data-pswp-height="800px">
-                                                    <img class="tf-image-zoom lazyload" data-zoom="images/product-thumb/look1/5.jpg" data-src="images/product-thumb/look1/5.jpg" src="images/product-thumb/look1/5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>  
                             </div>
-                
-                             
                         </div>
                         <!-- /Product default -->
+
+
                         <!-- tf-product-info-list -->
                         <div class="col-md-6">
                             <div class="tf-product-info-wrap position-relative">
@@ -125,18 +91,17 @@
                                 <div class="tf-product-info-list other-image-zoom">
                                     <div class="tf-product-info-heading">
                                         <div class="tf-product-info-name">
-                                            <h3 class="name">NAMKHA: Midi Dress</h3>
-                                            
+                                            <h3 class="name">{{ $product->product_name }}</h3>
                                         </div>
                                         <div class="tf-product-info-desc">
                                             <div class="tf-product-info-price">
-                                                <h5 class="price-on-sale font-2"><i class="fa fa-inr" aria-hidden="true"></i> INR 19,000</h5>
-               
+                                                <h5 class="price-on-sale font-2">
+                                                    <i class="fa fa-inr" aria-hidden="true"></i> INR {{ $product->product_price }}
+                                                </h5>
                                             </div>
-                                            
- 
                                         </div>
                                     </div>
+
                                     <div class="tf-product-info-choose-option">
                                         <div class="variant-picker-item">
                                             <div class="variant-picker-label mb_12">
@@ -262,6 +227,8 @@
             </div>
         </section>
         <!-- /Product_Main -->
+
+
 
         <!-- Product_Description_Tabs -->
         <section class="">
@@ -620,7 +587,11 @@
 
         @include('components.frontend.footer')
 
-@include('components.frontend.main-js')
+        @include('components.frontend.main-js')
+
+        <script src="{{ asset('frontend/assets/js/drift.min.js') }}" defer></script>
+        <script type="module" src="{{ asset('frontend/assets/js/model-viewer.min.js') }}"></script>
+        <script type="module" src="{{ asset('frontend/assets/js/zoom.js') }}"></script>
 </body>
 
 </html>

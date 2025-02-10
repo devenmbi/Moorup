@@ -20,9 +20,14 @@ class ProductController extends Controller
         $product = ProductDetails::where('slug', $slug)->whereNull('deleted_at')->firstOrFail();
         $category = ProductCategory::find($product->category_id);
         $imageTitle = optional($category)->image_title ?? '';
-
-        return view('frontend.product-detail', compact('product', 'category'));
+    
+        // Fetch gallery images
+        $galleryImages = json_decode($product->gallery_images, true) ?? [];
+        // dd($galleryImages);
+        return view('frontend.product-detail', compact('product', 'category', 'galleryImages'));
     }
+    
+
     
      
 }

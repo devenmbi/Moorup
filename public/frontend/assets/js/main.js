@@ -727,55 +727,19 @@
 
   /* write-review
   ------------------------------------------------------------------------------------- */
-  var write_review = function () {
-    if ($(".write-cancel-review-wrap").length > 0) {
-      $(".btn-comment-review").click(function () {
-        $(this)
-          .closest(".write-cancel-review-wrap")
-          .toggleClass("write-review");
-      });
-    }
-  };
+  
 
   /* customInput
   ------------------------------------------------------------------------------------- */
-  var customInput = function () {
-    $("input[type=file]").change(function (e) {
-      $(this)
-        .parents(".uploadfile")
-        .find(".filename")
-        .text(e.target.files[0].name);
-    });
-  };
+  
 
   /* chooseOption
   ------------------------------------------------------------------------------------- */
-  var chooseOption = function () {
-    $(".choose-option-item").click(function () {
-      $(this)
-        .closest(".choose-option-list")
-        .find(".select-option")
-        .removeClass("select-option");
-      $(this).toggleClass("select-option");
-    });
-  };
+
 
   /* withDiscount
   ------------------------------------------------------------------------------------- */
-  var withDiscount = function () {
-    $(".btn-discount-apply").click(function () {
-      var number = $(this)
-        .closest(".tf-product-discount-item")
-        .find(".number-discount")
-        .text();
-      $(this)
-        .closest(".tf-product-info-list")
-        .find(".tf-product-info-heading")
-        .find(".tf-product-info-price")
-        .find(".badges-on-sale")
-        .text("-" + number);
-    });
-  };
+ 
 
   /* totalPriceVariant
   ------------------------------------------------------------------------------------- */
@@ -784,15 +748,6 @@
       var productItem = $(this);
       var basePrice = parseFloat(productItem.find(".price-on-sale").data("base-price")) || parseFloat(productItem.find(".price-on-sale").text().replace("$", ""));
       var quantityInput = productItem.find(".quantity-product");
-
-      productItem.find(".color-btn, .size-btn").on("click", function () {
-        var newPrice = parseFloat($(this).data("price")) || basePrice;
-        quantityInput.val(1);
-        productItem.find(".price-on-sale").text(
-          "$" + newPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        );
-        updateTotalPrice(newPrice, productItem);
-      });
 
       productItem.find(".btn-increase").on("click", function () {
         var currentQuantity = parseInt(quantityInput.val());
@@ -808,14 +763,6 @@
         }
       });
 
-      function updateTotalPrice(price, scope) {
-        var currentPrice = price || parseFloat(scope.find(".price-on-sale").text().replace("$", ""));
-        var quantity = parseInt(scope.find(".quantity-product").val());
-        var totalPrice = currentPrice * quantity;
-        scope.find(".total-price").text(
-          "$" + totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        );
-      }
     });
   };
 
@@ -1207,6 +1154,7 @@
     tabs();
     swatchColor();
     changeValue();
+    totalPriceVariant();
     btn_loading();
     loadItem();
     stagger_wrap();
@@ -1216,11 +1164,6 @@
     rangePrice();
     clickControl();
     checkClick();
-    write_review();
-    customInput();
-    chooseOption();
-    withDiscount();
-    totalPriceVariant();
     variantPicker();
     scrollGridProduct();
     hoverPin();
@@ -1242,3 +1185,6 @@
     
   });
 })(jQuery);
+
+
+
