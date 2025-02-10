@@ -16,7 +16,7 @@
             <div class="container-full">
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="heading text-center">{{ $category->image_title ?? 'Dresses' }}</h3>
+                        <h3 class="heading text-center">{{ $category->category_name }}</h3>
                         <ul class="breadcrumbs d-flex align-items-center justify-content-center">
                             <li>
                                 <a class="link" href="{{ route('frontend.index') }}">Home</a>
@@ -31,7 +31,7 @@
                                 <i class="icon-arrRight"></i>
                             </li>
                             <li>
-                                {{ $category->image_title ?? 'Dresses' }}
+                                {{ $category->category_name }}
                             </li>
                         </ul>
                     </div>
@@ -433,6 +433,7 @@
             </div>
         </div>
         <!-- /size-guide -->
+
 
 
         <section class="flat-spacing">
