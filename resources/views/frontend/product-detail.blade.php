@@ -103,28 +103,24 @@
                                     </div>
 
                                     <div class="tf-product-info-choose-option">
-                                        <div class="variant-picker-item">
-                                            <div class="variant-picker-label mb_12">
-                                                Colors:<span class="text-title">Gray</span>
-                                            </div>
-                                            <div class="variant-picker-values">
-                                                <input id="values-beige" type="radio" name="color1">
-                                                <label class="hover-tooltip tooltip-bot radius-60 color-btn">
-                                                    <span class="btn-checkbox bg-color-beige1"></span>
-                                                    <span class="tooltip">Beige</span>
-                                                </label>
-                                                <input id="values-gray" type="radio" name="color1" checked>
-                                                <label class="hover-tooltip tooltip-bot radius-60 color-btn active">
-                                                    <span class="btn-checkbox bg-color-gray"></span>
-                                                    <span class="tooltip">Gray</span>
-                                                </label>
-                                                <input id="values-grey" type="radio" name="color1">
-                                                <label class="hover-tooltip tooltip-bot radius-60 color-btn">
-                                                    <span class="btn-checkbox bg-color-grey"></span>
-                                                    <span class="tooltip">Grey</span>
-                                                </label>
-                                            </div>
+                                    <div class="variant-picker-item">
+                                        <div class="variant-picker-label mb_12">
+                                            Colors: <span class="text-title" id="selected-color">{{ $productColor[0] ?? 'Select Color' }}</span>
                                         </div>
+                                        <div class="variant-picker-values">
+                                        @foreach($productColor as $id => $color)
+                                            <input id="color_{{ $id }}" type="radio" name="color1" value="{{ $color }}" 
+                                                {{ $loop->first ? 'checked' : '' }} onchange="updateSelectedColor(this)">
+                                            <label for="color_{{ $id }}" class="hover-tooltip tooltip-bot radius-60 color-btn {{ $loop->first ? 'active' : '' }}">
+                                                <span class="btn-checkbox" style="background-color: {{ $color }};"></span>
+                                                <span class="tooltip">{{ $color }}</span>
+                                            </label>
+                                        @endforeach
+
+                                        </div>
+                                    </div>
+
+
                                         <div class="variant-picker-item">
                                         <div class="d-flex justify-content-between mb_12">
                                                 <div class="variant-picker-label">
@@ -443,6 +439,13 @@
 <script>
     function updateSelectedSize(element) {
         document.getElementById('selected-size').innerText = element.value;
+    }
+</script>
+
+
+<script>
+    function updateSelectedColor(element) {
+        document.getElementById('selected-color').innerText = element.value;
     }
 </script>
 </body>

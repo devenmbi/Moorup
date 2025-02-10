@@ -50,8 +50,10 @@ class ProductController extends Controller
             ->whereNull('deleted_at')
             ->pluck('size', 'id'); // Get an array of size names with their IDs
 
+        $productColor = json_decode($product->colors, true) ?? [];
+
         return view('frontend.product-detail', compact(
-            'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts', 'productSizes'
+            'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts', 'productSizes','productColor'
         ));
     }
             
