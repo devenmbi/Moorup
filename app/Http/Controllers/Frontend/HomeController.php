@@ -37,7 +37,6 @@ class HomeController extends Controller
         ->select('home_shop_category.*', 'master_product_category.slug')
         ->get();
 
-
         return view('frontend.index', compact('banners','newArrivals','collectionDetail','shopCategories','productPolicies','testimonials','socialMedia'));
     }
     

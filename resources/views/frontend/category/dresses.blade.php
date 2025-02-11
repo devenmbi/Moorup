@@ -358,7 +358,7 @@
         @include('components.frontend.footer')
 
 
-@include('components.frontend.main-js')
+        @include('components.frontend.main-js')
 
 
 
