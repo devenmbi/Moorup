@@ -156,20 +156,25 @@
                                             <div class="title mb_12">Quantity:</div>
                                             <div class="wg-quantity">
                                                 <span class="btn-quantity btn-decrease">-</span>
-                                                <input class="quantity-product" type="text" name="number" value="1">
+                                                <input class="quantity-product" type="text" name="quantity" value="1">
                                                 <span class="btn-quantity btn-increase">+</span>
                                             </div>
-                                        </div><br>
+                                        </div>
+                                        <br>
                                         <div>
                                             <div class="tf-product-info-by-btn mb_10">
-                                                <a href="" class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart"><span>Add to cart</span></a>
-                                                <a href="javascript:void(0);" class="box-icon hover-tooltip text-caption-2 wishlist btn-icon-action">
+                                                <a href="{{ route('cart.add', ['id' => $product->id, 'quantity' => 1]) }}" 
+                                                class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
+                                                    <span>Add to cart</span>
+                                                </a>
+                                                <a href="{{ route('wishlist.add', ['id' => $product->id]) }}" 
+                                                class="box-icon hover-tooltip text-caption-2 wishlist btn-icon-action">
                                                     <span class="icon icon-heart"></span>
                                                     <span class="tooltip text-caption-2">Wishlist</span>
                                                 </a>
-                                               
                                             </div>
                                         </div><br>
+
                                         
                                         <ul class="tf-product-info-sku">
                                         
@@ -213,7 +218,7 @@
                                                         <span class="text-muted">Not Available</span>
                                                     @endif
                                                 </p>
-                                            </li>
+                                            </li><br>
 
                                         </ul>
                                         <div class="tf-product-info-guranteed">
@@ -457,11 +462,15 @@
 </script>
 
 
+ <!-- For Product color -->   
 <script>
     function updateSelectedColor(element) {
         document.getElementById('selected-color').innerText = element.value;
     }
 </script>
+
+
+
 </body>
 
 </html>
