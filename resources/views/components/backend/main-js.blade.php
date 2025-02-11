@@ -17,9 +17,6 @@
     <script src="{{ asset('admin/assets/js/slick/slick.js') }}"></script>
     <script src="{{ asset('admin/assets/js/header-slick.js') }}"></script>
     <script src="{{ asset('admin/assets/js/editors/quill.js') }}"></script>
-    <!-- <script src="{{ asset('admin/assets/js/chart/apex-chart/apex-chart.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/stock-prices.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/moment.min.js') }}"></script> -->
     <script src="{{ asset('admin/assets/js/notify/bootstrap-notify.min.js') }}"></script>
     <!-- calendar js-->
     <script src="{{ asset('admin/assets/js/dashboard/default.js') }}"></script>
@@ -30,7 +27,6 @@
     <script src="{{ asset('admin/assets/js/typeahead-search/handlebars.js') }}"></script>
     <script src="{{ asset('admin/assets/js/typeahead-search/typeahead-custom.js') }}"></script>
     <script src="{{ asset('admin/assets/js/height-equal.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/animation/wow/wow.min.js') }}"></script>
     <!-- Plugins JS Ends-->
 
     <script src="{{ asset('admin/assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
@@ -38,6 +34,7 @@
     
     <!-- Theme js-->
     <script src="{{ asset('admin/assets/js/script.js') }}"></script>
+
     <script>new WOW().init();</script>
 
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>

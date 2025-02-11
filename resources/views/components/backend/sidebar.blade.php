@@ -1,4 +1,4 @@
- <!-- Page Body Start-->
+<!-- Page Body Start-->
  <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper" data-layout="stroke-svg">
@@ -17,11 +17,7 @@
                 <li class="back-btn"><a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo-icon.png') }}" alt=""></a>
                   <div class="mobile-back text-end"> <span>Back </span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                 </li>
-                <li class="pin-title sidebar-main-title">
-                  <div> 
-                    <h6>Pinned</h6>
-                  </div>
-                </li>
+
                 <li class="sidebar-main-title">
                   <div>
                     <h6 class="lan-1">General</h6>
@@ -38,18 +34,34 @@
                   </a>
                 </li>
 
-                <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
-                    <svg class="stroke-icon"> 
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
-                    </svg>
-                    <svg class="fill-icon">
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-user') }}"></use>
-                    </svg><span>User Management</span></a>
+                
+                <li class="sidebar-list {{ request()->routeIs('user-list.index', 'user-permissions.index') ? 'active' : '' }}">
+                  <a class="sidebar-link sidebar-title {{ request()->routeIs('user-list.index', 'user-permissions.index') ? 'active' : '' }}" href="#">
+                      <svg class="stroke-icon">
+                          <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
+                      </svg>
+                      <svg class="fill-icon">
+                          <use href="{{ asset('admin/assets/svg/icon-sprite.svg#fill-user') }}"></use>
+                      </svg>
+                      <span>User Management</span>
+                  </a>
                   <ul class="sidebar-submenu">
-                    <li><a href="{{ route('user-list.index') }}">New User</a></li>
-                    <li><a href="{{ route('user-permissions.index') }}">User Permissions</a></li>
+                      <li>
+                          <a href="{{ route('user-list.index') }}" class="sidebar-link {{ request()->routeIs('user-list.index') ? 'active' : '' }}">
+                              New User
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('user-permissions.index') }}" class="sidebar-link {{ request()->routeIs('user-permissions.index') ? 'active' : '' }}">
+                              User Permissions
+                          </a>
+                      </li>
                   </ul>
-                </li>
+              </li>
+
+
+
+
 
 
                 <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="#">
@@ -138,3 +150,6 @@
             </div>
           </nav>
         </div>
+
+
+        

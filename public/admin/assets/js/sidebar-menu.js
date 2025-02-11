@@ -13,65 +13,63 @@
     $(".page-wrapper").addClass("compact-wrapper");
   }
 
-  // left sidebar and vertical menu
-  if ($("#pageWrapper").hasClass("compact-wrapper")) {
-    $(".sidebar-title").append(
+// Left sidebar and vertical menu
+if ($("#pageWrapper").hasClass("compact-wrapper")) {
+  $(".sidebar-title").append(
       '<div class="according-menu"><i class="fa fa-angle-right"></i></div>'
-    );
-    $(".sidebar-title").click(function () {
+  );
+
+  $(".sidebar-title").click(function () {
+      let wasActive = $(this).hasClass("active");
+
       $(".sidebar-title")
-        .removeClass("active")
-        .find("div")
-        .replaceWith(
-          '<div class="according-menu"><i class="fa fa-angle-right"></i></div>'
-        );
+          .removeClass("active")
+          .find("div")
+          .replaceWith('<div class="according-menu"><i class="fa fa-angle-right"></i></div>');
+      
       $(".sidebar-submenu, .menu-content").slideUp("normal");
-      $(".menu-content").slideUp("normal");
-      if ($(this).next().is(":hidden") == true) {
-        $(this).addClass("active");
-        $(this)
-          .find("div")
-          .replaceWith(
-            '<div class="according-menu"><i class="fa fa-angle-down"></i></div>'
-          );
-        $(this).next().slideDown("normal");
-      } else {
-        $(this)
-          .find("div")
-          .replaceWith(
-            '<div class="according-menu"><i class="fa fa-angle-right"></i></div>'
-          );
+
+      if (!wasActive) {
+          $(this).addClass("active");
+          $(this)
+              .find("div")
+              .replaceWith('<div class="according-menu"><i class="fa fa-angle-down"></i></div>');
+          $(this).next().slideDown("normal");
       }
-    });
-    $(".sidebar-submenu, .menu-content").hide();
-    $(".submenu-title").append(
+  });
+
+  $(".sidebar-submenu, .menu-content").hide();
+
+  $(".submenu-title").append(
       '<div class="according-menu"><i class="fa fa-angle-right"></i></div>'
-    );
-    $(".submenu-title").click(function () {
+  );
+
+  $(".submenu-title").click(function () {
+      let wasActive = $(this).hasClass("active");
+
       $(".submenu-title")
-        .removeClass("active")
-        .find("div")
-        .replaceWith(
-          '<div class="according-menu"><i class="fa fa-angle-right"></i></div>'
-        );
+          .removeClass("active")
+          .find("div")
+          .replaceWith('<div class="according-menu"><i class="fa fa-angle-right"></i></div>');
+      
       $(".submenu-content").slideUp("normal");
-      if ($(this).next().is(":hidden") == true) {
-        $(this).addClass("active");
-        $(this)
-          .find("div")
-          .replaceWith(
-            '<div class="according-menu"><i class="fa fa-angle-down"></i></div>'
-          );
-        $(this).next().slideDown("normal");
-      } else {
-        $(this)
-          .find("div")
-          .replaceWith(
-            '<div class="according-menu"><i class="fa fa-angle-right"></i></div>'
-          );
+
+      if (!wasActive) {
+          $(this).addClass("active");
+          $(this)
+              .find("div")
+              .replaceWith('<div class="according-menu"><i class="fa fa-angle-down"></i></div>');
+          $(this).next().slideDown("normal");
       }
-    });
-    $(".submenu-content").hide();
+  });
+
+  $(".submenu-content").hide();
+
+  // ✅ Ensure the current active menu stays open on page load
+  $(".sidebar-list .active").parents(".sidebar-submenu").show();
+  $(".sidebar-list .active").parents(".menu-content").show();
+
+
   } else if ($("#pageWrapper").hasClass("horizontal-wrapper")) {
     var smallSize = false,
       bigSize = false;
@@ -434,18 +432,23 @@
     $(this).parent().children("ul").toggleClass("d-block").slideToggle();
   }
 
-  // active link
-  if (
-    $(".simplebar-wrapper .simplebar-content-wrapper") &&
-    $("#pageWrapper").hasClass("compact-wrapper")
-  ) {
+// Active link scrolling
+if (
+  $(".simplebar-wrapper .simplebar-content-wrapper").length &&
+  $("#pageWrapper").hasClass("compact-wrapper")
+) {
+  let activeLink = $(".simplebar-wrapper .simplebar-content-wrapper a.active");
+
+  if (activeLink.length) {  // Check if element exists
     $(".simplebar-wrapper .simplebar-content-wrapper").animate(
       {
-        scrollTop:
-          $(".simplebar-wrapper .simplebar-content-wrapper a.active").offset()
-            .top - 400,
+        scrollTop: activeLink.offset().top - 400,
       },
       1000
     );
+  } else {
+    console.warn("No active link found inside .simplebar-content-wrapper.");
   }
+}
+
 })($);
