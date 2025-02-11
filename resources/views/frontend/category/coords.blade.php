@@ -357,6 +357,86 @@
 
 
 @include('components.frontend.main-js')
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdown = document.querySelector(".tf-dropdown-sort");
+    const dropdownMenu = document.querySelector(".dropdown-menu");
+    const sortButton = document.querySelector(".btn-select .text-sort-value");
+    const sortItems = document.querySelectorAll(".select-item");
+    const productContainer = document.getElementById("gridLayout");
+
+    // Bootstrap dropdown toggle (removes need for manual event handling)
+    dropdown.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+
+    // Sorting function
+    function getPrice(element) {
+        let priceText = element.querySelector(".current-price")?.textContent || "";
+        let price = priceText.replace(/[^\d.]/g, "").trim(); // Remove non-numeric characters
+        return price ? parseFloat(price) : 0; // Ensure valid number
+    }
+
+    sortItems.forEach(item => {
+        item.addEventListener("click", function () {
+            const sortValue = this.getAttribute("data-sort-value");
+            let products = Array.from(productContainer.children);
+
+            if (sortValue === "best-selling") {
+                // Implement logic for best-selling if applicable
+                return;
+            } else if (sortValue === "a-z") {
+                products.sort((a, b) => 
+                    a.querySelector(".title").textContent.trim().localeCompare(
+                        b.querySelector(".title").textContent.trim()
+                    )
+                );
+            } else if (sortValue === "z-a") {
+                products.sort((a, b) => 
+                    b.querySelector(".title").textContent.trim().localeCompare(
+                        a.querySelector(".title").textContent.trim()
+                    )
+                );
+            } else if (sortValue === "price-low-high") {
+                products.sort((a, b) => {
+                    let priceA = getPrice(a);
+                    let priceB = getPrice(b);
+
+                    if (priceA === priceB) {
+                        return a.querySelector(".title").textContent.trim().localeCompare(
+                            b.querySelector(".title").textContent.trim()
+                        );
+                    }
+                    return priceA - priceB;
+                });
+            } else if (sortValue === "price-high-low") {
+                products.sort((a, b) => {
+                    let priceA = getPrice(a);
+                    let priceB = getPrice(b);
+
+                    if (priceA === priceB) {
+                        return a.querySelector(".title").textContent.trim().localeCompare(
+                            b.querySelector(".title").textContent.trim()
+                        );
+                    }
+                    return priceB - priceA;
+                });
+            }
+
+            // Update the product list
+            productContainer.innerHTML = "";
+            products.forEach(product => productContainer.appendChild(product));
+
+            // Update the dropdown button text
+            sortButton.textContent = this.textContent.trim();
+        });
+    });
+});
+
+
+</script>
 </body>
 
 </html>
