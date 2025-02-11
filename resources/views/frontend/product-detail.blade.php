@@ -416,13 +416,13 @@
 
                                         </div>
                                         <div class="list-product-btn">
-                                            <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
+                                            <a href="{{ route('wishlist.add', ['id' => $related->id]) }}" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
                                                 <span class="icon icon-heart"></span>
                                                 <span class="tooltip">Wishlist</span>
                                             </a>
                                         </div>
                                         <div class="list-btn-main">
-                                            <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
+                                            <a href="{{ route('cart.add', ['id' => $related->id]) }}" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
                                         </div>
                                     </div>
                                     <div class="card-product-info">
