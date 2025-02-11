@@ -16,7 +16,8 @@ use App\Models\Carts;
 
 class CartController extends Controller
 {
-    public function add($id)
+
+    public function add($id, Request $request)
     {
         $product = ProductDetails::find($id);
 
@@ -25,28 +26,31 @@ class CartController extends Controller
         }
 
         $userId = Auth::id();
+        $quantityToAdd = (int) $request->query('quantity', 1); 
 
-        $existingCarts = Carts::where('user_id', $userId)
-                                    ->where('product_id', $id)
-                                    ->first();
+        $existingCart = Carts::where('user_id', $userId)
+                            ->where('product_id', $id)
+                            ->first();
 
-        if ($existingCarts) {
-            $existingCarts->increment('quantity');
-            $existingCarts->update([
+        if ($existingCart) {
+            // If product exists in cart, increase the quantity
+            $existingCart->increment('quantity', $quantityToAdd);
+            $existingCart->update([
                 'modified_at' => Carbon::now(),
-                'modified_by' => $userId, 
+                'modified_by' => $userId,
             ]);
-            return redirect()->back()->with('message', 'Product added to Cart');
         } else {
+            // If product is not in cart, create a new entry with selected quantity
             Carts::create([
                 'user_id' => $userId,
                 'product_id' => $id,
-                'quantity' => 1,
+                'quantity' => $quantityToAdd,
                 'inserted_at' => Carbon::now(),
                 'inserted_by' => $userId,
             ]);
-
-            return redirect()->back()->with('message', 'Product added to Cart!');
         }
+
+        return redirect()->back()->with('message', 'Product added to Cart!');
     }
+
 }

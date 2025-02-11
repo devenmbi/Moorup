@@ -163,17 +163,18 @@
                                         <br>
                                         <div>
                                             <div class="tf-product-info-by-btn mb_10">
-                                                <a href="{{ route('cart.add', ['id' => $product->id, 'quantity' => 1]) }}" 
-                                                class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
+                                                <a href="{{ route('cart.add', ['id' => $product->id]) }}" 
+                                                    class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
                                                     <span>Add to cart</span>
                                                 </a>
                                                 <a href="{{ route('wishlist.add', ['id' => $product->id]) }}" 
-                                                class="box-icon hover-tooltip text-caption-2 wishlist btn-icon-action">
+                                                    class="box-icon hover-tooltip text-caption-2 wishlist btn-icon-action">
                                                     <span class="icon icon-heart"></span>
                                                     <span class="tooltip text-caption-2">Wishlist</span>
                                                 </a>
                                             </div>
-                                        </div><br>
+                                        </div>
+                                        <br>
 
                                         
                                         <ul class="tf-product-info-sku">
@@ -470,6 +471,48 @@
 </script>
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const decreaseBtn = document.querySelector(".btn-decrease");
+        const increaseBtn = document.querySelector(".btn-increase");
+        const quantityInput = document.querySelector(".quantity-product");
+        const addToCartBtn = document.querySelector(".btn-add-to-cart");
+
+        // Function to update the Add to Cart URL dynamically
+        function updateCartUrl() {
+            let quantity = parseInt(quantityInput.value) || 1;
+            if (quantity < 1) quantity = 1; // Ensure minimum quantity of 1
+            
+            // Update href dynamically with selected quantity
+            let baseUrl = "{{ route('cart.add', ['id' => $product->id]) }}";
+            addToCartBtn.setAttribute("href", baseUrl + `?quantity=${quantity}`);
+        }
+
+        // Increase quantity
+        increaseBtn.addEventListener("click", function () {
+            let quantity = parseInt(quantityInput.value) || 1;
+            quantityInput.value = quantity;
+            updateCartUrl();
+        });
+
+        // Decrease quantity (minimum 1)
+        decreaseBtn.addEventListener("click", function () {
+            let quantity = parseInt(quantityInput.value) || 1;
+            if (quantity > 1) {
+                quantityInput.value = quantity;
+                updateCartUrl();
+            }
+        });
+
+        // On manual input change
+        quantityInput.addEventListener("input", function () {
+            updateCartUrl();
+        });
+
+        // Initialize URL on page load
+        updateCartUrl();
+    });
+</script>
 
 </body>
 
