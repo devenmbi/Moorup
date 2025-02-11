@@ -85,16 +85,17 @@
                             </div>
                         </li>
                     </ul>
+                    
                     <div class="tf-control-sorting">
                         <p class="d-none d-lg-block text-caption-1">Sort by:</p>
-                        <div class="tf-dropdown-sort" data-bs-toggle="dropdown">
+                        <div class="tf-dropdown-sort">
                             <div class="btn-select">
-                                <span class="text-sort-value">Best selling</span>
+                                <span class="text-sort-value">Alphabetically, A-Z</span>
                                 <span class="icon icon-arrow-down"></span>
                             </div>
                             <div class="dropdown-menu">
                                 <div class="select-item" data-sort-value="best-selling">
-                                    <span class="text-value-item">Best selling</span>
+                                    <span class="text-value-item">Bestselling</span>
                                 </div>
                                 <div class="select-item" data-sort-value="a-z">
                                     <span class="text-value-item">Alphabetically, A-Z</span>
@@ -111,6 +112,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="wrapper-control-shop">
                     <div class="meta-filter-shop">
@@ -357,6 +359,77 @@
 
 
 @include('components.frontend.main-js')
+
+
+
+
+<!-- To manage the dopdown filters of arrainging the data-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdown = document.querySelector(".tf-dropdown-sort");
+        const dropdownMenu = document.querySelector(".dropdown-menu");
+        const sortButton = document.querySelector(".btn-select .text-sort-value");
+        const sortItems = document.querySelectorAll(".select-item");
+        const productContainer = document.getElementById("gridLayout");
+
+        // Toggle dropdown menu visibility
+        dropdown.addEventListener("click", function () {
+            dropdownMenu.classList.toggle("show"); // Show/Hide dropdown
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.remove("show");
+            }
+        });
+
+        // Sorting functionality
+        sortItems.forEach(item => {
+            item.addEventListener("click", function () {
+                const sortValue = this.getAttribute("data-sort-value");
+                let products = Array.from(productContainer.children);
+
+                if (sortValue === "a-z") {
+                    products.sort((a, b) => {
+                        return a.querySelector(".title").textContent.trim().localeCompare(
+                            b.querySelector(".title").textContent.trim()
+                        );
+                    });
+                } else if (sortValue === "z-a") {
+                    products.sort((a, b) => {
+                        return b.querySelector(".title").textContent.trim().localeCompare(
+                            a.querySelector(".title").textContent.trim()
+                        );
+                    });
+                } else if (sortValue === "price-low-high") {
+                    products.sort((a, b) => {
+                        return parseFloat(a.querySelector(".current-price").textContent.replace("INR", "").trim()) - 
+                               parseFloat(b.querySelector(".current-price").textContent.replace("INR", "").trim());
+                    });
+                } else if (sortValue === "price-high-low") {
+                    products.sort((a, b) => {
+                        return parseFloat(b.querySelector(".current-price").textContent.replace("INR", "").trim()) - 
+                               parseFloat(a.querySelector(".current-price").textContent.replace("INR", "").trim());
+                    });
+                }
+
+                // Update the product list
+                productContainer.innerHTML = "";
+                products.forEach(product => productContainer.appendChild(product));
+
+                // Update the dropdown button text
+                sortButton.textContent = this.textContent.trim();
+
+                // Close the dropdown after selection
+                dropdownMenu.classList.remove("show");
+            });
+        });
+    });
+</script>
+
+
+
 </body>
 
 </html>
