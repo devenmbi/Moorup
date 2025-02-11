@@ -150,7 +150,7 @@
                                             </p>
                                         </div>
                                     @endif
-
+                                        <br>
 
                                         <div class="tf-product-info-quantity">
                                             <div class="title mb_12">Quantity:</div>

@@ -48,7 +48,7 @@ class ProductController extends Controller
         // Fetch matching sizes from ProductSizes table
         $productSizes = ProductSizes::whereIn('id', $productSizeIds)
             ->whereNull('deleted_at')
-            ->pluck('size', 'id'); // Get an array of size names with their IDs
+            ->pluck('size', 'id'); 
 
         $productColor = json_decode($product->colors, true) ?? [];
 
