@@ -102,27 +102,31 @@
                                         </div>
                                     </div>
 
-                                    <div class="tf-product-info-choose-option">
-                                    <div class="variant-picker-item">
-                                        <div class="variant-picker-label mb_12">
-                                            Colors: <span class="text-title" id="selected-color">{{ $productColor[0] ?? 'Select Color' }}</span>
+                                    @if(!empty($productColor) && count($productColor) > 0)
+                                        <div class="tf-product-info-choose-option">
+                                            <div class="variant-picker-item">
+                                                <div class="variant-picker-label mb_12">
+                                                    Colors: <span class="text-title" id="selected-color">{{ $productColor[0] ?? 'Select Color' }}</span>
+                                                </div>
+                                                <div class="variant-picker-values">
+                                                    @foreach($productColor as $id => $color)
+                                                        <input id="color_{{ $id }}" type="radio" name="color1" value="{{ $color }}" 
+                                                            {{ $loop->first ? 'checked' : '' }} onchange="updateSelectedColor(this)">
+                                                        <label for="color_{{ $id }}" class="hover-tooltip tooltip-bot radius-60 color-btn {{ $loop->first ? 'active' : '' }}">
+                                                            <span class="btn-checkbox" style="background-color: {{ $color }};"></span>
+                                                            <span class="tooltip">{{ $color }}</span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="variant-picker-values">
-                                        @foreach($productColor as $id => $color)
-                                            <input id="color_{{ $id }}" type="radio" name="color1" value="{{ $color }}" 
-                                                {{ $loop->first ? 'checked' : '' }} onchange="updateSelectedColor(this)">
-                                            <label for="color_{{ $id }}" class="hover-tooltip tooltip-bot radius-60 color-btn {{ $loop->first ? 'active' : '' }}">
-                                                <span class="btn-checkbox" style="background-color: {{ $color }};"></span>
-                                                <span class="tooltip">{{ $color }}</span>
-                                            </label>
-                                        @endforeach
+                                    @endif
 
-                                        </div>
-                                    </div>
+                                    <br>
 
-
+                                    @if(!empty($productSizes) && count($productSizes) > 0)
                                         <div class="variant-picker-item">
-                                        <div class="d-flex justify-content-between mb_12">
+                                            <div class="d-flex justify-content-between mb_12">
                                                 <div class="variant-picker-label">
                                                     Size:
                                                     <span class="text-title variant-picker-label-value" id="selected-size">
@@ -145,6 +149,7 @@
                                                 For customized sizes, please <a class="contact-link" href="">contact us.</a>
                                             </p>
                                         </div>
+                                    @endif
 
 
                                         <div class="tf-product-info-quantity">
@@ -154,7 +159,7 @@
                                                 <input class="quantity-product" type="text" name="number" value="1">
                                                 <span class="btn-quantity btn-increase">+</span>
                                             </div>
-                                        </div>
+                                        </div><br>
                                         <div>
                                             <div class="tf-product-info-by-btn mb_10">
                                                 <a href="" class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart"><span>Add to cart</span></a>
@@ -164,7 +169,7 @@
                                                 </a>
                                                
                                             </div>
-                                        </div>
+                                        </div><br>
                                         
                                         <ul class="tf-product-info-sku">
                                         
@@ -392,14 +397,23 @@
                                             <img class="lazyload img-hover" data-src="{{ $thumbnail }}" src="{{ $thumbnail }}" alt="{{ $related->name }}">
                                         </a>
                                         <div class="variant-wrap size-list">
+                                        @php
+                                            // Fetch sizes based on stored size IDs
+                                            $sizeIds = json_decode($related->sizes, true) ?? [];
+                                            $productSizes = \App\Models\ProductSizes::whereIn('id', $sizeIds)
+                                                ->whereNull('deleted_at')
+                                                ->pluck('size')
+                                                ->toArray();
+                                        @endphp
+
+                                        @if(!empty($productSizes))
                                             <ul class="variant-box">
-                                                @php
-                                                    $sizes = json_decode($related->available_sizes, true) ?? [];
-                                                @endphp
-                                                @foreach($sizes as $size)
+                                                @foreach($productSizes as $size)
                                                     <li class="size-item">{{ $size }}</li>
                                                 @endforeach
                                             </ul>
+                                        @endif
+
                                         </div>
                                         <div class="list-product-btn">
                                             <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
