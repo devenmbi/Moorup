@@ -144,22 +144,27 @@
 
 
                                     <div class="col-xxl-4 col-sm-6">
-                                    <label class="form-label" for="product_colors">Product Colors </label>
+                                        <label class="form-label" for="product_colors">Product Colors</label>
                                         <div class="col-sm-9">
-                                            <select class="form-control" select2 id="color_dropdown" name="colors[]" multiple>
-                                                <option value="#ff0000">Red</option>
-                                                <option value="#00ff00">Green</option>
-                                                <option value="#0000ff">Blue</option>
-                                                <option value="#006666">Teal</option>
-                                                <option value="custom">Custom</option>
+                                            <select class="form-control" id="color_dropdown" name="colors[]" multiple>
+                                                <option value="Black">Black</option>
+                                                <option value="White">White</option>
+                                                <option value="Red">Red</option>
+                                                <option value="Green">Green</option>
+                                                <option value="Blue">Blue</option>
+                                                <option value="Yellow">Yellow</option>
+                                                <option value="Orange">Orange</option>
+                                                <option value="Purple">Purple</option>
+                                                <option value="Pink">Pink</option>
+                                                <option value="Brown">Brown</option>
+                                                <option value="Gray">Gray</option>
+                                                <option value="Cyan">Cyan</option>
+                                                <option value="Dark Green">Dark Green</option>
+                                                <option value="Maroon">Maroon</option>
+                                                <option value="Teal">Teal</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-12 mt-3" id="custom_color_container" style="display: none;">
-                                            <label class="form-label">Custom Color</label>
-                                            <input class="form-control form-control-color" type="color" name="custom_color" id="custom_color" value="#006666">
-                                        </div>
                                     </div>
-
 
 
                                      <!-- Product Description -->
@@ -547,56 +552,52 @@
 </script>
 
 
-
+<!--Product Color select 2 opt-->  
 <script>
-    $(document).ready(function () {
-        const colorDropdown = $('#color_dropdown');
-        const customColorContainer = $('#custom_color_container');
-        const customColorInput = $('#custom_color');
+   $(document).ready(function () {
+    const colorDropdown = $('#color_dropdown');
 
-        // Initialize Select2 with color swatches
-        colorDropdown.select2({
-            placeholder: "Select Colors",
-            allowClear: true,
-            templateResult: formatColorOption, // Swatches + text in dropdown
-            templateSelection: formatColorNameOnly // Show names only in selection
-        });
+    // Map color names to their respective hex values
+    const colorMap = {
+        "Black": "#000000",
+        "White": "#FFFFFF",
+        "Red": "#FF0000",
+        "Green": "#00FF00",
+        "Blue": "#0000FF",
+        "Yellow": "#FFFF00",
+        "Orange": "#FFA500",
+        "Purple": "#800080",
+        "Pink": "#FFC0CB",
+        "Brown": "#A52A2A",
+        "Gray": "#808080",
+        "Cyan": "#00FFFF",
+        "Dark Green": "#008000",
+        "Maroon": "#800000",
+        "Teal": "#006666"
+    };
 
-        // Show/hide the custom color picker based on dropdown selection
-        colorDropdown.on('change', function () {
-            const selectedOptions = colorDropdown.val() || [];
-            if (selectedOptions.includes('custom')) {
-                customColorContainer.show();
-            } else {
-                customColorContainer.hide();
-            }
-        });
-
-        // Handle custom color selection
-        customColorInput.on('input', function () {
-            console.log('Custom color selected:', this.value);
-        });
-
-        // Format options to include swatches and text
-        function formatColorOption(option) {
-            if (!option.id) return option.text; // Handle placeholder
-
-            const color = option.id === 'custom' ? '#cccccc' : option.id; // Default swatch for custom
-            return $(
-                `<span style="display: flex; align-items: center;">
-                    <span style="display: inline-block; width: 20px; height: 20px; background-color: ${color}; margin-right: 8px; border-radius: 3px;"></span>
-                    <span>${option.text}</span>
-                </span>`
-            );
-        }
-
-        // Format selection to display only the name without swatches
-        function formatColorNameOnly(option) {
-            return option.text;
-        }
+    // Initialize Select2 with color swatches
+    colorDropdown.select2({
+        placeholder: "Select Colors",
+        allowClear: true,
+        templateResult: formatColorOption,
+        templateSelection: formatColorOption
     });
-</script>
 
+    // Format options to display color swatches
+    function formatColorOption(option) {
+        if (!option.id) return option.text; // Handle placeholder
+        const colorHex = colorMap[option.id] || "#ccc"; // Fallback for unknown colors
+        return $(
+            `<span style="display: inline-flex; align-items: center;">
+                <span style="display: inline-block; width: 20px; height: 20px; background-color: ${colorHex}; margin-right: 8px; border-radius: 3px; border: 1px solid #ccc;"></span>
+                ${option.text}
+            </span>`
+        );
+    }
+    });
+
+</script>
 
 
 

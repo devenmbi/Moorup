@@ -93,16 +93,7 @@ class ProductDetailsController extends Controller
         $slug = Str::slug($request->product_name, '-');
         $product = new ProductDetails();
 
-        // Handle colors
-        $colors = $request->colors;
-
-        // Check if 'custom' is selected, and add the custom color value if provided
-        if (in_array('custom', $colors) && $request->has('custom_color')) {
-            $customColor = $request->custom_color;
-            $colors = array_filter($colors, fn($color) => $color !== 'custom'); // Remove 'custom'
-            $colors[] = $customColor; // Add the custom color hex value
-        }
-
+        $colors = $request->colors ?? [];
 
         $product->style_code = $request->style_code;
         $product->look_name = $request->look_name;
@@ -230,12 +221,7 @@ class ProductDetailsController extends Controller
         
         $product = ProductDetails::findOrFail($id);
 
-        $colors = $request->colors;
-
-        if (in_array('custom', $colors) && $request->filled('custom_color')) {
-            $colors = array_filter($colors, fn($color) => $color !== 'custom'); 
-            $colors[] = $request->custom_color; 
-        }
+        $colors = $request->colors ?? [];
 
         $product->colors = json_encode($colors);
         $product->style_code = $request->style_code;

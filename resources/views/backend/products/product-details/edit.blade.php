@@ -144,25 +144,40 @@
                                         <div class="invalid-feedback">Please select at least one product size.</div>
                                     </div>
 
-
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_colors">Product Colors</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" id="color_dropdown" name="colors[]" multiple>
-                                                <option value="#ff0000" {{ in_array('#ff0000', $selectedColors ?? []) ? 'selected' : '' }}>Red</option>
-                                                <option value="#00ff00" {{ in_array('#00ff00', $selectedColors ?? []) ? 'selected' : '' }}>Green</option>
-                                                <option value="#0000ff" {{ in_array('#0000ff', $selectedColors ?? []) ? 'selected' : '' }}>Blue</option>
-                                                <option value="#006666" {{ in_array('#006666', $selectedColors ?? []) ? 'selected' : '' }}>Teal</option>
-                                                <option value="custom" {{ in_array('custom', $selectedColors ?? []) ? 'selected' : '' }}>Custom</option>
+                                                @php
+                                                    $colorMapping = [
+                                                        "#000000" => "Black",
+                                                        "#FFFFFF" => "White",
+                                                        "#FF0000" => "Red",
+                                                        "#00FF00" => "Green",
+                                                        "#0000FF" => "Blue",
+                                                        "#FFFF00" => "Yellow",
+                                                        "#FFA500" => "Orange",
+                                                        "#800080" => "Purple",
+                                                        "#FFC0CB" => "Pink",
+                                                        "#A52A2A" => "Brown",
+                                                        "#808080" => "Gray",
+                                                        "#00FFFF" => "Cyan",
+                                                        "#008000" => "Dark Green",
+                                                        "#800000" => "Maroon",
+                                                        "#006666" => "Teal"
+                                                    ];
+                                                    // Convert stored names to their corresponding hex values
+                                                    $selectedHexColors = array_keys(array_filter($colorMapping, fn($name) => in_array($name, $selectedColors ?? [])));
+                                                @endphp
+
+                                                @foreach ($colorMapping as $hex => $name)
+                                                    <option value="{{ $name }}" {{ in_array($name, $selectedColors ?? []) ? 'selected' : '' }}>
+                                                        {{ $name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-sm-12 mt-3" id="custom_color_container" style="display: {{ in_array('custom', $selectedColors ?? []) ? 'block' : 'none' }};">
-                                            <label class="form-label">Custom Color</label>
-                                            <input class="form-control form-control-color" type="color" name="custom_color" id="custom_color" 
-                                                value="{{ collect($selectedColors)->first(fn($color) => !in_array($color, ['#ff0000', '#00ff00', '#0000ff', '#006666', 'custom'])) ?? '#cccccc' }}">
-                                        </div>
                                     </div>
-
 
                                     <!-- Product Description -->
                                     <div class="col-xxl-4 col-sm-12" style="margin-bottom: 20px;">
@@ -312,8 +327,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-
 
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
@@ -544,30 +557,31 @@
     });
 </script>
 
+
 <script>
-   $(document).ready(function () {
+    $(document).ready(function () {
         const colorDropdown = $('#color_dropdown');
-        const customColorContainer = $('#custom_color_container');
-        const customColorInput = $('#custom_color');
 
         // Map of predefined color names
         const colorNames = {
-            "#ff0000": "Red",
-            "#00ff00": "Green",
-            "#0000ff": "Blue",
-            "#006666": "Teal",
+            "Black": "#000000",
+            "White": "#FFFFFF",
+            "Red": "#FF0000",
+            "Green": "#00FF00",
+            "Blue": "#0000FF",
+            "Yellow": "#FFFF00",
+            "Orange": "#FFA500",
+            "Purple": "#800080",
+            "Pink": "#FFC0CB",
+            "Brown": "#A52A2A",
+            "Gray": "#808080",
+            "Cyan": "#00FFFF",
+            "Dark Green": "#008000",
+            "Maroon": "#800000",
+            "Teal": "#006666"
         };
 
-        // Add selected custom colors to the dropdown if not already present
-        const selectedColors = @json($selectedColors ?? []);
-        selectedColors.forEach(color => {
-            if (!Object.keys(colorNames).includes(color) && color !== 'custom') {
-                const newOption = new Option(color, color, true, true);
-                colorDropdown.append(newOption).trigger('change');
-            }
-        });
-
-        // Initialize Select2 with color swatches and names
+        // Initialize Select2 with color swatches
         colorDropdown.select2({
             placeholder: "Select Colors",
             allowClear: true,
@@ -575,40 +589,20 @@
             templateSelection: formatColorOption
         });
 
-        // Show/hide the custom color picker when "Custom" is selected
-        colorDropdown.on('change', function () {
-            const selectedOptions = colorDropdown.val() || [];
-            if (selectedOptions.includes('custom')) {
-                customColorContainer.show();
-            } else {
-                customColorContainer.hide();
-            }
-        });
-
-        // Format options with color swatches and names
+        // Format options to include swatches and text
         function formatColorOption(option) {
             if (!option.id) return option.text; // Handle placeholder
-            const color = option.id === 'custom' ? customColorInput.val() : option.id;
-            const colorName = colorNames[color] || color; // Use color name if available, else show color code
-            return $(
-                `<span style="display: inline-flex; align-items: center;">
-                    <span style="display: inline-block; width: 20px; height: 20px; background-color: ${color}; margin-right: 8px; border-radius: 3px;"></span>
+            const colorName = option.id;
+            const colorHex = colorNames[colorName] || colorName; // Use hex if available, else fallback
+            return $(`
+                <span style="display: inline-flex; align-items: center;">
+                    <span style="display: inline-block; width: 20px; height: 20px; background-color: ${colorHex}; margin-right: 8px; border-radius: 3px; border: 1px solid #ccc;"></span>
                     ${colorName}
-                </span>`
-            );
+                </span>
+            `);
         }
-
-        // Update custom color option dynamically when the custom color input changes
-        customColorInput.on('input', function () {
-            const customColorValue = customColorInput.val();
-            const customOption = colorDropdown.find('option[value="custom"]');
-            if (customOption.length) {
-                customOption.text(customColorValue); // Update the displayed name for the "custom" option
-                customOption.val(customColorValue);  // Update the value for the "custom" option
-                colorDropdown.trigger('change.select2'); // Refresh the dropdown
-            }
-        });
     });
+
 </script>
 
 
