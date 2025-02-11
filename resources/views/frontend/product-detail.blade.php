@@ -470,7 +470,7 @@
     }
 </script>
 
-
+<!-- For Add to cart based on the quantity selection -->  
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const decreaseBtn = document.querySelector(".btn-decrease");
