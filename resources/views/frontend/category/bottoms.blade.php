@@ -359,7 +359,7 @@
 
 @include('components.frontend.main-js')
 
-
+<!-- To manage the dopdown filters of arrainging the data-->
 <script>
    document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.querySelector(".tf-dropdown-sort");
