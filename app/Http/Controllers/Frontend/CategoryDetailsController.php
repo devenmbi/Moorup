@@ -61,7 +61,7 @@ class CategoryDetailsController extends Controller
         'inStockCount', 
         'outStockCount'
         ));
-        }
+    }
 
 
 
