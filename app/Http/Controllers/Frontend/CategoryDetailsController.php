@@ -13,6 +13,7 @@ use App\Models\TopsDetails;
 use App\Models\BottomsDetails;
 use App\Models\CoordsDetails;
 use App\Models\JacketsDetails;
+use App\Models\ProductSizes;
 
 class CategoryDetailsController extends Controller
 {
@@ -29,8 +30,44 @@ class CategoryDetailsController extends Controller
 
         $products = ProductDetails::whereNull('deleted_by')->where('category_id', $categoryId)->get();
 
-        return view('frontend.category.dresses', compact('banner','products'));
-    }
+
+        // For FIlter Data fethcing
+
+        $priceRange = ProductDetails::whereNull('deleted_by')
+        ->where('category_id', $categoryId)
+        ->selectRaw('MIN(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as min_price, 
+                     MAX(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as max_price')
+        ->first();
+
+        // Get available sizes from master_product_size
+        $sizes = ProductSizes::whereNull('deleted_by')->pluck('size');
+
+        // Get stock availability count
+        $inStockCount = ProductDetails::whereNull('deleted_by')
+        ->where('category_id', $categoryId)
+        ->where('available_quantity', '>', 0)
+        ->count();
+
+        $outStockCount = ProductDetails::whereNull('deleted_by')
+        ->where('category_id', $categoryId)
+        ->where('available_quantity', '=', 0)
+        ->count();
+
+        return view('frontend.category.dresses', compact(
+        'banner', 
+        'products', 
+        'priceRange', 
+        'sizes', 
+        'inStockCount', 
+        'outStockCount'
+        ));
+        }
+
+
+
+
+
+
 
 
     // === Tops
@@ -45,8 +82,37 @@ class CategoryDetailsController extends Controller
 
         $products = ProductDetails::whereNull('deleted_by')->where('category_id', $categoryId)->get();
 
-        return view('frontend.category.tops', compact('banner','products'));
+
+         // For FIlter Data fethcing
+
+         $priceRange = ProductDetails::whereNull('deleted_by')
+         ->where('category_id', $categoryId)
+         ->selectRaw('MIN(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as min_price, 
+                      MAX(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as max_price')
+         ->first();
+ 
+         // Get available sizes from master_product_size
+         $sizes = ProductSizes::whereNull('deleted_by')->pluck('size');
+ 
+         // Get stock availability count
+         $inStockCount = ProductDetails::whereNull('deleted_by')
+         ->where('category_id', $categoryId)
+         ->where('available_quantity', '>', 0)
+         ->count();
+ 
+         $outStockCount = ProductDetails::whereNull('deleted_by')
+         ->where('category_id', $categoryId)
+         ->where('available_quantity', '=', 0)
+         ->count();
+
+        return view('frontend.category.tops', compact('banner','products','priceRange', 
+        'sizes', 
+        'inStockCount', 
+        'outStockCount'));
     }
+
+
+
 
     // === Bottoms
     public function bottoms(Request $request)
@@ -60,8 +126,37 @@ class CategoryDetailsController extends Controller
 
         $products = ProductDetails::whereNull('deleted_by')->where('category_id', $categoryId)->get();
 
-        return view('frontend.category.bottoms', compact('banner','products'));
+
+        // For FIlter Data fethcing
+
+        $priceRange = ProductDetails::whereNull('deleted_by')
+        ->where('category_id', $categoryId)
+        ->selectRaw('MIN(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as min_price, 
+                     MAX(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as max_price')
+        ->first();
+
+        // Get available sizes from master_product_size
+        $sizes = ProductSizes::whereNull('deleted_by')->pluck('size');
+
+        // Get stock availability count
+        $inStockCount = ProductDetails::whereNull('deleted_by')
+        ->where('category_id', $categoryId)
+        ->where('available_quantity', '>', 0)
+        ->count();
+
+        $outStockCount = ProductDetails::whereNull('deleted_by')
+        ->where('category_id', $categoryId)
+        ->where('available_quantity', '=', 0)
+        ->count();
+
+        return view('frontend.category.bottoms', compact('banner','products','priceRange', 
+        'sizes', 
+        'inStockCount', 
+        'outStockCount'));
     }
+
+
+
 
 
      // === Coords
@@ -77,7 +172,33 @@ class CategoryDetailsController extends Controller
 
         $products = ProductDetails::whereNull('deleted_by')->where('category_id', $categoryId)->get();
 
-        return view('frontend.category.coords', compact('banner','products'));
+
+          // For FIlter Data fethcing
+
+          $priceRange = ProductDetails::whereNull('deleted_by')
+          ->where('category_id', $categoryId)
+          ->selectRaw('MIN(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as min_price, 
+                       MAX(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as max_price')
+          ->first();
+  
+          // Get available sizes from master_product_size
+          $sizes = ProductSizes::whereNull('deleted_by')->pluck('size');
+  
+          // Get stock availability count
+          $inStockCount = ProductDetails::whereNull('deleted_by')
+          ->where('category_id', $categoryId)
+          ->where('available_quantity', '>', 0)
+          ->count();
+  
+          $outStockCount = ProductDetails::whereNull('deleted_by')
+          ->where('category_id', $categoryId)
+          ->where('available_quantity', '=', 0)
+          ->count();
+
+        return view('frontend.category.coords', compact('banner','products','priceRange', 
+        'sizes', 
+        'inStockCount', 
+        'outStockCount'));
     }
 
 
@@ -93,8 +214,34 @@ class CategoryDetailsController extends Controller
      
  
          $products = ProductDetails::whereNull('deleted_by')->where('category_id', $categoryId)->get();
+
+
+            // For FIlter Data fethcing
+
+            $priceRange = ProductDetails::whereNull('deleted_by')
+            ->where('category_id', $categoryId)
+            ->selectRaw('MIN(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as min_price, 
+                         MAX(CAST(REPLACE(product_price, ",", "") AS UNSIGNED)) as max_price')
+            ->first();
+    
+            // Get available sizes from master_product_size
+            $sizes = ProductSizes::whereNull('deleted_by')->pluck('size');
+    
+            // Get stock availability count
+            $inStockCount = ProductDetails::whereNull('deleted_by')
+            ->where('category_id', $categoryId)
+            ->where('available_quantity', '>', 0)
+            ->count();
+    
+            $outStockCount = ProductDetails::whereNull('deleted_by')
+            ->where('category_id', $categoryId)
+            ->where('available_quantity', '=', 0)
+            ->count();
  
-         return view('frontend.category.jackets', compact('banner','products'));
+         return view('frontend.category.jackets', compact('banner','products','priceRange', 
+         'sizes', 
+         'inStockCount', 
+         'outStockCount'));
      }
     
 }

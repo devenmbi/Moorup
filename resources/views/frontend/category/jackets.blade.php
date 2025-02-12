@@ -171,71 +171,61 @@
         <!-- /Section product -->
 
 
-    <!-- Filter -->
-    <div class="offcanvas offcanvas-start canvas-filter" id="filterShop">
-        <div class="canvas-wrapper">
-            <div class="canvas-header">
-                <h5>Filters</h5>
-                <span class="icon-close icon-close-popup" data-bs-dismiss="offcanvas" aria-label="Close"></span>
-            </div>
-            <div class="canvas-body">
-                <div class="widget-facet facet-categories">
-                    <h6 class="facet-title">Shop by Category</h6>
-                    <ul class="facet-content">
-                        <li><a href="#" class="categories-item active">Dresses <span class="count-cate">(112)</span></a></li>
-                        <li><a href="#" class="categories-item">Tops <span class="count-cate">(32)</span> </a></li>
-                        <li><a href="#" class="categories-item">Bottoms <span class="count-cate">(42)</span></a></li>
-                        <li><a href="#" class="categories-item">Co-Ords <span class="count-cate">(13)</span></a></li>
-                        <li><a href="#" class="categories-item">Blazers/Jackets <span class="count-cate">(52)</span></a></li>
-                    </ul>
+        <!-- Filter -->
+        <div class="offcanvas offcanvas-start canvas-filter" id="filterShop">
+            <div class="canvas-wrapper">
+                <div class="canvas-header">
+                    <h5>Filters</h5>
+                    <span class="icon-close icon-close-popup" data-bs-dismiss="offcanvas" aria-label="Close"></span>
                 </div>
-                <div class="widget-facet facet-price">
-                    <h6 class="facet-title">Price</h6>
-                    <div class="price-val-range" id="price-value-range" data-min="0" data-max="500"></div>
-                    <div class="box-price-product">
-                        <div class="box-price-item">
-                            <span class="title-price">Min price</span>
-                            <div class="price-val" id="price-min-value" data-currency="$"></div>
-                        </div>
-                        <div class="box-price-item">
-                            <span class="title-price">Max price</span>
-                            <div class="price-val" id="price-max-value" data-currency="$"></div>
+                <div class="canvas-body">
+                    <!-- Price Filter -->
+                    <div class="widget-facet facet-price">
+                        <h6 class="facet-title">Price</h6>
+                        <div class="price-val-range" id="price-value-range" data-min="{{ $priceRange->min_price }}" data-max="{{ $priceRange->max_price }}"></div>
+                        <div class="box-price-product">
+                            <div class="box-price-item">
+                                <span class="title-price">Min price</span>
+                                <div class="price-val" id="price-min-value" data-currency="₹">{{ $priceRange->min_price }}</div>
+                            </div>
+                            <div class="box-price-item">
+                                <span class="title-price">Max price</span>
+                                <div class="price-val" id="price-max-value" data-currency="₹">{{ $priceRange->max_price }}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="widget-facet facet-size">
-                    <h6 class="facet-title">Size</h6>
-                    <div class="facet-size-box size-box">
-                        <span class="size-item size-check">XS</span>
-                        <span class="size-item size-check">S</span>
-                        <span class="size-item size-check">M</span>
-                        <span class="size-item size-check">L</span>
-                        <span class="size-item size-check">XL</span>
-                        <span class="size-item size-check">2XL</span>
-                        <span class="size-item size-check">3XL</span>
-                        <span class="size-item size-check free-size">Free Size</span>
+
+                    <!-- Size Filter -->
+                    <div class="widget-facet facet-size">
+                        <h6 class="facet-title">Size</h6>
+                        <div class="facet-size-box size-box">
+                            @foreach($sizes as $size)
+                                <span class="size-item size-check">{{ $size }}</span>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="widget-facet facet-fieldset">
+                        <h6 class="facet-title">Availability</h6>
+                        <div class="box-fieldset-item">
+                            <fieldset class="fieldset-item">
+                                <input type="radio" name="availability" class="tf-check" id="inStock">
+                                <label for="inStock">In stock <span class="count-stock">({{ $inStockCount }})</span></label>
+                            </fieldset>
+                            <fieldset class="fieldset-item">
+                                <input type="radio" name="availability" class="tf-check" id="outStock">
+                                <label for="outStock">Out of stock <span class="count-stock">({{ $outStockCount }})</span></label>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
-                <div class="widget-facet facet-fieldset">
-                    <h6 class="facet-title">Availability</h6>
-                    <div class="box-fieldset-item">
-                        <fieldset class="fieldset-item">
-                            <input type="radio" name="availability" class="tf-check" id="inStock">
-                            <label for="inStock">In stock <span class="count-stock">(32)</span></label>
-                        </fieldset>
-                        <fieldset class="fieldset-item">
-                            <input type="radio" name="availability" class="tf-check" id="outStock">
-                            <label for="outStock">Out of stock <span class="count-stock">(2)</span></label>
-                        </fieldset>
-                    </div>
+                <div class="canvas-bottom">
+                    <button id="reset-filter" class="tf-btn btn-reset">Reset Filters</button>
                 </div>
-            </div>
-            <div class="canvas-bottom">
-                <button id="reset-filter" class="tf-btn btn-reset">Reset Filters</button>
             </div>
         </div>
-    </div>
-    <!-- /Filter -->
+        <!-- /Filter -->
 
     <!-- search -->
     <div class="modal fade modal-search" id="search">
@@ -434,6 +424,28 @@
                 // Update the dropdown button text
                 sortButton.textContent = this.textContent.trim();
             });
+        });
+    });
+
+</script>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let minPrice = document.getElementById("price-value-range").getAttribute("data-min");
+        let maxPrice = document.getElementById("price-value-range").getAttribute("data-max");
+
+        // Example using jQuery UI slider (if needed)
+        $("#price-value-range").slider({
+            range: true,
+            min: parseInt(minPrice),
+            max: parseInt(maxPrice),
+            values: [parseInt(minPrice), parseInt(maxPrice)],
+            slide: function (event, ui) {
+                $("#price-min-value").text("₹" + ui.values[0]);
+                $("#price-max-value").text("₹" + ui.values[1]);
+            }
         });
     });
 
