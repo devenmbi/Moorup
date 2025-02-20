@@ -291,7 +291,7 @@
 
 
         <!-- Testimonial -->
-        <section class="flat-spacing bg-surface">
+        <!-- <section class="flat-spacing bg-surface">
             <div class="container">
                 <div class="heading-section text-center wow fadeInUp">
                     <h3 class="heading">Customer Say!</h3>
@@ -339,7 +339,7 @@
                     <div class="sw-pagination-testimonial sw-dots type-circle d-flex justify-content-center"></div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- /Testimonial -->
 
 
