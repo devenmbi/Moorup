@@ -14,10 +14,10 @@
                     @php
                         $footer = \App\Models\Footer::first();
                     @endphp
-                    <div class="footer-address">
+                    <!-- <div class="footer-address">
                         <p>{!! $footer->about !!}</p>
                         <a href="{{ $footer->map_url ?? '#' }}" class="tf-btn-default fw-6" target="_blank">GET DIRECTION<i class="icon-arrowUpRight"></i></a>
-                    </div>
+                    </div> -->
 
                     <ul class="footer-info">
                         <li>
@@ -29,29 +29,31 @@
                             <p>{{ $footer->contact_number ?? '' }}</p>
                         </li>
                     </ul>
-                    <ul class="tf-social-icon">
-                        <li>
-                            <a href="{{ json_decode($footer->media_link ?? '[]')[0] ?? '#' }}" class="social-facebook" aria-label="Facebook">
-                                <i class="icon icon-fb"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ json_decode($footer->media_link ?? '[]')[1] ?? '#' }}" class="social-twiter" aria-label="Twitter">
-                                <i class="icon icon-x"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ json_decode($footer->media_link ?? '[]')[2] ?? '#' }}" class="social-instagram" aria-label="Instagram">
-                                <i class="icon icon-instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ json_decode($footer->media_link ?? '[]')[3] ?? '#' }}" class="social-pinterest" aria-label="Pinterest">
-                                <i class="icon icon-pinterest"></i>
-                            </a>
-                        </li>
-                    </ul>
+                        @php
+                            // Decode the stored media platform and link arrays
+                            $mediaPlatforms = json_decode($footer->media_platform ?? '[]', true);
+                            $mediaLinks = json_decode($footer->media_link ?? '[]', true);
 
+                            // Define icons for known platforms
+                            $socialIcons = [
+                                '1' => ['class' => 'social-facebook', 'icon' => 'icon-fb', 'label' => 'Facebook'],
+                                '2' => ['class' => 'social-twitter', 'icon' => 'icon-x', 'label' => 'Twitter'],
+                                '3' => ['class' => 'social-instagram', 'icon' => 'icon-instagram', 'label' => 'Instagram'],
+                                '4' => ['class' => 'social-pinterest', 'icon' => 'icon-pinterest', 'label' => 'Pinterest']
+                            ];
+                        @endphp
+
+                        <ul class="tf-social-icon">
+                            @foreach($mediaPlatforms as $index => $platformId)
+                                @if(!empty($mediaLinks[$index]) && isset($socialIcons[$platformId])) 
+                                    <li>
+                                        <a href="{{ $mediaLinks[$index] }}" class="{{ $socialIcons[$platformId]['class'] }}" aria-label="{{ $socialIcons[$platformId]['label'] }}">
+                                            <i class="icon {{ $socialIcons[$platformId]['icon'] }}"></i>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
                 </div>
             </div>
             <div class="col-lg-5">
