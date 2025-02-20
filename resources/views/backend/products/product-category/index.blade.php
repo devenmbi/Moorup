@@ -57,8 +57,8 @@
                           <tr>
                             <th>#</th>
                             <th>Product Category</th>
-                            <th>Created By</th>
-                            <th>Created Date</th>
+                            <!-- <th>Created By</th>
+                            <th>Created Date</th> -->
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -67,8 +67,8 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $category->category_name }}</td>
-                                <td>{{ $category->creator_name }}</td>
-                                <td>{{ \Carbon\Carbon::parse($category->created_at)->format('d-m-Y') }}</td>
+                                <!-- <td>{{ $category->creator_name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($category->created_at)->format('d-m-Y') }}</td> -->
                                 <td>
                                     <a href="{{ route('product-category.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                     <form action="{{ route('product-category.destroy', $category->id) }}" method="POST" style="display:inline;">
