@@ -70,19 +70,7 @@
                           </li>
                           <li> <span class="f-light f-14 f-w-500">We have total +5k orders this week.</span></li>
                         </ul>
-                        <ul class="product-costing">
-                          <li class="product-cost">
-                            <div class="product-icon bg-danger-light">
-                              <svg>
-                                <use href="{{ asset('admin/assets/svg/icon-sprite.svg#money-recive') }}"></use>
-                              </svg>
-                            </div>
-                            <div><span class="f-w-500 f-14 mb-0">Refunded</span>
-                              <h2 class="f-w-600">₹20,000</h2>
-                            </div>
-                          </li>
-                          <li> <span class="f-light f-14 f-w-500">We got +66k refund this week.</span></li>
-                        </ul>
+                        
                       </div>
                     </div>
                   </div>
