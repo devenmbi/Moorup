@@ -109,7 +109,7 @@
                 </li>
 
 
-                <li class="sidebar-list {{ request()->routeIs('dresses.index', 'tops.index', 'bottoms.index', 'co-ords.index', 'jackets.index') ? 'active' : '' }}">
+                <!-- <li class="sidebar-list {{ request()->routeIs('dresses.index', 'tops.index', 'bottoms.index', 'co-ords.index', 'jackets.index') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"> </i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
@@ -127,7 +127,7 @@
                     <li><a href="{{ route('co-ords.index') }}" class="{{ request()->routeIs('co-ords.index') ? 'active' : '' }}">Co-ords</a></li>
                     <li><a href="{{ route('jackets.index') }}" class="{{ request()->routeIs('jackets.index') ? 'active' : '' }}">Blazers/Jackets</a></li>
                   </ul>
-                </li>
+                </li> -->
 
 
                 <li class="sidebar-list {{ request()->routeIs('seo-tags.index') ? 'active' : '' }}">
