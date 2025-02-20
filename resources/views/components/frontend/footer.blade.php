@@ -7,27 +7,32 @@
             <div class="col-lg-3">
                 <div class="footer-infor">
                     <div class="footer-logo">
-                        <a href="#">
+                        <a href="{{ route('frontend.index') }}">
                             <img src="{{ asset('frontend/assets/images/logo/logo.webp') }}" width="144px" height="26px" alt="Murupp Logo">
                         </a>
                     </div>
                     @php
                         $footer = \App\Models\Footer::first();
                     @endphp
-                    <!-- <div class="footer-address">
+                    <div class="footer-address">
                         <p>{!! $footer->about !!}</p>
-                        <a href="{{ $footer->map_url ?? '#' }}" class="tf-btn-default fw-6" target="_blank">GET DIRECTION<i class="icon-arrowUpRight"></i></a>
-                    </div> -->
+                        <!-- <a href="{{ $footer->map_url ?? '#' }}" class="tf-btn-default fw-6" target="_blank">GET DIRECTION<i class="icon-arrowUpRight"></i></a> -->
+                    </div>
 
                     <ul class="footer-info">
-                        <li>
-                            <i class="icon-mail"></i>
-                            <p>{{ $footer->email ?? '' }}</p>
-                        </li>
-                        <li>
-                            <i class="icon-phone"></i>
-                            <p>{{ $footer->contact_number ?? '' }}</p>
-                        </li>
+                    <li>
+                        <i class="icon-mail"></i>
+                        <p>
+                            <a href="mailto:{{ $footer->email ?? '' }}">{{ $footer->email ?? '' }}</a>
+                        </p>
+                    </li>
+                    <li>
+                        <i class="icon-phone"></i>
+                        <p>
+                            <a href="tel:+91{{ $footer->contact_number ?? '' }}">+91 {{ $footer->contact_number ?? '' }}</a>
+                        </p>
+                    </li>
+
                     </ul>
                         @php
                             // Decode the stored media platform and link arrays
@@ -68,28 +73,13 @@
                                     <a href="#" class="footer-menu_item">About Us</a>
                                 </li>
                                 <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">New Collection</a>
-                                </li>
-                                <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Shop</a>
-                                </li>
-                                <li class="text-caption-1">
                                     <a href="#" class="footer-menu_item">Contact us</a>
                                 </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="footer-col-block">
-                        <div class="footer-heading text-button footer-heading-mobile">
-                            Customer Services
-                        </div>
-                        <div class="tf-collapse-content">
-                            <ul class="footer-menu-list">
                                 <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Shipping</a>
+                                    <a href="#" class="footer-menu_item">Shipping & Delivery</a>
                                 </li>
                                 <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Return & Refund</a>
+                                    <a href="#" class="footer-menu_item">Return & Refunds</a>
                                 </li>
                                 <li class="text-caption-1">
                                     <a href="#" class="footer-menu_item">Privacy Policy</a>
@@ -97,11 +87,29 @@
                                 <li class="text-caption-1">
                                     <a href="#" class="footer-menu_item">Terms & Conditions</a>
                                 </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-col-block">
+                        <div class="footer-heading text-button footer-heading-mobile">
+                            Category
+                        </div>
+                        <div class="tf-collapse-content">
+                            <ul class="footer-menu-list">
                                 <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Orders FAQs</a>
+                                    <a href="#" class="footer-menu_item">Jackets/Blazers</a>
                                 </li>
                                 <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">My Wishlist</a>
+                                    <a href="#" class="footer-menu_item">Dresses</a>
+                                </li>
+                                <li class="text-caption-1">
+                                    <a href="#" class="footer-menu_item">Tops</a>
+                                </li>
+                                <li class="text-caption-1">
+                                    <a href="#" class="footer-menu_item">Bottoms</a>
+                                </li>
+                                <li class="text-caption-1">
+                                    <a href="#" class="footer-menu_item">Co-ords</a>
                                 </li>
                             </ul>
                         </div>
@@ -115,7 +123,7 @@
                     </div>
                     <div class="tf-collapse-content">
                         <div class="footer-newsletter">
-                            <p class="text-caption-1">Sign up for our newsletter and get 10% off your first purchase</p>
+                            <p class="text-caption-1">Sign up for our newsletter and get your first purchase</p>
                             <form id="subscribe-form" action="#" class="form-newsletter subscribe-form" method="post" accept-charset="utf-8" data-mailchimp="true">
                                 <div id="subscribe-content" class="subscribe-content">
                                     <fieldset class="email">
@@ -136,9 +144,9 @@
                                         <i class="icon-check"></i>
                                     </div>
                                 </div>
-                                <label class="text-caption-1" for="footer-Form_agree">
+                                <!-- <label class="text-caption-1" for="footer-Form_agree">
                                     By clicking subscribe, you agree to the <a class="fw-6 link" href="#">Terms of Service</a> and <a class="fw-6 link" href="#">Privacy Policy</a>.
-                                </label>
+                                </label> -->
                             </div>
                         </div>
                     </div>
@@ -189,5 +197,5 @@
         <!-- /Footer -->
 
         <a href="https://web.whatsapp.com/" class="float" target="_blank">
-<i class="fab fa-whatsapp my-float"></i>
-</a>
+            <i class="fab fa-whatsapp my-float"></i>
+        </a>

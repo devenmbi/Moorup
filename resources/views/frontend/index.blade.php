@@ -69,7 +69,7 @@
         <!-- /Slider -->
 
         <!-- Marquee -->
-        <section class="tf-marquee bg-surface">
+        <!-- <section class="tf-marquee bg-surface">
             <div class="marquee-wrapper">
                 <div class="initial-child-container">
                     <div class="marquee-child-item">
@@ -84,7 +84,6 @@
                     <div class="marquee-child-item">
                         <span class="icon icon-lightning-line"></span>
                     </div>
-                    <!-- 2 -->
                     <div class="marquee-child-item">
                         <p class="text-btn-uppercase">Free shipping on all orders over $20.00</p>
                     </div>
@@ -97,7 +96,6 @@
                     <div class="marquee-child-item">
                         <span class="icon icon-lightning-line"></span>
                     </div>
-                    <!-- 3 -->
                     <div class="marquee-child-item">
                         <p class="text-btn-uppercase">Free shipping on all orders over $20.00</p>
                     </div>
@@ -110,7 +108,6 @@
                     <div class="marquee-child-item">
                         <span class="icon icon-lightning-line"></span>
                     </div>
-                    <!-- 4 -->
                     <div class="marquee-child-item">
                         <p class="text-btn-uppercase">Free shipping on all orders over $20.00</p>
                     </div>
@@ -123,7 +120,6 @@
                     <div class="marquee-child-item">
                         <span class="icon icon-lightning-line"></span>
                     </div>
-                    <!-- 5 -->
                     <div class="marquee-child-item">
                         <p class="text-btn-uppercase">Free shipping on all orders over $20.00</p>
                     </div>
@@ -136,7 +132,6 @@
                     <div class="marquee-child-item">
                         <span class="icon icon-lightning-line"></span>
                     </div>
-                    <!-- 6 -->
                     <div class="marquee-child-item">
                         <p class="text-btn-uppercase">Free shipping on all orders over $20.00</p>
                     </div>
@@ -151,7 +146,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- /Marquee -->
 
 
@@ -172,20 +167,20 @@
                                         <img class="lazyload img-product" data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" alt="image-product">
                                         <img class="lazyload img-hover" data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" alt="image-product">
                                     </a>
-                                    <div class="variant-wrap size-list">
+                                    <!-- <div class="variant-wrap size-list">
                                         <ul class="variant-box">
                                             <li class="size-item">{{ $product->product_size }}</li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                     <div class="list-product-btn">
                                         <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
                                             <span class="icon icon-heart"></span>
                                             <span class="tooltip">Wishlist</span>
                                         </a>
                                     </div>
-                                    <div class="list-btn-main">
+                                    <!-- <div class="list-btn-main">
                                         <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-product-info">
                                     <a href="#" class="title link">{{ $product->product_name }}</a>
@@ -271,14 +266,13 @@
                         @foreach ($productPolicies as $policy)
                             <div class="swiper-slide">
                                 <div class="tf-icon-box style-2">
-                                    <!-- Displaying Policy Image instead of Static Icon -->
                                     @if($policy->policy_image)
                                         <div class="icon-box">
                                             <img src="{{ asset('/murupp/home/product-policies/' . $policy->policy_image) }}" alt="{{ $policy->heading }}" class="img-fluid">
                                         </div>
                                     @else
                                         <div class="icon-box">
-                                            <span class="icon icon-return"></span> <!-- Fallback icon in case no image is set -->
+                                            <span class="icon icon-return"></span>
                                         </div>
                                     @endif
                                     <div class="content">
