@@ -31,13 +31,13 @@
         <img src="{{ asset('frontend/assets/images/logo/logo.webp') }}" alt="Murupp" class="logo">
     </div>
 
-    <p>Special Request Submission for <span style="font-size: 1.5em; font-weight: bold;">{{ $emailData['product_name'] ?? 'Product' }}</span></p>
+    <p>Special Request Submission for <span style="font-size: 1.1em; font-weight: bold;">{{ $emailData['product_name'] ?? 'Product' }}</span></p>
     <p><strong>Name:</strong> {{ $emailData['name'] }}</p>
     <p><strong>Email:</strong> {{ $emailData['email'] }}</p>
     <p><strong>Phone:</strong> {{ $emailData['phone'] }}</p>
     <p><strong>Subject:</strong> {{ $emailData['subject'] }}</p>
     <p><strong>Message:</strong> {{ nl2br(e($emailData['message'])) }}</p>
-
+    <br>
     <hr>
     <!-- Footer Section -->
     <div class="footer">
