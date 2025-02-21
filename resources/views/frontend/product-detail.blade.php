@@ -124,6 +124,37 @@
 
                                     <br>
 
+                                    @if (!empty($productprints))
+                                    <div class="variant-picker-item">
+                                        <div class="variant-picker-label mb_12">
+                                            Print Options:
+                                            @if (!empty($productprints[0]))
+                                                <span class="text-title">{{ $productprints[0] }}</span> 
+                                            @endif
+                                        </div>
+                                        <div class="variant-picker-values">
+                                            @foreach ($productprints as $index => $print)
+                                                @php
+                                                    $printSlug = Str::slug($print); // Convert print name to a slug format
+                                                @endphp
+                                                <input id="values-{{ $printSlug }}" type="radio" name="color1" {{ $loop->first ? 'checked' : '' }}>
+                                                <label class="style-image hover-tooltip tooltip-bot color-btn" 
+                                                    for="values-{{ $printSlug }}" 
+                                                    data-value="{{ $print }}" 
+                                                    data-color="{{ $printSlug }}">
+                                                    <img class="lazyload" data-src="{{ asset('/murupp/product/prints' . $print . '.jpg') }}" 
+                                                        src="{{ asset('/murupp/product/prints' . $print . '.jpg') }}" 
+                                                        alt="{{ $print }}">
+                                                    <span class="tooltip">{{ $print }}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+
+
+                                    <br>
+
                                     @if(!empty($productSizes) && count($productSizes) > 0)
                                         <div class="variant-picker-item">
                                             <div class="d-flex justify-content-between mb_12">
@@ -146,7 +177,7 @@
                                                 @endforeach
                                             </div>
                                             <p class="mt-3">
-                                                For customized sizes, please <a class="contact-link" href="">contact us.</a>
+                                                Crafted for you, <a class="contact-link" href="">contact us </a> for custom sizing
                                             </p>
                                         </div>
                                     @endif

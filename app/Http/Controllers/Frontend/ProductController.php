@@ -52,8 +52,11 @@ class ProductController extends Controller
 
         $productColor = json_decode($product->colors, true) ?? [];
 
+
+        $productprints = json_decode($product->product_prints, true) ?? [];
+
         return view('frontend.product-detail', compact(
-            'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts', 'productSizes','productColor'
+            'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts', 'productSizes','productColor','productprints'
         ));
     }
             
