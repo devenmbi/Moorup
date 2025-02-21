@@ -138,17 +138,17 @@
                                 </div>
                                 <div id="subscribe-msg" class="subscribe-msg"></div>
                             </form>
-                            <div class="tf-cart-checkbox">
+                            <!-- <div class="tf-cart-checkbox">
                                 <div class="tf-checkbox-wrapp">
                                     <input class="" type="checkbox" id="footer-Form_agree" name="agree_checkbox">
                                     <div>
                                         <i class="icon-check"></i>
                                     </div>
                                 </div>
-                                <!-- <label class="text-caption-1" for="footer-Form_agree">
+                                <label class="text-caption-1" for="footer-Form_agree">
                                     By clicking subscribe, you agree to the <a class="fw-6 link" href="#">Terms of Service</a> and <a class="fw-6 link" href="#">Privacy Policy</a>.
-                                </label> -->
-                            </div>
+                                </label>
+                            </div> -->
                         </div>
                     </div>
                 </div>

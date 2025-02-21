@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\ProductDetails;
 use App\Models\ProductCategory;
 use App\Models\DressesDetails;
@@ -81,7 +84,36 @@ class ProductController extends Controller
         ));
     }
             
+    public function send_contact(Request $request)
+    {
+
+         $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email',
+            'phone'   => 'required|numeric|digits_between:10,15',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // Email data
+        $emailData = [
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'product_name' => $request->product_name ?? 'N/A',
+        ];
+
+        Mail::send('frontend.contact-mail', ['emailData' => $emailData], function ($message) use ($request, $emailData) {
+            $subject = "Special Request for " . ($emailData['product_name'] ?? 'Product');
+            $message->to('riddhi@matrixbricks.com')
+                    ->subject($subject);
+        });
     
+        
+        return back()->with('success', 'Your message has been sent successfully!');
+    }
     
     
 

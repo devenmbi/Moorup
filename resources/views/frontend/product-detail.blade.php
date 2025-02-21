@@ -170,7 +170,7 @@
                                                 @endforeach
                                             </div>
                                             <p class="mt-3">
-                                                Crafted for you, <a class="contact-link" href="">contact us </a> for custom sizing
+                                                Crafted for you, <a class="contact-link" href="#ask_question" data-bs-toggle="modal">contact us </a> for custom sizing
                                             </p>
                                         </div>
                                     @endif
@@ -469,6 +469,75 @@
                 </div>
             </section>
         @endif
+
+
+
+        <!-- modal ask_question -->
+        <div class="modal modalCentered fade tf-product-modal modal-part-content" id="ask_question">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="header">
+                        <div class="demo-title">Get in Touch</div>
+                            <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
+                        </div>
+                        
+                        <form action="{{ route('contact.send') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <input type="text" placeholder="Name *" name="name" value="{{ old('name') }}" required>
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <input type="email" placeholder="Email *" name="email" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <input type="number" placeholder="Phone number" name="phone" value="{{ old('phone') }}" required>
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <input type="text" placeholder="Subject" name="subject" value="{{ old('subject') }}" required>
+                                        @error('subject')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <textarea name="message" rows="4" placeholder="Message" required>{{ old('message') }}</textarea>
+                                        @error('message')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn-style-2 w-100"><span class="text">Send</span></button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+        <!-- /modal ask_question -->
 
 
 
