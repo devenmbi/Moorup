@@ -49,15 +49,24 @@
                                         </ul>
                                     </div>
                                 </li>
+                                @php
+                                    use Illuminate\Support\Facades\DB;
+                                    $categories = DB::table('master_product_category')->whereNull('deleted_by')->orderBy('id','asc')->get();
+                                @endphp
+
                                 <li class="menu-item position-relative">
-                                    <a href="#" class="item-link" aria-expanded="false">Shop by Category<i class="icon icon-arrow-down"></i></a>
+                                    <a href="#" class="item-link" aria-expanded="false">
+                                        Shop by Category <i class="icon icon-arrow-down"></i>
+                                    </a>
                                     <div class="sub-menu submenu-default" aria-hidden="true">
                                         <ul class="menu-list">
-                                            <li><a href="{{ route('frontend.dresses') }}" class="menu-link-text">Dresses</a></li>
-                                            <li><a href="{{ route('frontend.tops') }}" class="menu-link-text">Tops</a></li>
-                                            <li><a href="{{ route('frontend.bottoms') }}" class="menu-link-text">Bottoms</a></li>
-                                            <li><a href="{{ route('frontend.coords') }}" class="menu-link-text">Co-ords</a></li>
-                                            <li><a href="{{ route('frontend.blazers') }}" class="menu-link-text">Blazers/Jackets</a></li>
+                                            @foreach ($categories as $category)
+                                                <li>
+                                                    <a href="{{ route('product.category', ['slug' => $category->slug]) }}" class="menu-link-text">
+                                                        {{ $category->category_name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </li>

@@ -2484,7 +2484,6 @@ header {
   transition: 0.2s ease-out;
   z-index: 888;
   background-color: var(--white);
-  box-shadow: 0 3px 6px rgb(0 0 0 / 0%), 0 3px 6px rgb(0 0 0 / 6%);
 }
 header.header-bg {
   background-color: var(--white);
@@ -4326,7 +4325,7 @@ form .cols > * {
 .tf-select select {
   width: 100%;
   padding: 7px 16px;
-  border: 1px solid var(--line);
+  border: 2px solid var(--line);
   border-radius: 999px;
   -webkit-appearance: none;
   appearance: none;
@@ -5206,10 +5205,10 @@ form .cols > * {
 }
 
 .tf-product-modal .modal-dialog {
-  max-width: min(510px, 90vw);
+  max-width: min(625px, 90vw);
 }
 .tf-product-modal .modal-dialog .modal-content {
-  padding: 40px 40px;
+  padding: 38px 36px 40px;
   margin-left: 0;
   margin-right: 0;
   border: 0;
@@ -5307,7 +5306,7 @@ form .cols > * {
   height: 50px;
 }
 #ask_question textarea {
-  height: 86px;
+  height: 176px;
 }
 #ask_question button {
   border-radius: 4px;
@@ -7051,15 +7050,7 @@ form .cols > * {
   opacity: 1;
   visibility: visible;
 }
-  .size-box .tf-select select {
-    
-    min-width: 100px;
-    border-radius: 8px;
-    padding: 5px 12px;
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 600;
-  }
+
 /*------------ collection ---------------- */
 .collection-default {
   display: grid;
@@ -8616,8 +8607,8 @@ form .cols > * {
   display: flex;
   justify-content: space-between;
   background-color: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
   overflow: hidden;
 }
 .wg-quantity input {
@@ -8669,7 +8660,7 @@ form .cols > * {
 }
 .variant-picker-item .variant-picker-values {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -8803,8 +8794,8 @@ form .cols > * {
   border: 2px solid transparent;
   border-radius: 8px;
   padding: 4px;
-  width: 50px;
-  height: 50px;
+  width: 72px;
+  height: 92px;
 }
 .variant-picker-item .variant-picker-values label.style-image img {
   border-radius: 4px;
@@ -11337,7 +11328,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 .tf-cart-item .tf-cart-item_product .cart-info {
   display: grid;
-  gap: 4px;
+  gap: 12px;
 }
 .tf-cart-item .tf-cart-item_product .variant-box {
   display: grid;
@@ -11357,7 +11348,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   font-size: 16px;
 }
 .tf-cart-item .wg-quantity {
-  width: 85px;
+  width: 120px;
   height: 40px;
 }
 .tf-cart-item .wg-quantity input {
@@ -11389,10 +11380,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   background-color: var(--primary);
-  border: 1px solid var(--primary);
+  border: 1px solid var(--critical);
   border-radius: 1000px;
   font-size: 8px;
-  color: var(--primary);
+  color: var(--critical);
   background-color: var(--white);
   cursor: pointer;
 }
@@ -11594,8 +11585,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   gap: 4px;
   padding: 11px 16px;
   border-radius: 8px;
-  background-color: #dad3cb52;
-  color: #000000;
+  background-color: var(--surface);
+  color: var(--secondary-2);
   margin-bottom: 12px;
 }
 .tf-page-checkout .title-login a {
@@ -11706,7 +11697,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 .payment-box .payment-choose-card.active {
   border-color: transparent;
-  background-color: #dad3cb52;
+  background-color: var(--surface);
 }
 .payment-box .payment-choose-card.active .payment-header {
   padding-top: 20px;
@@ -11733,7 +11724,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .sidebar-checkout-content .sec-discount,
 .sidebar-checkout-content .list-product,
 .sidebar-checkout-content .title {
-  margin-bottom: 20px;
+  margin-bottom: 32px;
 }
 .sidebar-checkout-content .list-product .item-product {
   padding-bottom: 20px;
@@ -11742,8 +11733,6 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 .sidebar-checkout-content .list-product .item-product:last-child {
   margin-bottom: 0;
-  border-bottom: none;
-  padding-bottom: 0px;
 }
 .sidebar-checkout-content .item-product {
   display: flex;
@@ -11812,7 +11801,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   padding: 12px 20px;
 }
 .canvas-filter .canvas-bottom .tf-btn {
-  /* width: 100%; */
+  width: 100%;
   font-size: 12px;
   line-height: 20px;
   text-transform: uppercase;
@@ -11826,7 +11815,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 .heading-section h3 {
   margin-bottom: 12px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 .heading-section p {
   color: #64666C;
@@ -11842,16 +11831,14 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 .page-title {
-  padding: 20px 0 20px;
-  background-image: none !important;!i;!;
+  padding: 60px 0 80px;
+  background: var(--gradient);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-bottom: 1px solid #00000012;
 }
 .page-title .heading {
   margin-bottom: 12px;
-  display: none;
 }
 
 ul.breadcrumbs {
@@ -13075,7 +13062,7 @@ ul.list-text.type-number {
 }
 
 .sidebar-account {
-  background-color: #dad3cb52;
+  background-color: var(--surface);
   border-radius: 20px;
   padding: 40px 32px;
 }
@@ -13170,7 +13157,7 @@ ul.list-text.type-number {
 }
 .account-orders table thead tr {
   border: 1px solid var(--line);
-  background-color: #dad3cb52;
+  background-color: var(--surface);
 }
 .account-orders table tbody {
   border: 1px solid var(--line);
@@ -13259,8 +13246,8 @@ ul.list-text.type-number {
   gap: 12px;
 }
 .wd-form-order .order-head .img-product {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border: 1px solid var(--line);
   border-radius: 3px;
 }
@@ -13751,7 +13738,7 @@ ul.list-text.type-number {
   }
 
   .canvas-filter .canvas-bottom .tf-btn {
-    padding: 12px 20px;
+    padding: 12px;
   }
 
   .image-select.type-currencies > .dropdown-menu, .image-select.type-languages > .dropdown-menu {
@@ -13763,7 +13750,7 @@ ul.list-text.type-number {
   }
 
   .page-title {
-    padding: 20px 0 20px;
+    padding: 40px 0 50px;
   }
 
   .breadcrumbs-default {
@@ -15387,18 +15374,7 @@ button .icon {
   footer.has-pb {
     padding-bottom: 197px;
   }
-  .size-box .tf-select select{
-        min-width: 65px;
-        border-radius: 8px;
-        padding: 5px 6px;
-            border: 2px solid #e9e9e999;
-  }
-  .text-button {
-    font-size: 15px;
-  }
-.page-title{
-  padding: 10px 0 10px;
-}
+
   .loobook-product:not(.style-row) .img-style {
     height: 120px;
   }
@@ -15879,7 +15855,7 @@ button .icon {
 .card-product .size-list,
 .card-product .wishlist,
 .card-product .compare {
-    /* display: none; */
+    display: none;
   }
 
   .flat-countdown-banner .banner-img {
@@ -15921,7 +15897,7 @@ button .icon {
     display: none;
   }
   .tf-table-page-cart .tf-cart-item {
-    padding-left: 90px;
+    padding-left: 98px;
     min-height: 140px;
     display: block;
     position: relative;
@@ -15930,12 +15906,12 @@ button .icon {
     margin-bottom: 15px;
   }
   .tf-table-page-cart .tf-cart-item td {
-    /* display: flex; */
+    display: flex;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 7px 6px;
-    /* margin: 10px; */
+    padding: 10px 0;
+    margin: 0;
   }
   .tf-table-page-cart .tf-cart-item td:not(:last-child) {
     border-bottom: 1px dashed var(--line);
@@ -16045,7 +16021,7 @@ button .icon {
     max-width: calc(100vw - 30px);
     margin-left: 15px;
     margin-right: 15px;
-    align-items: center;
+    align-items: flex-end;
   }
   .tf-product-modal .modal-dialog .modal-content {
     padding: 25px 15px;
@@ -16135,28 +16111,4 @@ button .icon {
 }
 .contact-link:hover{
   color:  var(--primary);
-}
-.variant-picker-values img {
-    border-radius: 50%;
-  }
-
-/* Hide on desktop, show only on mobile (below 576px) */
-.mob-sec {
-    display: flex !important;
-    align-items: center;
-    width: 100%;
-}
-
-/* Ensure right-aligned price */
-.mob-sec .cart-price {
-    margin-left: 74px;
-    text-align: right;
-    white-space: nowrap;
-}
-
-/* Hide on larger screens (desktop view) */
-@media (min-width: 576px) {
-    .mob-sec {
-        display: none !important;
-    }
 }

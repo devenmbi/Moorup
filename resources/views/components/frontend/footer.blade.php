@@ -90,30 +90,31 @@
                             </ul>
                         </div>
                     </div>
+                    @php
+                        use Illuminate\Support\Facades\DB;
+                        $categories = DB::table('master_product_category')
+                            ->whereNull('deleted_by')
+                            ->orderBy('id', 'asc')
+                            ->get();
+                    @endphp
+
                     <div class="footer-col-block">
                         <div class="footer-heading text-button footer-heading-mobile">
                             Category
                         </div>
                         <div class="tf-collapse-content">
                             <ul class="footer-menu-list">
-                                <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Jackets/Blazers</a>
-                                </li>
-                                <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Dresses</a>
-                                </li>
-                                <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Tops</a>
-                                </li>
-                                <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Bottoms</a>
-                                </li>
-                                <li class="text-caption-1">
-                                    <a href="#" class="footer-menu_item">Co-ords</a>
-                                </li>
+                                @foreach ($categories as $category)
+                                    <li class="text-caption-1">
+                                        <a href="{{ route('product.category', ['slug' => $category->slug]) }}" class="footer-menu_item">
+                                            {{ $category->category_name }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-lg-4">
