@@ -38,9 +38,6 @@
         </div>
         <!-- /page-title -->
 
-
-
-
         <!-- Section product -->
         <section class="flat-spacing">
             <div class="container">
@@ -224,6 +221,7 @@
                     </div>
                 </div>
                 <div class="canvas-bottom">
+                    <button class="tf-btn  btn-reset mb-2">Apply Filters</button>
                     <button id="reset-filter" class="tf-btn btn-reset">Reset Filters</button>
                 </div>
             </div>

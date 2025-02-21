@@ -179,6 +179,18 @@
                     <span class="icon-close icon-close-popup" data-bs-dismiss="offcanvas" aria-label="Close"></span>
                 </div>
                 <div class="canvas-body">
+
+                    <div class="widget-facet facet-categories">
+                        <h6 class="facet-title">Shop by Category</h6>
+                        <ul class="facet-content">
+                            <li><a href="#" class="categories-item active">Dresses <span class="count-cate">(112)</span></a></li>
+                            <li><a href="#" class="categories-item">Tops <span class="count-cate">(32)</span> </a></li>
+                            <li><a href="#" class="categories-item">Bottoms <span class="count-cate">(42)</span></a></li>
+                            <li><a href="#" class="categories-item">Co-Ords <span class="count-cate">(13)</span></a></li>
+                            <li><a href="#" class="categories-item">Blazers/Jackets <span class="count-cate">(52)</span></a></li>
+                        </ul>
+                    </div>
+
                     <!-- Price Filter -->
                     <div class="widget-facet facet-price">
                         <h6 class="facet-title">Price</h6>
@@ -221,6 +233,7 @@
                     </div>
                 </div>
                 <div class="canvas-bottom">
+                    <button class="tf-btn  btn-reset mb-2">Apply Filters</button>
                     <button id="reset-filter" class="tf-btn btn-reset">Reset Filters</button>
                 </div>
             </div>
