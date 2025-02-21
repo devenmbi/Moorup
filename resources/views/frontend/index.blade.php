@@ -155,7 +155,19 @@
             <div class="container">
                 <div class="heading-section-2 wow fadeInUp">
                     <h3 class="heading">New Arrivals</h3>
-                    <a href="#" class="btn-line">View All Collection</a>
+                    @php
+                        $collection = $newArrivals->firstWhere('collection_slug', '!=', null);
+                    @endphp
+
+                    @if($collection)
+                        <a href="{{ route('collection.view', ['slug' => $collection->collection_slug]) }}" class="btn-line">
+                            View All Collection
+                        </a>
+                    @else
+                        <a href="#" class="btn-line">View All Collection</a>
+                    @endif
+
+
                 </div>
                 <div dir="ltr" class="swiper tf-sw-recent" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-md="1" data-pagination-lg="1">
                     <div class="swiper-wrapper">
@@ -163,7 +175,7 @@
                         <div class="swiper-slide">
                             <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
                                 <div class="card-product-wrapper">
-                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="product-img">
+                                    <a href="{{ route('product.show', ['slug' => $product->product_slug]) }}" class="product-img">
                                         <img class="lazyload img-product" 
                                             data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" 
                                             src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" 
@@ -186,7 +198,7 @@
                                 </div>
 
                                 <div class="card-product-info">
-                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title link">
+                                    <a href="{{ route('product.show', ['slug' => $product->product_slug]) }}" class="title link">
                                         {{ $product->product_name }}
                                     </a>
                                     <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{ $product->product_price }} INR</span>
