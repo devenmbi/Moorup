@@ -57,8 +57,8 @@
                           <tr>
                             <th>#</th>
                             <th>Collections Name</th>
-                            <th>Created By</th>
-                            <th>Created Date</th>
+                            <!-- <th>Created By</th>
+                            <th>Created Date</th> -->
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -67,8 +67,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $collection->collection_name }}</td>
-                                <td>{{ $collection->creator_name }}</td> 
-                                <td>{{ \Carbon\Carbon::parse($collection->created_at)->format('d-m-Y') }}</td>
+                                <!-- <td>{{ $collection->creator_name }}</td> 
+                                <td>{{ \Carbon\Carbon::parse($collection->created_at)->format('d-m-Y') }}</td> -->
                                 <td>
                                     <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline;">
