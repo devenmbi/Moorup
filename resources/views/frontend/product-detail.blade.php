@@ -12,12 +12,11 @@
 
 
         <!-- page-title -->
-        <div class="page-title" style="background-image: url('{{ asset('frontend/assets/images/bg/page-title.webp') }}');">
-            <div class="container-full">
+        <div class="page-title" style="background-image: url(images/bg/page-title.webp);">
+            <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <h3 class="heading text-center">{{ $category->category_name }}</h3>
-                        <ul class="breadcrumbs d-flex align-items-center justify-content-center">
+                    <div class="col-12">    
+                        <ul class="breadcrumbs d-flex align-items-center">
                             <li>
                                 <a class="link" href="{{ route('frontend.index') }}">Home</a>
                             </li>
@@ -439,13 +438,13 @@
                                                 ->toArray();
                                         @endphp
 
-                                        @if(!empty($productSizes))
+                                        <!-- @if(!empty($productSizes))
                                             <ul class="variant-box">
                                                 @foreach($productSizes as $size)
                                                     <li class="size-item">{{ $size }}</li>
                                                 @endforeach
                                             </ul>
-                                        @endif
+                                        @endif -->
 
                                         </div>
                                         <div class="list-product-btn">
@@ -454,9 +453,9 @@
                                                 <span class="tooltip">Wishlist</span>
                                             </a>
                                         </div>
-                                        <div class="list-btn-main">
+                                        <!-- <div class="list-btn-main">
                                             <a href="{{ route('cart.add', ['id' => $related->id]) }}" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="card-product-info">
                                         <a href="{{ route('product.show', $related->slug) }}" class="title link">{{ $related->product_name }}</a>
