@@ -31,6 +31,7 @@ class ProductDetails extends Model
         'collection_name',
         'thumbnail_image',
         'gallery_images',
+        'print_name',
         'product_prints',
         'created_at',
         'created_by',

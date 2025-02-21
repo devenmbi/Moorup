@@ -18,6 +18,7 @@ use App\Models\FabricsComposition;
 use App\Models\ProductFabrics;
 use App\Models\MasterCollections;
 use App\Models\ProductSizes;
+use App\Models\ProductPrints;
 
 
 class ProductDetailsController extends Controller
@@ -45,7 +46,8 @@ class ProductDetailsController extends Controller
         $product_fabric = ProductFabrics::whereNull('deleted_by')->get();
         $collections = MasterCollections::whereNull('deleted_by')->get();
         $product_sizes = ProductSizes::whereNull('deleted_at')->pluck('size', 'id');
-        return view('backend.products.product-details.create', compact('categories','fabric_composition','product_fabric','collections','product_sizes'));
+        $product_prints = ProductPrints::whereNull('deleted_by')->pluck('print_name', 'id'); 
+        return view('backend.products.product-details.create', compact('categories','fabric_composition','product_fabric','collections','product_sizes','product_prints'));
     }
 
 
@@ -69,6 +71,8 @@ class ProductDetailsController extends Controller
             'thumbnail_image.*' => 'max:3072', 
             'gallery_image' => 'nullable|array',
             'gallery_image.*' => 'max:3072',
+            'print_name' => 'nullable|array', 
+            'print_name.*' => 'exists:master_product_print,id',
             'print_image.*' => 'nullable|image|max:3072', 
         ], [
             'style_code.required' => 'The product style code is required.',
@@ -88,6 +92,7 @@ class ProductDetailsController extends Controller
             'thumbnail_image.*.max' => 'Each thumbnail image must be less than 3MB.',
             'gallery_image.*.max' => 'Each gallery image must be less than 3MB.',
             'print_image.*.max' => 'Each print image must be less than 3MB.',
+            'print_name.*.exists' => 'Selected print name is invalid.',
         ]);
 
         $slug = Str::slug($request->product_name, '-');
@@ -108,6 +113,7 @@ class ProductDetailsController extends Controller
         $product->return = $request->return;
         $product->sizes = json_encode($request->product_size);
         $product->colors = json_encode($colors);
+        $product->print_name = json_encode($request->print_name);
         $product->slug = $slug;
         $product->created_at = Carbon::now();
         $product->created_by = Auth::user()->id;
@@ -176,8 +182,21 @@ class ProductDetailsController extends Controller
         $selectedColors = json_decode($product_details->colors, true); 
         // dd($selectedColors);
 
-        return view('backend.products.product-details.edit', compact('product_details','categories','fabric_composition','product_fabric','collections','product_sizes','selected_sizes','selectedColors'));
+         // Decode print_name field from product_details
+        $selectedprintname = json_decode($product_details->print_name, true) ?? [];
+
+        $masterPrints = DB::table('master_product_print')
+                        ->whereNull('deleted_by')
+                        ->pluck('print_name', 'id');
+    
+        
+
+        // dd($selectedPrintDetails);
+        return view('backend.products.product-details.edit', compact('product_details','categories','fabric_composition','product_fabric','collections','product_sizes','selected_sizes','selectedColors','masterPrints'));
     }
+
+
+    
 
     public function update(Request $request, $id)
     {
@@ -200,6 +219,9 @@ class ProductDetailsController extends Controller
             'gallery_image' => 'nullable|array',
             'gallery_image.*' => 'max:3072',
             'print_image.*' => 'nullable|image|max:3072', 
+            'print_name' => 'nullable|array', 
+            'print_name.*' => 'exists:master_product_print,id',
+            'print_image.*' => 'nullable|image|max:3072', 
         ], [
             'style_code.required' => 'The product style code is required.',
             'look_name.required' => 'The full look name is required.',
@@ -217,6 +239,8 @@ class ProductDetailsController extends Controller
             'thumbnail_image.*.max' => 'Each thumbnail image must be less than 3MB.',
             'gallery_image.*.max' => 'Each gallery image must be less than 3MB.',
             'print_image.*.max' => 'Each print image must be less than 3MB.',
+            'print_image.*.max' => 'Each print image must be less than 3MB.',
+            'print_name.*.exists' => 'Selected print name is invalid.',
         ]);
         
         $product = ProductDetails::findOrFail($id);
@@ -224,6 +248,7 @@ class ProductDetailsController extends Controller
         $colors = $request->colors ?? [];
 
         $product->colors = json_encode($colors);
+        $product->print_name = json_encode($request->print_name);
         $product->style_code = $request->style_code;
         $product->look_name = $request->look_name;
         $product->product_name = $request->product_name;

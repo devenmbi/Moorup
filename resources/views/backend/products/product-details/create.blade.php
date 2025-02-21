@@ -256,6 +256,7 @@
                                         <table class="table table-bordered p-3" id="printsTable" style="border: 2px solid #dee2e6;">
                                             <thead>
                                                 <tr>
+                                                    <th>Print Name</th>
                                                     <th>Uploaded Print Image:</th>
                                                     <th>Preview</th>
                                                     <th>Action</th>
@@ -263,6 +264,14 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <td>
+                                                        <select name="print_name[]" id="print_name_0" class="form-control">
+                                                            <option value="">Select Print Name</option>
+                                                            @foreach($product_prints as $id => $print_name)
+                                                                <option value="{{ $id }}">{{ $print_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
                                                     <td>
                                                         <input type="file" onchange="previewPrintImage(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_0" class="form-control" placeholder="Upload Print Image">
                                                         <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
@@ -493,6 +502,14 @@
             const newRow = document.createElement("tr");
 
             newRow.innerHTML = `
+                <td>
+                    <select name="print_name[]" id="print_name_0" class="form-control">
+                        <option value="">Select Print Name</option>
+                        @foreach($product_prints as $id => $print_name)
+                            <option value="{{ $id }}">{{ $print_name }}</option>
+                        @endforeach
+                    </select>
+                </td>
                 <td>
                     <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control" placeholder="Upload Print Image" required>
                     <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>

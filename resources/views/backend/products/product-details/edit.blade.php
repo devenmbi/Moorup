@@ -298,6 +298,7 @@
                                         <table class="table table-bordered p-3" id="printsTable" style="border: 2px solid #dee2e6;">
                                             <thead>
                                                 <tr>
+                                                    <th>Print Name</th>
                                                     <th>Uploaded Print Image:</th>
                                                     <th>Preview</th>
                                                     <th>Action</th>
@@ -308,6 +309,19 @@
                                                 @if(isset($product_details->product_prints) && $productPrints = json_decode($product_details->product_prints, true))
                                                     @foreach($productPrints as $key => $print)
                                                     <tr>
+                                                    <td>
+                                                            <!-- Print Name Dropdown -->
+                                                            <select name="print_name[]" class="form-control">
+                                                                <option value="">Select Print Name</option>
+                                                                @foreach($masterPrints as $id => $name)
+                                                                    <option value="{{ $id }}" 
+                                                                        {{ isset($selectedPrintNames[$id]) ? 'selected' : '' }}>
+                                                                        {{ $name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+
                                                         <td>
                                                             <input type="file" onchange="previewPrintImage(this, {{ $key }})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_{{ $key }}" class="form-control">
                                                             <input type="hidden" name="existing_prints[]" value="{{ $print }}">
@@ -499,7 +513,18 @@
             const tableBody = document.querySelector("#printsTable tbody");
             const newRow = document.createElement("tr");
 
+            let printOptions = `<option value="">Select Print Name</option>`;
+            @foreach($masterPrints as $id => $name)
+                printOptions += `<option value="{{ $id }}">{{ $name }}</option>`;
+            @endforeach
+
             newRow.innerHTML = `
+                <td>
+                    <!-- Print Name Dropdown -->
+                    <select name="print_name[]" class="form-control">
+                        ${printOptions}
+                    </select>
+                </td>
                 <td>
                     <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control">
                     <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
