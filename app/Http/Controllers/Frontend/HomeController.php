@@ -25,12 +25,16 @@ class HomeController extends Controller
     {
         $banners = BannerDetails::whereNull('deleted_at')->orderBy('created_at', 'asc')->get();
         $newArrivals = NewArrival::whereNull('new_arrivals.deleted_at')
-                                ->leftJoin('product_details', 'product_details.id', '=', 'new_arrivals.product_name') // Match product ID
-                                ->select('new_arrivals.*', 'product_details.product_name as product_name', 'product_details.slug')
+                                ->leftJoin('product_details', 'product_details.id', '=', 'new_arrivals.product_name')
+                                ->select(
+                                    'new_arrivals.*', 
+                                    'product_details.id as product_id', 
+                                    'product_details.product_name', 
+                                    'product_details.slug'
+                                )
                                 ->orderBy('new_arrivals.created_at', 'asc')
                                 ->get();
     
-                            
         $collectionDetail = CollectionDetail::whereNull('deleted_at')->orderBy('created_at', 'asc')->first(); 
         $productPolicies = ProductPolicy::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 
         $testimonials = Testimonial::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 

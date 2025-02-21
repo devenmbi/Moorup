@@ -176,7 +176,9 @@
                                     </a>
 
                                     <div class="list-product-btn">
-                                        <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
+                                        <a href="{{ route('wishlist.add', ['id' => $product->product_id]) }}" 
+                                        class="box-icon wishlist btn-icon-action" 
+                                        aria-label="Add to Wishlist">
                                             <span class="icon icon-heart"></span>
                                             <span class="tooltip">Wishlist</span>
                                         </a>
