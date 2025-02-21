@@ -65,7 +65,7 @@
                         @foreach($category as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td> 
-                                <td>{{ $item->image_title }}</td> 
+                                <td>{{ $item->category_name }}</td>
                                 <td>
                                     @if($item->product_image)
                                         <img src="{{ asset('/murupp/home/shop_categories/' . $item->product_image) }}" alt="Image" style="width: 100px; height: auto;">

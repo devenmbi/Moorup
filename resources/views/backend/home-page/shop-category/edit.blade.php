@@ -64,19 +64,22 @@
                                         <div class="invalid-feedback">Please enter a Heading.</div>
                                     </div>
 
-                                    <!-- Image Title -->
+                                    <!-- Select Category -->
                                     <div class="col-xxl-4 col-sm-6">
-                                        <label class="form-label" for="image_title">Image Title <span class="txt-danger">*</span></label>
-                                        <input 
-                                            class="form-control" 
-                                            id="image_title" 
-                                            type="text" 
-                                            name="image_title" 
-                                            value="{{ old('image_title', $category->image_title) }}" 
-                                            placeholder="Enter Image Title" 
-                                            required>
-                                        <div class="invalid-feedback">Please enter an Image Title.</div>
+                                        <label class="form-label" for="category_id">Select Category <span class="txt-danger">*</span></label>
+                                        <select class="form-control" id="category_id" name="image_title" required>
+                                            <option value="" disabled>Select a category</option>
+                                            @foreach ($categories as $cat)
+                                                <option value="{{ $cat->id }}" 
+                                                    {{ old('image_title', $category->category_id) == $cat->id ? 'selected' : '' }}>
+                                                    {{ $cat->category_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Please select a category.</div>
                                     </div>
+
+
 
                                     <!-- Product Image -->
                                     <div class="col-xxl-4 col-sm-12">

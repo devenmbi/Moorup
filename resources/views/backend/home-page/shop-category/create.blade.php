@@ -59,10 +59,16 @@
 
                                      <!-- Image Title-->
                                      <div class="col-xxl-4 col-sm-6">
-                                        <label class="form-label" for="image_title">Image Title <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="image_title" type="text" name="image_title" placeholder="Enter Image Title" required>
-                                        <div class="invalid-feedback">Please enter a Image Title.</div>
+                                        <label class="form-label" for="image_title">Select Product Category <span class="txt-danger">*</span></label>
+                                        <select class="form-control" id="image_title" name="image_title" required>
+                                            <option value="" disabled selected>Select a category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Please select a category.</div>
                                     </div>
+
 
                                     <!-- Product Image-->
                                     <div class="col-xxl-4 col-sm-12">
