@@ -29,13 +29,15 @@ class HomeController extends Controller
         $productPolicies = ProductPolicy::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 
         $testimonials = Testimonial::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 
         $socialMedia = SocialMedia::whereNull('deleted_at')->orderBy('created_at', 'asc')->first(); 
-        $shopCategories = ShopCategory::whereNull('home_shop_category.deleted_at')
+
+        $shopCategories = DB::table('home_shop_category')
+        ->whereNull('home_shop_category.deleted_at')
+        ->leftJoin('master_product_category', 'master_product_category.category_name', '=', 'home_shop_category.image_title')
+        ->select('home_shop_category.*', 'master_product_category.slug', 'master_product_category.category_name')
         ->orderBy('home_shop_category.created_at', 'asc')
-        ->leftJoin('master_product_category', function($join) {
-            $join->on('master_product_category.category_name', 'LIKE', DB::raw("CONCAT('%', home_shop_category.image_title, '%')"));
-        })
-        ->select('home_shop_category.*', 'master_product_category.slug')
         ->get();
+    
+        // dd($shopCategories);
 
         return view('frontend.index', compact('banners','newArrivals','collectionDetail','shopCategories','productPolicies','testimonials','socialMedia'));
     }
