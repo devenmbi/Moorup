@@ -159,36 +159,40 @@
                 </div>
                 <div dir="ltr" class="swiper tf-sw-recent" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-md="1" data-pagination-lg="1">
                     <div class="swiper-wrapper">
-                        @foreach ($newArrivals as $product)
+                    @foreach ($newArrivals as $product)
                         <div class="swiper-slide">
                             <div class="card-product card-product-size wow fadeInUp" data-wow-delay="0s">
                                 <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
-                                        <img class="lazyload img-product" data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" alt="image-product">
-                                        <img class="lazyload img-hover" data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" alt="image-product">
+                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="product-img">
+                                        <img class="lazyload img-product" 
+                                            data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" 
+                                            src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" 
+                                            alt="{{ $product->product_name }}">
+
+                                        <img class="lazyload img-hover" 
+                                            data-src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" 
+                                            src="{{ asset('murupp/home/new-arrivals/' . $product->product_image) }}" 
+                                            alt="{{ $product->product_name }}">
                                     </a>
-                                    <!-- <div class="variant-wrap size-list">
-                                        <ul class="variant-box">
-                                            <li class="size-item">{{ $product->product_size }}</li>
-                                        </ul>
-                                    </div> -->
+
                                     <div class="list-product-btn">
                                         <a href="#" class="box-icon wishlist btn-icon-action" aria-label="Add to Wishlist">
                                             <span class="icon icon-heart"></span>
                                             <span class="tooltip">Wishlist</span>
                                         </a>
                                     </div>
-                                    <!-- <div class="list-btn-main">
-                                        <a href="#" data-bs-toggle="modal" class="btn-main-product">Quick Add</a>
-                                    </div> -->
                                 </div>
+
                                 <div class="card-product-info">
-                                    <a href="#" class="title link">{{ $product->product_name }}</a>
+                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title link">
+                                        {{ $product->product_name }}
+                                    </a>
                                     <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{ $product->product_price }} INR</span>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
+                    @endforeach
+
                     </div>
                     <div class="sw-pagination-recent sw-dots type-circle justify-content-center"></div>
                 </div>
