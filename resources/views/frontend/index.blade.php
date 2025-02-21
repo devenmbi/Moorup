@@ -225,40 +225,6 @@
         <!-- /Banner with text -->
 
         <!-- Categories -->
-        <!-- <section class="flat-spacing pt-0">
-            <div class="container">
-                <div class="heading-section text-center wow fadeInUp">
-                    <h3 class="heading">Shop by categories</h3>
-                </div>
-                <div class="grid-cls grid-cls-v2">
-                    @foreach ($shopCategories as $category)
-                        <div class="item{{ $loop->iteration }} collection-position-2 hover-img">
-                            <a class="img-style">
-                                <img class="lazyload" 
-                                    data-src="{{ asset('murupp/home/shop_categories/' . $category->product_image) }}" 
-                                    src="{{ asset('murupp/home/shop_categories/' . $category->product_image) }}" 
-                                    alt="{{ $category->image_title }}">
-                            </a>
-                            <div class="content">
-                                <div class="title-top">
-                                    <h4 class="title">
-                                        <a href="{{ !empty($category->slug) ? url('/category-' . $category->slug) : '#' }}" class="link text-white wow fadeInUp">
-                                            {{ $category->image_title }}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div>
-                                    <a href="{{ !empty($category->slug) ? url('/category-' . $category->slug) : '#' }}" class="btn-line style-white">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section> -->
-        <!-- /Categories -->
-
-        <!-- Categories -->
         <section class="flat-spacing pt-0">
             <div class="container">
                 <div class="heading-section text-center wow fadeInUp">
@@ -278,7 +244,7 @@
                                     <h4 class="title">
                                         <a href="{{ !empty($category->slug) ? route('product.category', ['slug' => $category->slug]) : '#' }}" 
                                         class="link text-white wow fadeInUp">
-                                            {{ $category->category_name }} <!-- Fetching category_name correctly -->
+                                            {{ $category->category_name }} 
                                         </a>
                                     </h4>
                                 </div>
@@ -393,9 +359,6 @@
             <div class="elfsight-app-8f24f565-abc8-4144-95c9-4922f192f0cf" data-elfsight-app-lazy></div>
         </section>
         <!-- /Iconbox -->
-
-
-
 
 
         @include('components.frontend.footer')

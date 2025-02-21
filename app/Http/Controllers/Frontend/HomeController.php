@@ -31,14 +31,16 @@ class HomeController extends Controller
         $socialMedia = SocialMedia::whereNull('deleted_at')->orderBy('created_at', 'asc')->first(); 
 
         $shopCategories = DB::table('home_shop_category')
-        ->whereNull('home_shop_category.deleted_at')
-        ->leftJoin('master_product_category', 'master_product_category.category_name', '=', 'home_shop_category.image_title')
-        ->select('home_shop_category.*', 'master_product_category.slug', 'master_product_category.category_name')
-        ->orderBy('home_shop_category.created_at', 'asc')
-        ->get();
+                        ->whereNull('home_shop_category.deleted_at')
+                        ->leftJoin('master_product_category', 'master_product_category.id', '=', 'home_shop_category.image_title')
+                        ->select(
+                            'home_shop_category.*',
+                            'master_product_category.slug',
+                            'master_product_category.category_name'
+                        )
+                        ->orderBy('home_shop_category.created_at', 'asc')
+                        ->get();
     
-        // dd($shopCategories);
-
         return view('frontend.index', compact('banners','newArrivals','collectionDetail','shopCategories','productPolicies','testimonials','socialMedia'));
     }
     
