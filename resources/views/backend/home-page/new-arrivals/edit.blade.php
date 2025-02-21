@@ -59,11 +59,18 @@
                                         <div class="invalid-feedback">Please enter a Section Heading.</div>
                                     </div>
 
-                                    <!-- Product Name -->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="product_name">Product Name <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="product_name" type="text" name="product_name" value="{{ $new_arrival->product_name }}" placeholder="Enter Product Name" required>
-                                        <div class="invalid-feedback">Please enter a Product Name.</div>
+                                        <select class="form-control" id="product_name" name="product_name" required>
+                                            <option value="" disabled>Select a product</option>
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}" 
+                                                    {{ old('product_name', $new_arrival->product_name) == $product->id ? 'selected' : '' }}>
+                                                    {{ $product->product_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Please select a product.</div>
                                     </div>
 
                                     <!-- Product Price -->
@@ -75,8 +82,8 @@
 
                                     <!-- Product Size -->
                                     <div class="col-xxl-4 col-sm-6">
-                                        <label class="form-label" for="product_size">Product Size <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="product_size" type="text" name="product_size" value="{{ $new_arrival->product_size }}" placeholder="Enter Product Size" required>
+                                        <label class="form-label" for="product_size">Product Size </label>
+                                        <input class="form-control" id="product_size" type="text" name="product_size" value="{{ $new_arrival->product_size }}" placeholder="Enter Product Size">
                                         <div class="invalid-feedback">Please enter a Product Size.</div>
                                     </div>
 

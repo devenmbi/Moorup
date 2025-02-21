@@ -23,30 +23,37 @@ class NewArrivalsController extends Controller
     public function index()
     {
         $new_arrivals = NewArrival::leftJoin('users', 'new_arrivals.created_by', '=', 'users.id')
-                                        ->whereNull('new_arrivals.deleted_by')
-                                        ->select('new_arrivals.*', 'users.name as creator_name')
-                                        ->get();
+            ->leftJoin('product_details', 'product_details.id', '=', 'new_arrivals.product_name') // Match with product ID
+            ->whereNull('new_arrivals.deleted_by')
+            ->select('new_arrivals.*', 'users.name as creator_name', 'product_details.product_name as product_name')
+            ->get();
+    
         return view('backend.home-page.new-arrivals.index', compact('new_arrivals'));
     }
+    
 
     public function create(Request $request)
     { 
-        return view('backend.home-page.new-arrivals.create');
+        $products = DB::table('product_details')
+                      ->whereNull('deleted_by')
+                      ->get();
+    
+        return view('backend.home-page.new-arrivals.create', compact('products'));
     }
-
+    
 
     public function store(Request $request)
     {
         $request->validate([
             'section_heading' => 'nullable|string|max:255',
-            'product_name' => 'required|string|max:255',
+            'product_name' => 'required|exists:product_details,id',
             'product_price' => 'required|string',
-            'product_size' => 'required|string|max:255',
+            'product_size' => 'nullable|string|max:255',
             'product_image' => 'required|image|max:3072', 
         ], [
             'product_name.required' => 'The product name is required.',
+            'product_name.exists' => 'The selected product is invalid.',
             'product_price.required' => 'The product price is required.',
-            'product_size.required' => 'The product size is required.',
             'product_image.required' => 'The product image is required.',
             'product_image.image' => 'The product image must be a valid image file.',
             'product_image.max' => 'The product image must not exceed 3MB in size.',
@@ -75,22 +82,28 @@ class NewArrivalsController extends Controller
     public function edit($id)
     {
         $new_arrival = NewArrival::findOrFail($id);
-        return view('backend.home-page.new-arrivals.edit', compact('new_arrival'));
+        $products = DB::table('product_details')
+                      ->whereNull('deleted_by')
+                      ->orderBy('product_name', 'asc')
+                      ->get();
+    
+        return view('backend.home-page.new-arrivals.edit', compact('new_arrival', 'products'));
     }
+    
 
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'section_heading' => 'nullable|string|max:255',
-            'product_name' => 'required|string|max:255',
+            'product_name' => 'required|exists:product_details,id',
             'product_price' => 'required|string',
-            'product_size' => 'required|string|max:255',
+            'product_size' => 'nullable|string|max:255',
             'product_image' => 'nullable|image|max:3072', 
         ], [
             'product_name.required' => 'The product name is required.',
+            'product_name.exists' => 'The selected product is invalid.',
             'product_price.required' => 'The product price is required.',
-            'product_size.required' => 'The product size is required.',
             'product_image.image' => 'The product image must be a valid image file.',
             'product_image.max' => 'The product image must not exceed 3MB in size.',
         ]);

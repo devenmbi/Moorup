@@ -152,7 +152,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     //===== Category Page
     Route::get('/category/{slug}', [CategoryDetailsController::class, 'category_details'])->name('product.category');
 
-    //===== Cllection Page
+    //===== Collection Page
     Route::get('/collection/{slug}', [CategoryDetailsController::class, 'category_details'])->name('collection.view');
 
     //===== Detailed Product Page

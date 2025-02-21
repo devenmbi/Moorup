@@ -25,6 +25,7 @@ class HomeController extends Controller
     {
         $banners = BannerDetails::whereNull('deleted_at')->orderBy('created_at', 'asc')->get();
         $newArrivals = NewArrival::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 
+        
         $collectionDetail = CollectionDetail::whereNull('deleted_at')->orderBy('created_at', 'asc')->first(); 
         $productPolicies = ProductPolicy::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 
         $testimonials = Testimonial::whereNull('deleted_at')->orderBy('created_at', 'asc')->get(); 

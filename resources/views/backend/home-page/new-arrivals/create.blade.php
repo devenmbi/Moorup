@@ -57,13 +57,18 @@
                                         <div class="invalid-feedback">Please enter a Section Heading.</div>
                                     </div>
 
-
-                                    <!-- Product Name-->
+                                    <!-- Product Name--->
                                     <div class="col-xxl-4 col-sm-6">
-                                        <label class="form-label" for="product_name">Product Name <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="product_name" type="text" name="product_name" placeholder="Enter Product Name" required>
-                                        <div class="invalid-feedback">Please enter a Product Name.</div>
+                                        <label class="form-label" for="product_name">Select Product <span class="txt-danger">*</span></label>
+                                        <select class="form-control" id="product_name" name="product_name" required>
+                                            <option value="" disabled selected>Select a product</option>
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Please select a product.</div>
                                     </div>
+
 
                                     <!-- Product Price-->
                                     <div class="col-xxl-4 col-sm-6">
@@ -74,8 +79,8 @@
 
                                      <!-- Product Size-->
                                      <div class="col-xxl-4 col-sm-6">
-                                        <label class="form-label" for="product_size">Product Size <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="product_size" type="text" name="product_size" placeholder="Enter Product Size" required>
+                                        <label class="form-label" for="product_size">Product Size </label>
+                                        <input class="form-control" id="product_size" type="text" name="product_size" placeholder="Enter Product Size">
                                         <div class="invalid-feedback">Please enter a Product Size.</div>
                                     </div>
 
