@@ -149,25 +149,11 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     // ==== Home
     Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
 
-    // // ==== Category Pages
-    // Route::get('/category-dresses', [CategoryDetailsController::class, 'dresses'])->name('frontend.dresses');
-
-    // // ==== Category Pages
-    // Route::get('/category-tops', [CategoryDetailsController::class, 'tops'])->name('frontend.tops');
-
-    // // ==== Category Pages
-    // Route::get('/category-bottoms', [CategoryDetailsController::class, 'bottoms'])->name('frontend.bottoms');
-
-    // // ==== Category Pages
-    // Route::get('/category-co-ord-set', [CategoryDetailsController::class, 'coords'])->name('frontend.coords');
-
-    // // ==== Category Pages
-    // Route::get('/category-blazersjackets', [CategoryDetailsController::class, 'blazers'])->name('frontend.blazers');
-
-
-    //===== Detailed Product Page
+    //===== Category Page
     Route::get('/category/{slug}', [CategoryDetailsController::class, 'category_details'])->name('product.category');
 
+    //===== Cllection Page
+    Route::get('/collection/{slug}', [CategoryDetailsController::class, 'category_details'])->name('collection.view');
 
     //===== Detailed Product Page
     Route::get('/product-detail/{slug}', [ProductController::class, 'show'])->name('product.show');
