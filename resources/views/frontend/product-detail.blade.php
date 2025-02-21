@@ -481,48 +481,38 @@
                             <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
                         </div>
                         
-                        <form action="{{ route('contact.send') }}" method="POST">
+                        <form id="contactForm" action="{{ route('contact.send') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input type="text" placeholder="Name *" name="name" value="{{ old('name') }}" required>
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <input type="text" id="name" placeholder="Name *" name="name" required>
+                                        <span class="text-danger" id="nameError"></span>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input type="email" placeholder="Email *" name="email" value="{{ old('email') }}" required>
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <input type="email" id="email" placeholder="Email *" name="email" required>
+                                        <span class="text-danger" id="emailError"></span>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input type="number" placeholder="Phone number" name="phone" value="{{ old('phone') }}" required>
-                                        @error('phone')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <input type="text" id="phone" placeholder="Phone number *" name="phone" required min="10" max="10">
+                                        <span class="text-danger" id="phoneError"></span>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input type="text" placeholder="Subject" name="subject" value="{{ old('subject') }}" required>
-                                        @error('subject')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <input type="text" id="subject" placeholder="Subject *" name="subject" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-12">
                                     <fieldset>
-                                        <textarea name="message" rows="4" placeholder="Message" required>{{ old('message') }}</textarea>
-                                        @error('message')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <textarea id="message" name="message" rows="4" placeholder="Message *" required></textarea>
+                                        <span class="text-danger" id="messageError"></span>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-12">
@@ -548,6 +538,58 @@
         <script src="{{ asset('frontend/assets/js/drift.min.js') }}" defer></script>
         <script type="module" src="{{ asset('frontend/assets/js/model-viewer.min.js') }}"></script>
         <script type="module" src="{{ asset('frontend/assets/js/zoom.js') }}"></script>
+
+<!--- for form validation--->
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        // Name Validation (Only letters & spaces)
+        let name = document.getElementById('name').value.trim();
+        let nameRegex = /^[a-zA-Z\s]+$/;
+        if (!nameRegex.test(name)) {
+            document.getElementById('nameError').innerText = "Name must contain only letters & spaces.";
+            isValid = false;
+        } else {
+            document.getElementById('nameError').innerText = "";
+        }
+
+        // Email Validation
+        let email = document.getElementById('email').value.trim();
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').innerText = "Enter a valid email address.";
+            isValid = false;
+        } else {
+            document.getElementById('emailError').innerText = "";
+        }
+
+        // Phone Validation (Exactly 10 digits)
+        let phone = document.getElementById('phone').value.trim();
+        let phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phone)) {
+            document.getElementById('phoneError').innerText = "Phone number must be exactly 10 digits.";
+            isValid = false;
+        } else {
+            document.getElementById('phoneError').innerText = "";
+        }
+
+        // Message Validation (Required)
+        let message = document.getElementById('message').value.trim();
+        if (message.length === 0) {
+            document.getElementById('messageError').innerText = "Message cannot be empty.";
+            isValid = false;
+        } else {
+            document.getElementById('messageError').innerText = "";
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
+
 
  <!-- For dynamic size fetching -->       
 <script>

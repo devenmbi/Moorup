@@ -87,15 +87,17 @@ class ProductController extends Controller
     public function send_contact(Request $request)
     {
 
-         $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
-            'phone'   => 'required|numeric|digits_between:10,15',
+        $request->validate([
+            'name'    => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'], 
+            'email'   => 'required|email', 
+            'phone'   => 'required|digits:10', 
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+        ], [
+            'name.regex'  => 'The name must not contain special characters or numbers.',
+            'phone.digits' => 'The contact number must be exactly 10 digits.',
         ]);
-
-        // Email data
+    
         $emailData = [
             'name'    => $request->name,
             'email'   => $request->email,
