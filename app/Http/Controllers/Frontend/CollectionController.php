@@ -15,14 +15,13 @@ use App\Models\CoordsDetails;
 use App\Models\JacketsDetails;
 use App\Models\ProductSizes;
 
-class CategoryDetailsController extends Controller
+class CollectionController extends Controller
 {
 
-
-    public function category_details(Request $request, $slug)
+    public function collection_details(Request $request, $slug)
     { 
         // Fetch category ID based on the slug from the URL
-        $category = DB::table('master_product_category')
+        $category = DB::table('master_collections')
             ->whereNull('deleted_by')
             ->where('slug', $slug)
             ->first();
@@ -33,7 +32,9 @@ class CategoryDetailsController extends Controller
     
         // Fetch products under the fetched category
         $products = ProductDetails::whereNull('deleted_by')
-            ->where('category_id', $category->id)
+            ->whereNull('deleted_by')
+            ->where('collection_id', $category->id)
+            ->orderBy('product_name', 'asc')
             ->get();
     
         // Fetch price range for the category
@@ -57,9 +58,8 @@ class CategoryDetailsController extends Controller
             ->where('available_quantity', '=', 0)
             ->count();
     
-        return view('frontend.category-details', compact(
+        return view('frontend.collection-details', compact(
             'category',
-            'banner', 
             'products', 
             'priceRange', 
             'sizes', 

@@ -33,6 +33,7 @@ use App\Http\Controllers\Frontend\CategoryDetailsController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CollectionController;
 
 
 // =========================================================================== Backend Routes
@@ -153,7 +154,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/category/{slug}', [CategoryDetailsController::class, 'category_details'])->name('product.category');
 
     //===== Collection Page
-    Route::get('/collection/{slug}', [CategoryDetailsController::class, 'category_details'])->name('collection.view');
+    Route::get('/collection/{slug}', [CollectionController::class, 'collection_details'])->name('collection.view');
 
     //===== Detailed Product Page
     Route::get('/product-detail/{slug}', [ProductController::class, 'show'])->name('product.show');
