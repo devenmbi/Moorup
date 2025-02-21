@@ -59,7 +59,6 @@ class CategoryDetailsController extends Controller
     
         return view('frontend.category-details', compact(
             'category',
-            'banner', 
             'products', 
             'priceRange', 
             'sizes', 
