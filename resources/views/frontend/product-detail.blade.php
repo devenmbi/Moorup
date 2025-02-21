@@ -124,34 +124,29 @@
 
                                     <br>
 
-                                    @if (!empty($productprints))
-                                    <div class="variant-picker-item">
-                                        <div class="variant-picker-label mb_12">
-                                            Print Options:
-                                            @if (!empty($productprints[0]))
-                                                <span class="text-title">{{ $productprints[0] }}</span> 
-                                            @endif
-                                        </div>
-                                        <div class="variant-picker-values">
-                                            @foreach ($productprints as $index => $print)
-                                                @php
-                                                    $printSlug = Str::slug($print); // Convert print name to a slug format
-                                                @endphp
-                                                <input id="values-{{ $printSlug }}" type="radio" name="color1" {{ $loop->first ? 'checked' : '' }}>
-                                                <label class="style-image hover-tooltip tooltip-bot color-btn" 
-                                                    for="values-{{ $printSlug }}" 
-                                                    data-value="{{ $print }}" 
-                                                    data-color="{{ $printSlug }}">
-                                                    <img class="lazyload" data-src="{{ asset('/murupp/product/prints' . $print . '.jpg') }}" 
-                                                        src="{{ asset('/murupp/product/prints' . $print . '.jpg') }}" 
-                                                        alt="{{ $print }}">
-                                                    <span class="tooltip">{{ $print }}</span>
-                                                </label>
-                                            @endforeach
+                                    @if(!empty($printData) && count($printData) > 0)
+                                    <div class="tf-product-info-choose-option">
+                                        <div class="variant-picker-item">
+                                            <div class="variant-picker-label mb_12">
+                                                Print Options: 
+                                                <span class="text-title" id="selected-print">{{ $printData[0]['name'] ?? 'Select Print' }}</span>
+                                            </div>
+                                            <div class="variant-picker-values">
+                                                @foreach ($printData as $index => $print)
+                                                    <input id="print_{{ $index }}" type="radio" name="print_option" value="{{ $print['name'] }}" 
+                                                        {{ $loop->first ? 'checked' : '' }} onchange="updateSelectedPrint(this)">
+                                                    <label for="print_{{ $index }}" class="style-image hover-tooltip tooltip-bot color-btn {{ $loop->first ? 'active' : '' }}">
+                                                        <img class="lazyload" 
+                                                            data-src="{{ asset('/murupp/product/prints/' . $print['image']) }}" 
+                                                            src="{{ asset('/murupp/product/prints/' . $print['image']) }}" 
+                                                            alt="{{ $print['name'] }}">
+                                                        <span class="tooltip">{{ $print['name'] }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
-                                @endif
-
+                                    @endif
 
                                     <br>
 
@@ -181,6 +176,7 @@
                                             </p>
                                         </div>
                                     @endif
+
                                         <br>
 
                                         <div class="tf-product-info-quantity">
@@ -543,6 +539,13 @@
         // Initialize URL on page load
         updateCartUrl();
     });
+</script>
+
+
+<script>
+    function updateSelectedPrint(input) {
+        document.getElementById('selected-print').innerText = input.value;
+    }
 </script>
 
 </body>
