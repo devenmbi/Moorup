@@ -283,7 +283,7 @@
         <!-- Iconbox -->
         <section class="flat-spacing line-top-container">
             <div class="container">
-                <div dir="ltr" class="swiper tf-sw-iconbox" data-preview="4" data-tablet="3" data-mobile-sm="2" data-mobile="1" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-sm="2" data-pagination-md="3" data-pagination-lg="4">
+                <div dir="ltr" class="swiper tf-sw-iconbox" data-preview="2" data-tablet="2" data-mobile-sm="2" data-mobile="1" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-sm="2" data-pagination-md="3" data-pagination-lg="4">
                     <div class="swiper-wrapper">
                         @foreach ($productPolicies as $policy)
                             <div class="swiper-slide">
