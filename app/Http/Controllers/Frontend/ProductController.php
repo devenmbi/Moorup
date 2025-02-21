@@ -70,18 +70,12 @@ class ProductController extends Controller
         foreach ($productPrintIds as $index => $id) {
             if (isset($productprintsname[$id]) && isset($productprints[$index])) {
                 $printData[] = [
-                    'name' => $productprintsname[$id], // Print Name
-                    'image' => $productprints[$index], // Corresponding Image
+                    'name' => $productprintsname[$id], 
+                    'image' => $productprints[$index], 
                 ];
             }
         }
-        
-        // Debugging
-        // dd(['product_prints' => $productprints, 'product_print_ids' => $productPrintIds, 'product_prints_name' => $productprintsname, 'mapped_prints' => $printData]);
-        
-
-
-        
+ 
         return view('frontend.product-detail', compact(
             'product', 'category', 'galleryImages', 'sizeCharts', 'fabric', 'fabricComposition', 'relatedProducts', 'productSizes','productColor','productprints','productprintsname','printData'
         ));
