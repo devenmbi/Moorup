@@ -126,7 +126,7 @@
                         @foreach($products as $product)
                             <div class="card-product grid">
                                 <div class="card-product-wrapper">
-                                    <a href="#" class="product-img">
+                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="product-img">
                                         @php
                                             $thumbnailImages = json_decode($product->thumbnail_image);
                                         @endphp
@@ -143,9 +143,9 @@
                                             <span class="tooltip">Wishlist</span>
                                         </a>
                                     </div>
-                                    <div class="list-btn-main">
+                                    <!-- <div class="list-btn-main">
                                         <a href="{{ route('cart.add', ['id' => $product->id]) }}" class="btn-main-product">Add To cart</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-product-info">
                                     <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title link">
