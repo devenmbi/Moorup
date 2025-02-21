@@ -31,7 +31,7 @@
         <img src="{{ asset('frontend/assets/images/logo/logo.webp') }}" alt="Murupp" class="logo">
     </div>
 
-    <p>Special Request Submission for <h2> {{ $emailData['product_name'] ?? 'Product' }}</h2></p>
+    <p>Special Request Submission for <span style="font-size: 1.5em; font-weight: bold;">{{ $emailData['product_name'] ?? 'Product' }}</span></p>
     <p><strong>Name:</strong> {{ $emailData['name'] }}</p>
     <p><strong>Email:</strong> {{ $emailData['email'] }}</p>
     <p><strong>Phone:</strong> {{ $emailData['phone'] }}</p>
