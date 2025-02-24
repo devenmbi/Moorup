@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 use App\Models\ProductDetails;
@@ -70,4 +71,36 @@ class CartController extends Controller
     
         return redirect()->back()->with('message', 'Product added to Cart!');
     }
+
+
+    public function updateQuantity(Request $request)
+    {
+        $cartItem = Carts::find($request->cart_item_id);
+        if ($cartItem) {
+            $cartItem->quantity = $request->quantity;
+            $cartItem->product_total_price = $cartItem->product_price * $request->quantity;
+            $cartItem->save();
+            return response()->json(['success' => true, 'message' => 'Cart updated']);
+        }
+        return response()->json(['success' => false, 'message' => 'Item not found']);
+    }
+
+
+    public function deleteCartItem(Request $request)
+{
+    Log::info("Delete Request Received", $request->all());
+
+    $cartItem = Carts::find($request->cart_item_id);
+
+    if (!$cartItem) {
+        Log::error("Cart Item Not Found: " . $request->cart_item_id);
+        return response()->json(['success' => false, 'message' => 'Item not found'], 404);
+    }
+
+    $cartItem->deleted_at = now();  // Soft delete
+    $cartItem->deleted_by = auth()->id();
+    $cartItem->save();
+
+    return response()->json(['success' => true, 'message' => 'Item deleted']);
+}
 }

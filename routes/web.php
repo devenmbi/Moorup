@@ -144,12 +144,18 @@ Route::resource('stock-details', StockDetailsController::class);
         
     Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
+    //====== remove item from cart
+    Route::post('/update-cart-quantity', [CartController::class, 'updateQuantity']);
+
+    Route::post('/delete-cart-item', [CartController::class, 'deleteCartItem'])->name('delete.cart.item');
+
 
 Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
 
     // ==== Home
     Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
 
+    //===== customize request form
     Route::post('/contact-submission', [ProductController::class, 'send_contact'])->name('contact.send');
 
     //===== Category Page

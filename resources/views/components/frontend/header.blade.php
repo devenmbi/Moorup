@@ -1,3 +1,4 @@
+    <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Scroll Top -->
     <button id="scroll-top">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,6 +153,7 @@
                                                     ->join('product_details', 'carts.product_id', '=', 'product_details.id')
                                                     ->where('carts.user_id', Auth::id())
                                                     ->select('carts.*', 'product_details.product_name', 'product_details.slug')
+                                                    ->whereNull('carts.deleted_at')
                                                     ->get();
                                                 
                                                 $subtotal = 0;
@@ -196,6 +198,7 @@
                                                             <div class="wg-quantity mx-md-auto">
                                                                 <span class="btn-quantity btn-decrease" onclick="updateQuantity(this, -1)">-</span>
                                                                 <input type="text" class="quantity-product" name="number" value="{{ $cartItem->quantity }}" 
+                                                                    data-id="{{ $cartItem->id }}" 
                                                                     data-price="{{ $cartItem->product_total_price / $cartItem->quantity }}" 
                                                                     data-total="{{ $cartItem->product_total_price }}" 
                                                                     oninput="manualUpdate(this)">
@@ -390,37 +393,57 @@
         </div>
         <!-- /mobile menu -->
 
-        
+
     <!--- to manage the price based on the quantity--->
     <script>
         function updateQuantity(element, change) {
             let input = element.parentElement.querySelector(".quantity-product");
             let quantity = parseInt(input.value) + change;
             let unitPrice = parseFloat(input.getAttribute("data-price"));
-            
-            if (quantity < 1) return; // Prevent negative quantity
-            
+            let cartItemId = input.getAttribute("data-id"); // Get cart item ID
+            let cartElement = input.closest(".tf-mini-cart-item"); // Get cart item element
+
+            if (!cartItemId) {
+                console.error("cart_item_id is missing");
+                return;
+            }
+
+            if (isNaN(quantity) || quantity < 1) {
+                removeItemFromCart(cartItemId, cartElement);
+                return;
+            }
+
             input.value = quantity;
             let newTotal = unitPrice * quantity;
             input.setAttribute("data-total", newTotal);
-            
+
             // Update item price
             let priceElement = element.parentElement.parentElement.querySelector(".item-price");
             priceElement.innerText = formatIndianCurrency(newTotal);
 
             // Update subtotal
             updateSubtotal();
+
+            // Update quantity in the database
+            updateCartQuantity(cartItemId, quantity, cartElement);
         }
 
         function manualUpdate(input) {
             let quantity = parseInt(input.value);
             let unitPrice = parseFloat(input.getAttribute("data-price"));
-            
-            if (isNaN(quantity) || quantity < 1) {
-                input.value = 1;
-                quantity = 1;
+            let cartItemId = input.getAttribute("data-id"); // Get cart item ID
+            let cartElement = input.closest(".tf-mini-cart-item"); // Get cart item element
+
+            if (!cartItemId) {
+                console.error("cart_item_id is missing");
+                return;
             }
-            
+
+            if (isNaN(quantity) || quantity < 1) {
+                removeItemFromCart(cartItemId, cartElement);
+                return;
+            }
+
             let newTotal = unitPrice * quantity;
             input.setAttribute("data-total", newTotal);
 
@@ -430,6 +453,9 @@
 
             // Update subtotal
             updateSubtotal();
+
+            // Update quantity in the database
+            updateCartQuantity(cartItemId, quantity, cartElement);
         }
 
         function updateSubtotal() {
@@ -440,7 +466,7 @@
                 subtotal += parseFloat(item.getAttribute("data-total"));
             });
 
-            document.querySelector(".tf-totals-total-value").innerHTML = 
+            document.querySelector(".tf-totals-total-value").innerHTML =
                 '<i class="fa fa-inr" aria-hidden="true"></i> ' + formatIndianCurrency(subtotal);
         }
 
@@ -452,5 +478,48 @@
                 lastThree = "," + lastThree;
             }
             return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        }
+
+        // AJAX Call to Update Cart Quantity or Remove Item if Quantity is Zero
+        function updateCartQuantity(cartItemId, quantity, cartElement) {
+            fetch("/update-cart-quantity", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ cart_item_id: cartItemId, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Cart updated:", data);
+                } else {
+                    console.error("Error updating cart:", data.message);
+                }
+            })
+            .catch(error => console.error("Error updating cart:", error));
+        }
+
+        function removeItemFromCart(cartItemId, cartElement) {
+            fetch("{{ route('delete.cart.item') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ cart_item_id: cartItemId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Item deleted:", data);
+                if (data.success) {
+                    cartElement.remove(); // Remove item from UI
+                    updateSubtotal(); // Recalculate subtotal
+                } else {
+                    console.error("Failed to delete:", data.message);
+                }
+            })
+            .catch(error => console.error("Error deleting cart item:", error));
         }
     </script>
