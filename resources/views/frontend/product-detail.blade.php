@@ -188,10 +188,25 @@
                                         <br>
                                         <div>
                                             <div class="tf-product-info-by-btn mb_10">
-                                                <a href="{{ route('cart.add', ['id' => $product->id]) }}" 
+                                                <!-- <a href="{{ route('cart.add', ['id' => $product->id]) }}" 
                                                     class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
                                                     <span>Add to cart</span>
-                                                </a>
+                                                </a> -->
+
+                                                <form action="{{ route('cart.add', ['id' => $product->id]) }}" method="GET">
+                                                    <input type="hidden" name="color1" id="hidden-color" value="{{ $productColor[0] ?? '' }}">
+                                                    <input type="hidden" name="print_option" id="hidden-print" value="{{ $printData[0]['name'] ?? '' }}">
+                                                    <input type="hidden" name="size" id="hidden-size" value="{{ $productSizes[0] ?? '' }}">
+                                                    <input type="hidden" name="quantity" value="1" class="quantity-product">
+                                                    <input type="hidden" name="product_price" value="{{ $product->product_price ?? 0 }}">
+                                                    <input type="hidden" name="product_image" value="{{ $product->galleryImages[0] ?? '' }}">
+
+                                                    <button type="submit" class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
+                                                        <span>Add to cart</span>
+                                                    </button>
+                                                </form>
+
+
                                                 <a href="{{ route('wishlist.add', ['id' => $product->id]) }}" 
                                                     class="box-icon hover-tooltip text-caption-2 wishlist btn-icon-action">
                                                     <span class="icon icon-heart"></span>
@@ -539,6 +554,8 @@
         <script type="module" src="{{ asset('frontend/assets/js/model-viewer.min.js') }}"></script>
         <script type="module" src="{{ asset('frontend/assets/js/zoom.js') }}"></script>
 
+
+
 <!--- for form validation--->
 <script>
     document.getElementById('contactForm').addEventListener('submit', function(event) {
@@ -650,11 +667,30 @@
     });
 </script>
 
-
+<!--- for print name selected option--->
 <script>
     function updateSelectedPrint(input) {
         document.getElementById('selected-print').innerText = input.value;
     }
+</script>
+
+<!--- for hidden input fields --->
+<script>
+    function updateSelectedColor(element) {
+        document.getElementById('hidden-color').value = element.value;
+        document.getElementById('selected-color').textContent = element.value;
+    }
+
+    function updateSelectedPrint(element) {
+        document.getElementById('hidden-print').value = element.value;
+        document.getElementById('selected-print').textContent = element.value;
+    }
+
+    function updateSelectedSize(element) {
+        document.getElementById('hidden-size').value = element.value;
+        document.getElementById('selected-size').textContent = element.value;
+    }
+
 </script>
 
 </body>
