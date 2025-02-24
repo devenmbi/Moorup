@@ -194,7 +194,10 @@
                                                         </div>
                                                     </div>
                                                         <div class="d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                            <div class="text-secondary-2">{{ $cartItem->size }}/{{ $cartItem->colors }}</div>
+                                                            <div class="text-secondary-2">
+                                                                {{ $cartItem->size }}{{ $cartItem->colors ? ' / ' . $cartItem->colors : '' }}
+                                                            </div>
+
                                                             <div class="wg-quantity mx-md-auto">
                                                                 <span class="btn-quantity btn-decrease" onclick="updateQuantity(this, -1)">-</span>
                                                                 <input type="text" class="quantity-product" name="number" value="{{ $cartItem->quantity }}" 
