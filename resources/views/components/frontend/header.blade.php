@@ -147,98 +147,93 @@
                                 <div class="tf-mini-cart-main">
                                     <div class="tf-mini-cart-sroll">
                                         <div class="tf-mini-cart-items">
-                                            <div class="tf-mini-cart-item file-delete">
-                                                <div class="tf-mini-cart-image">
-                                                    <img class="lazyload" data-src="images/New-Arrivals/3_4_11zon.webp" src="images/New-Arrivals/3_4_11zon.webp" alt="">
-                                                </div>
-                                                <div class="tf-mini-cart-info flex-grow-1">
-                                                    <div class="mb_12 d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                        <div class="text-title"><a href="product-detail.html" class="link text-line-clamp-1">RI Bowknot Dress</a></div>
-                                                        
-                                                    </div>
-                                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                        <div class="text-secondary-2">XL/Blue</div>
-                                                        <div class="wg-quantity mx-md-auto">
-                                                    <span class="btn-quantity btn-decrease">-</span>
-                                                    <input type="text" class="quantity-product" name="number" value="1">
-                                                    <span class="btn-quantity btn-increase">+</span>
-                                                </div>
-                                                        <div class="text-button"> <i class="fa fa-inr" aria-hidden="true"></i> 6060</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tf-mini-cart-item file-delete">
-                                                <div class="tf-mini-cart-image">
-                                                    <img class="lazyload" data-src="images/New-Arrivals/2_3_11zon.webp" src="images/New-Arrivals/2_3_11zon.webp" alt="">
-                                                </div>
-                                                <div class="tf-mini-cart-info flex-grow-1">
-                                                    <div class="mb_12 d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                        <div class="text-title"><a href="product-detail.html" class="link text-line-clamp-1">PUTIT Short Bubble-Hem Dress</a></div>
-                                                        
-                                                    </div>
-                                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                        <div class="text-secondary-2">XL/Blue</div>
-                                                        <div class="wg-quantity mx-md-auto">
-                                                    <span class="btn-quantity btn-decrease">-</span>
-                                                    <input type="text" class="quantity-product" name="number" value="1">
-                                                    <span class="btn-quantity btn-increase">+</span>
-                                                </div>
-                                                        <div class="text-button"> <i class="fa fa-inr" aria-hidden="true"></i> 2260</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="tf-mini-cart-item file-delete">
-                                                <div class="tf-mini-cart-image">
-                                                    <img class="lazyload" data-src="images/New-Arrivals/1_2_11zon.webp" src="images/New-Arrivals/1_2_11zon.webp" alt="">
-                                                </div>
-                                                <div class="tf-mini-cart-info flex-grow-1">
-                                                    <div class="mb_12 d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                        <div class="text-title"><a href="product-detail.html" class="link text-line-clamp-1">SAA Tiered Midi Dress</a></div>
+                                            @php
+                                                $cartItems = DB::table('carts')
+                                                    ->join('product_details', 'carts.product_id', '=', 'product_details.id')
+                                                    ->where('carts.user_id', Auth::id())
+                                                    ->select('carts.*', 'product_details.product_name', 'product_details.slug')
+                                                    ->get();
+                                                
+                                                $subtotal = 0;
+                                            @endphp
 
+                                            @php
+                                                function number_format_indian($num) {
+                                                    $num = round($num); // Remove decimal points
+                                                    $num = (string) $num;
+                                                    $len = strlen($num);
+                                                    
+                                                    if ($len <= 3) {
+                                                        return $num;
+                                                    }
+                                                    
+                                                    $lastThree = substr($num, -3);
+                                                    $remaining = substr($num, 0, -3);
+                                                    $remaining = preg_replace('/\B(?=(\d{2})+(?!\d))/', ',', $remaining);
+                                                    
+                                                    return $remaining . ',' . $lastThree;
+                                                }
+                                            @endphp
 
+                                            @foreach($cartItems as $cartItem)
+                                                @php
+                                                    $subtotal += $cartItem->product_total_price;
+                                                @endphp
+                                                <div class="tf-mini-cart-item file-delete">
+                                                    <div class="tf-mini-cart-image">
+                                                        <img data-src="{{ asset($cartItem->product_image) }}" src="{{ asset($cartItem->product_image) }}" alt="">
                                                     </div>
-                                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                                        <div class="text-secondary-2">XL/Blue</div>
-                                                        <div class="wg-quantity mx-md-auto">
-                                                    <span class="btn-quantity btn-decrease">-</span>
-                                                    <input type="text" class="quantity-product" name="number" value="1">
-                                                    <span class="btn-quantity btn-increase">+</span>
-                                                </div>
-                                                        <div class="text-button"><i class="fa fa-inr" aria-hidden="true"></i> 16060</div>
+                                                    <div class="tf-mini-cart-info flex-grow-1">
+                                                    <div class="mb_12 d-flex align-items-center justify-content-between flex-wrap gap-12">
+                                                        <div class="text-title">
+                                                            <a href="{{ route('product.show', $cartItem->slug) }}" class="link text-line-clamp-1">
+                                                                {{ $cartItem->product_name ?? 'Product Name' }}
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-12">
+                                                            <div class="text-secondary-2">{{ $cartItem->size }}/{{ $cartItem->colors }}</div>
+                                                            <div class="wg-quantity mx-md-auto">
+                                                                <span class="btn-quantity btn-decrease">-</span>
+                                                                <input type="text" class="quantity-product" name="number" value="{{ $cartItem->quantity }}">
+                                                                <span class="btn-quantity btn-increase">+</span>
+                                                            </div>
+                                                            <div class="text-button">
+                                                                <i class="fa fa-inr" aria-hidden="true"></i> {{ number_format_indian($cartItem->product_total_price) }}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                            
-                        
+                                            @endforeach
+            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tf-mini-cart-bottom">
-
                                     <div class="tf-mini-cart-bottom-wrap">
                                         <div class="tf-cart-totals-discounts">
                                             <h5>Subtotal</h5>
-                                            <h5 class="tf-totals-total-value"><i class="fa fa-inr" aria-hidden="true"></i> 186,99</h5>
+                                            <h5 class="tf-totals-total-value">
+                                                <i class="fa fa-inr" aria-hidden="true"></i> {{ number_format_indian($subtotal) }}
+                                            </h5>
                                         </div>
                                         <div class="tf-cart-checkbox">
                                             <div class="tf-checkbox-wrapp">
-                                                <input class="" type="checkbox" id="CartDrawer-Form_agree" name="agree_checkbox">
-                                                <div>
-                                                    <i class="icon-check"></i>
-                                                </div>
+                                                <input type="checkbox" id="CartDrawer-Form_agree" name="agree_checkbox">
+                                                <div><i class="icon-check"></i></div>
                                             </div>
                                             <label for="CartDrawer-Form_agree">
                                                 I agree with 
-                                                <a href="term-of-use.html" title="Terms of Service">Terms & Conditions</a>
+                                                <a href="#" title="Terms of Service">Terms & Conditions</a>
                                             </label>
                                         </div>
                                         <div class="tf-mini-cart-view-checkout">
-                                            
-                                            <a href="shopping-cart.html" class="tf-btn w-100 btn-fill radius-4"><span class="text">Check Out</span></a>
+                                            <a href="#" class="tf-btn w-100 btn-fill radius-4">
+                                                <span class="text">Check Out</span>
+                                            </a>
                                         </div>
                                         <div class="text-center">
-                                            <a class="link text-btn-uppercase" href="shop-default-grid.html">Or continue shopping</a>
+                                            <a class="link text-btn-uppercase" href="#">Or continue shopping</a>
                                         </div>
                                     </div>
                                 </div>
@@ -249,6 +244,8 @@
             </div>
         </div>
         <!-- /shoppingCart -->
+
+
 
 
         <!-- search -->
