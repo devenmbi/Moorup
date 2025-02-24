@@ -194,18 +194,23 @@
                                                         <div class="d-flex align-items-center justify-content-between flex-wrap gap-12">
                                                             <div class="text-secondary-2">{{ $cartItem->size }}/{{ $cartItem->colors }}</div>
                                                             <div class="wg-quantity mx-md-auto">
-                                                                <span class="btn-quantity btn-decrease">-</span>
-                                                                <input type="text" class="quantity-product" name="number" value="{{ $cartItem->quantity }}">
-                                                                <span class="btn-quantity btn-increase">+</span>
+                                                                <span class="btn-quantity btn-decrease" onclick="updateQuantity(this, -1)">-</span>
+                                                                <input type="text" class="quantity-product" name="number" value="{{ $cartItem->quantity }}" 
+                                                                    data-price="{{ $cartItem->product_total_price / $cartItem->quantity }}" 
+                                                                    data-total="{{ $cartItem->product_total_price }}" 
+                                                                    oninput="manualUpdate(this)">
+                                                                <span class="btn-quantity btn-increase" onclick="updateQuantity(this, 1)">+</span>
                                                             </div>
-                                                            <div class="text-button">
-                                                                <i class="fa fa-inr" aria-hidden="true"></i> {{ number_format_indian($cartItem->product_total_price) }}
+
+                                                            <div class="text-button price">
+                                                                <i class="fa fa-inr" aria-hidden="true"></i> <span class="item-price">{{ number_format_indian($cartItem->product_total_price) }}</span>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endforeach
-            </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -384,3 +389,68 @@
             </div>       
         </div>
         <!-- /mobile menu -->
+
+        
+    <!--- to manage the price based on the quantity--->
+    <script>
+        function updateQuantity(element, change) {
+            let input = element.parentElement.querySelector(".quantity-product");
+            let quantity = parseInt(input.value) + change;
+            let unitPrice = parseFloat(input.getAttribute("data-price"));
+            
+            if (quantity < 1) return; // Prevent negative quantity
+            
+            input.value = quantity;
+            let newTotal = unitPrice * quantity;
+            input.setAttribute("data-total", newTotal);
+            
+            // Update item price
+            let priceElement = element.parentElement.parentElement.querySelector(".item-price");
+            priceElement.innerText = formatIndianCurrency(newTotal);
+
+            // Update subtotal
+            updateSubtotal();
+        }
+
+        function manualUpdate(input) {
+            let quantity = parseInt(input.value);
+            let unitPrice = parseFloat(input.getAttribute("data-price"));
+            
+            if (isNaN(quantity) || quantity < 1) {
+                input.value = 1;
+                quantity = 1;
+            }
+            
+            let newTotal = unitPrice * quantity;
+            input.setAttribute("data-total", newTotal);
+
+            // Update item price
+            let priceElement = input.parentElement.parentElement.querySelector(".item-price");
+            priceElement.innerText = formatIndianCurrency(newTotal);
+
+            // Update subtotal
+            updateSubtotal();
+        }
+
+        function updateSubtotal() {
+            let items = document.querySelectorAll(".quantity-product");
+            let subtotal = 0;
+
+            items.forEach(item => {
+                subtotal += parseFloat(item.getAttribute("data-total"));
+            });
+
+            document.querySelector(".tf-totals-total-value").innerHTML = 
+                '<i class="fa fa-inr" aria-hidden="true"></i> ' + formatIndianCurrency(subtotal);
+        }
+
+        function formatIndianCurrency(num) {
+            num = Math.round(num).toString();
+            let lastThree = num.slice(-3);
+            let otherNumbers = num.slice(0, -3);
+            if (otherNumbers) {
+                lastThree = "," + lastThree;
+            }
+            return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        }
+    </script>
