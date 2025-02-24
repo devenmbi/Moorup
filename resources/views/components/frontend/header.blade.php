@@ -423,9 +423,6 @@
 
             // Update subtotal
             updateSubtotal();
-
-            // Update quantity in the database
-            updateCartQuantity(cartItemId, quantity, cartElement);
         }
 
         function manualUpdate(input) {
@@ -453,9 +450,6 @@
 
             // Update subtotal
             updateSubtotal();
-
-            // Update quantity in the database
-            updateCartQuantity(cartItemId, quantity, cartElement);
         }
 
         function updateSubtotal() {
@@ -480,27 +474,6 @@
             return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
         }
 
-        // AJAX Call to Update Cart Quantity or Remove Item if Quantity is Zero
-        function updateCartQuantity(cartItemId, quantity, cartElement) {
-            fetch("/update-cart-quantity", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({ cart_item_id: cartItemId, quantity: quantity })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log("Cart updated:", data);
-                } else {
-                    console.error("Error updating cart:", data.message);
-                }
-            })
-            .catch(error => console.error("Error updating cart:", error));
-        }
-
         function removeItemFromCart(cartItemId, cartElement) {
             fetch("{{ route('delete.cart.item') }}", {
                 method: "POST",
@@ -523,3 +496,4 @@
             .catch(error => console.error("Error deleting cart item:", error));
         }
     </script>
+

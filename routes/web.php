@@ -144,9 +144,6 @@ Route::resource('stock-details', StockDetailsController::class);
         
     Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
-    //====== remove item from cart
-    Route::post('/update-cart-quantity', [CartController::class, 'updateQuantity']);
-
     Route::post('/delete-cart-item', [CartController::class, 'deleteCartItem'])->name('delete.cart.item');
 
 

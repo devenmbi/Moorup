@@ -73,34 +73,21 @@ class CartController extends Controller
     }
 
 
-    public function updateQuantity(Request $request)
-    {
-        $cartItem = Carts::find($request->cart_item_id);
-        if ($cartItem) {
-            $cartItem->quantity = $request->quantity;
-            $cartItem->product_total_price = $cartItem->product_price * $request->quantity;
-            $cartItem->save();
-            return response()->json(['success' => true, 'message' => 'Cart updated']);
-        }
-        return response()->json(['success' => false, 'message' => 'Item not found']);
-    }
-
-
     public function deleteCartItem(Request $request)
-{
-    Log::info("Delete Request Received", $request->all());
+    {
+        Log::info("Delete Request Received", $request->all());
 
-    $cartItem = Carts::find($request->cart_item_id);
+        $cartItem = Carts::find($request->cart_item_id);
 
-    if (!$cartItem) {
-        Log::error("Cart Item Not Found: " . $request->cart_item_id);
-        return response()->json(['success' => false, 'message' => 'Item not found'], 404);
+        if (!$cartItem) {
+            Log::error("Cart Item Not Found: " . $request->cart_item_id);
+            return response()->json(['success' => false, 'message' => 'Item not found'], 404);
+        }
+
+        $cartItem->deleted_at = now();  // Soft delete
+        $cartItem->deleted_by = auth()->id();
+        $cartItem->save();
+
+        return response()->json(['success' => true, 'message' => 'Item deleted']);
     }
-
-    $cartItem->deleted_at = now();  // Soft delete
-    $cartItem->deleted_by = auth()->id();
-    $cartItem->save();
-
-    return response()->json(['success' => true, 'message' => 'Item deleted']);
-}
 }
