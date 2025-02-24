@@ -255,9 +255,6 @@
         </div>
         <!-- /shoppingCart -->
 
-
-
-
         <!-- search -->
         <div class="modal fade modal-search" id="search">
             <div class="modal-dialog modal-dialog-centered">
