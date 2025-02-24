@@ -63,7 +63,7 @@
                                         <label class="form-label" for="banner_image">Banner Image <span class="txt-danger">*</span></label>
                                         <input class="form-control" id="banner_image" type="file" name="banner_image" accept=".jpg, .jpeg, .png, .webp" onchange="previewBannerImage()">
                                         <div class="invalid-feedback">Please upload a Banner Image.</div>
-                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                                         <br>
                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small><br><br>
 

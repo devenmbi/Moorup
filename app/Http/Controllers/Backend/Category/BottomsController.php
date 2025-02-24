@@ -35,11 +35,11 @@ class BottomsController extends Controller
     {
         $request->validate([
             'banner_heading' => 'required|string|max:255',
-            'banner_image' => 'required|max:3072',  
+            'banner_image' => 'required|max:2048',  
         ], [
             'banner_heading.required' => 'The banner heading is required.',
             'banner_image.required' => 'The banner image is required.',
-            'banner_image.max' => 'The banner image must not be greater than 3MB.',
+            'banner_image.max' => 'The banner image must not be greater than 2MB.',
         ]);
     
         $imageName = null;
@@ -71,10 +71,10 @@ class BottomsController extends Controller
     {
         $request->validate([
             'banner_heading' => 'required|string|max:255',
-            'banner_image' => 'nullable|max:3072',  
+            'banner_image' => 'nullable|max:2048',  
         ], [
             'banner_heading.required' => 'The banner heading is required.',
-            'banner_image.max' => 'The banner image must not be greater than 3MB.',
+            'banner_image.max' => 'The banner image must not be greater than 2MB.',
         ]);
 
         $banner = BottomsDetails::findOrFail($id);

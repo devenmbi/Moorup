@@ -203,7 +203,7 @@
                                                 <tr>
                                                     <td>
                                                         <input type="file" onchange="previewThumbnail(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="thumbnail_image[]" id="thumbnail_image_0" class="form-control" placeholder="Upload Thumbnail Image" multiple required>
-                                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                                                         <br>
                                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                                                     </td>
@@ -234,7 +234,7 @@
                                                 <tr>
                                                     <td>
                                                         <input type="file" onchange="previewGalleryImage(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="gallery_image[]" id="gallery_image_0" class="form-control" placeholder="Upload Gallery Image" multiple required>
-                                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                                                         <br>
                                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                                                     </td>
@@ -274,7 +274,7 @@
                                                     </td>
                                                     <td>
                                                         <input type="file" onchange="previewPrintImage(this, 0)" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_0" class="form-control" placeholder="Upload Print Image">
-                                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                                                         <br>
                                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                                                     </td>
@@ -370,7 +370,7 @@
                 <tr>
                     <td>
                         <input type="file" onchange="previewThumbnail(this, ${rowId})" accept=".png, .jpg, .jpeg, .webp" name="thumbnail_image[]" id="thumbnail_image${rowId}" class="form-control" placeholder="Upload thumbnail Image">
-                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                         <br>
                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                     </td>
@@ -436,7 +436,7 @@
                 <tr>
                     <td>
                         <input type="file" onchange="previewGalleryImage(this, ${rowId})" accept=".png, .jpg, .jpeg, .webp" name="gallery_image[]" id="gallery_image_${rowId}" class="form-control" placeholder="Upload Gallery Image">
-                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                         <br>
                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                     </td>
@@ -512,7 +512,7 @@
                 </td>
                 <td>
                     <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control" placeholder="Upload Print Image" required>
-                    <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                    <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                     <br>
                     <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                 </td>

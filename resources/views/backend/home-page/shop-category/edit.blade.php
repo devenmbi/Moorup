@@ -93,7 +93,7 @@
                                             onchange="previewBannerImage()">
                                         <div class="invalid-feedback">Please upload a Product Image.</div>
                                         <small class="text-secondary">
-                                            <b>Note: The file size should be less than 3MB.</b>
+                                            <b>Note: The file size should be less than 2MB.</b>
                                         </small>
                                         <br>
                                         <small class="text-secondary">

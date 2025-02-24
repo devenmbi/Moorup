@@ -88,7 +88,7 @@
                                             accept=".jpg, .jpeg, .png, .webp" 
                                             onchange="previewBannerImage()">
                                         <div class="invalid-feedback">Please upload a Product Image.</div>
-                                        <small class="text-secondary"><b>Note: The file size should be less than 3MB.</b></small>
+                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
                                         <br>
                                         <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                                     </div>
