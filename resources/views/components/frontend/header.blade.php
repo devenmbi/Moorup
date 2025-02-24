@@ -213,7 +213,7 @@
                                                     </div>
                                                 </div>
                                                 @empty
-                                                    <div>No items found</div>
+                                                <div class="text-center py-4">No items found in your cart.</div>
                                             @endforelse
                                             </div>
                                         </div>
@@ -513,12 +513,20 @@
                 if (data.success) {
                     cartElement.remove(); // Remove item from UI
                     updateSubtotal(); // Recalculate subtotal
+
+                    // Check if cart is empty after removal
+                    if (document.querySelectorAll(".tf-mini-cart-item").length === 0) {
+                        document.querySelector(".tf-mini-cart-items").innerHTML = `
+                            <div class="text-center py-4">No items found in your cart.</div>
+                        `;
+                    }
                 } else {
                     console.error("Failed to delete:", data.message);
                 }
             })
             .catch(error => console.error("Error deleting cart item:", error));
         }
+
     </script>
 
 

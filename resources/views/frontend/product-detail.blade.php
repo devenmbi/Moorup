@@ -193,7 +193,7 @@
                                                     <span>Add to cart</span>
                                                 </a> -->
 
-                                                <form action="{{ route('cart.add', ['id' => $product->id]) }}" method="GET">
+                                                <form id="cartForm" action="{{ route('cart.add', ['id' => $product->id]) }}" method="GET">
                                                     <input type="hidden" name="color1" id="hidden-color" value="{{ $productColor[0] ?? '' }}">
                                                     <input type="hidden" name="print_option" id="hidden-print" value="{{ $printData[0]['name'] ?? '' }}">
                                                     <input type="hidden" name="size" id="hidden-size" value="{{ $productSizes[0] ?? '' }}">
@@ -205,6 +205,8 @@
                                                     <button type="submit" class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
                                                         <span>Add to cart</span>
                                                     </button>
+
+                                                    <p id="sizeError" style="color: red; display: none; margin-top: 10px;">Please select a size before adding to cart.</p>
                                                 </form>
 
 
@@ -693,6 +695,27 @@
     }
 
 </script>
+
+<!---- to manage the validation before adding to cart--->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let cartForm = document.getElementById("cartForm");
+        let sizeInput = document.getElementById("hidden-size");
+        let errorMsg = document.getElementById("sizeError");
+
+        if (cartForm) {
+            cartForm.addEventListener("submit", function (event) {
+                if (!sizeInput || !sizeInput.value.trim()) {
+                    errorMsg.style.display = "block";
+                    event.preventDefault(); // Prevent form submission
+                } else {
+                    errorMsg.style.display = "none"; // Hide error if size is selected
+                }
+            });
+        }
+    });
+</script>
+
 
 </body>
 
