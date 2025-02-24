@@ -199,7 +199,8 @@
                                                     <input type="hidden" name="size" id="hidden-size" value="{{ $productSizes[0] ?? '' }}">
                                                     <input type="hidden" name="quantity" value="1" class="quantity-product">
                                                     <input type="hidden" name="product_price" value="{{ $product->product_price ?? 0 }}">
-                                                    <input type="hidden" name="product_image" value="{{ $product->galleryImages[0] ?? '' }}">
+                                                    <input type="hidden" name="product_image" value="{{ isset($galleryImages[0]) ? asset('murupp/product/gallery/' . $galleryImages[0]) : '' }}">
+
 
                                                     <button type="submit" class="btn-style-2 flex-grow-1 text-btn-uppercase fw-6 btn-add-to-cart">
                                                         <span>Add to cart</span>
