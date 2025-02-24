@@ -177,7 +177,7 @@
                                                 }
                                             @endphp
 
-                                            @foreach($cartItems as $cartItem)
+                                            @forelse($cartItems as $cartItem)
                                                 @php
                                                     $subtotal += $cartItem->product_total_price;
                                                 @endphp
@@ -212,7 +212,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                                @empty
+                                                    <div>No items found</div>
+                                            @endforelse
                                             </div>
                                         </div>
                                     </div>
@@ -418,8 +420,16 @@
             input.setAttribute("data-total", newTotal);
 
             // Update item price
-            let priceElement = element.parentElement.parentElement.querySelector(".item-price");
-            priceElement.innerText = formatIndianCurrency(newTotal);
+            let priceElement = cartElement.querySelector(".item-price");
+            if (priceElement) {
+                priceElement.innerText = formatIndianCurrency(newTotal);
+            }
+
+            // Update the total price inside the ".text-button.price" div
+            let priceContainer = cartElement.querySelector(".text-button.price .item-price");
+            if (priceContainer) {
+                priceContainer.innerText = formatIndianCurrency(newTotal);
+            }
 
             // Update subtotal
             updateSubtotal();
@@ -445,8 +455,16 @@
             input.setAttribute("data-total", newTotal);
 
             // Update item price
-            let priceElement = input.parentElement.parentElement.querySelector(".item-price");
-            priceElement.innerText = formatIndianCurrency(newTotal);
+            let priceElement = cartElement.querySelector(".item-price");
+            if (priceElement) {
+                priceElement.innerText = formatIndianCurrency(newTotal);
+            }
+
+            // Update the total price inside the ".text-button.price" div
+            let priceContainer = cartElement.querySelector(".text-button.price .item-price");
+            if (priceContainer) {
+                priceContainer.innerText = formatIndianCurrency(newTotal);
+            }
 
             // Update subtotal
             updateSubtotal();
@@ -457,11 +475,20 @@
             let subtotal = 0;
 
             items.forEach(item => {
-                subtotal += parseFloat(item.getAttribute("data-total"));
+                let itemTotal = parseFloat(item.getAttribute("data-total"));
+                if (!isNaN(itemTotal)) {
+                    subtotal += itemTotal;
+                }
             });
 
-            document.querySelector(".tf-totals-total-value").innerHTML =
-                '<i class="fa fa-inr" aria-hidden="true"></i> ' + formatIndianCurrency(subtotal);
+            let subtotalElement = document.querySelector(".tf-totals-total-value");
+
+            if (subtotalElement) {
+                subtotalElement.innerHTML =
+                    '<i class="fa fa-inr" aria-hidden="true"></i> ' + formatIndianCurrency(subtotal);
+            } else {
+                console.error("Subtotal element not found.");
+            }
         }
 
         function formatIndianCurrency(num) {
@@ -496,4 +523,5 @@
             .catch(error => console.error("Error deleting cart item:", error));
         }
     </script>
+
 
